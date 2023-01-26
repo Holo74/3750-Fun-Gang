@@ -1,4 +1,7 @@
-﻿0: reviewing tutorial
+﻿~8 hours on tutorial
+
+Assignment 1
+0: reviewing tutorial
 2: attempting to build a forms app
 4: restarted with general web app
 6: basic pages created with links

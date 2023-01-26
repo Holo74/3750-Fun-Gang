@@ -15,8 +15,10 @@
 			<div class="d-flex justify-content-between">
 				<label asp-for="Password">Password:</label><input asp-for="Password" name="Password" type="text" />
 			</div>
-			<hr />
-			<input value="Submit" type="submit" class="btn btn-primary" />
+			<br />
+			<input value="Log in" type="submit" class="btn btn-primary" />
 		</form>
+		<hr />
+		<a class="btn btn-dark" asp-controller="Users" asp-action="Create">Create a new Account</a>
 	</div>
 </div>

@@ -15,7 +15,7 @@ namespace Assignment_1.Controllers
 
 		public IActionResult Index()
 		{
-			return View();
+			return Redirect("/Login/Index/");
 		}
 
 		public IActionResult Privacy()
