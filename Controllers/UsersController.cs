@@ -20,9 +20,9 @@ namespace Assignment_1.Controllers
         }
 
         // GET: Users
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? Id)
         {
-              return View(await _context.User.ToListAsync());
+              return Redirect("/Users/Details/" + Id);
         }
 
         // GET: Users/Details/5
@@ -77,9 +77,9 @@ namespace Assignment_1.Controllers
             {
                 _context.Add(user);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return Redirect("/Login/Index/");
         }
 
         // GET: Users/Edit/5
@@ -128,9 +128,9 @@ namespace Assignment_1.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return Redirect("/Users/Details/" + user.Id);
         }
 
         // GET: Users/Delete/5
