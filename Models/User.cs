@@ -11,7 +11,7 @@ namespace Assignment_1.Models
         [Required]
         public string Email { get; set; }
 
-        [StringLength(60, MinimumLength = 6)]
+        [StringLength(80,MinimumLength = 6)]
         [Required]
         public string Password { get; set; }
 
