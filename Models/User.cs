@@ -16,6 +16,8 @@ namespace Assignment_1.Models
         [StringLength(60, MinimumLength = 6)]
         [Required]
         public string Password { get; set; }
+        [Compare(otherProperty:"Password"), Display(Name ="Confirm Password")]
+        public string ConfirmPassword { get; set; }
 
         public string FirstName { get; set; }
         public string LastName { get; set; }
