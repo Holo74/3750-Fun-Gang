@@ -11,6 +11,8 @@ namespace Assignment_1.Models
         [Required]
         public string Email { get; set; }
 
+        // Requirements.  A single lower cases letter.  1 upper case letter.  1 decimal.  At least 1 special character.  Min length of 8 characters
+        [Validators.PasswordValidation]
         [StringLength(60, MinimumLength = 6)]
         [Required]
         public string Password { get; set; }
