@@ -13,9 +13,13 @@ namespace Assignment_1.Models
         [Required]
         public string Email { get; set; }
 
-        [StringLength(60, MinimumLength = 6)]
+        // Requirements.  A single lower cases letter.  1 upper case letter.  1 decimal.  At least 1 special character.  Min length of 8 characters
+        [Validators.PasswordValidation]
+        [StringLength(80, MinimumLength = 6)]
         [Required]
         public string Password { get; set; }
+        [Compare(otherProperty:"Password"), Display(Name ="Confirm Password")]
+        public string ConfirmPassword { get; set; }
 
         [Required]
         public string FirstName { get; set; }
