@@ -27,6 +27,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.BirthDate)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserType)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -48,6 +51,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.BirthDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserType)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

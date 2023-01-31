@@ -1,4 +1,5 @@
 ﻿using Assignment_1.Data;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -22,7 +23,8 @@ namespace Assignment_1.Models
                     Password= "password",
                     FirstName= "James",
                     LastName= "Holden",
-                    BirthDate= DateTime.Parse("01-01-2001")
+                    BirthDate= DateTime.Parse("01-01-2001"),
+                    UserType = "Student"
                     });
                 context.SaveChanges();
             }

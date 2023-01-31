@@ -20,5 +20,7 @@ namespace Assignment_1.Models
 
         [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
+        [Required(ErrorMessage ="Student or teacher selection has not been made")]
+        public string UserType { get;set; }
     }
 }
