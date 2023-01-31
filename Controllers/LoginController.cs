@@ -1,5 +1,6 @@
 ﻿using Assignment_1.Data;
 using Assignment_1.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -25,16 +26,21 @@ namespace Assignment_1.Controllers
 
 		public async Task<IActionResult> Validate(string Email, string Password)
 		{
-			Debug.WriteLine("Email: " + Email);
-			Debug.WriteLine("Password: " + Password);
+			//Debug.WriteLine("Email: " + Email);
+			//Debug.WriteLine("Password: " + Password);
 			if (!string.IsNullOrEmpty(Email) && !string.IsNullOrEmpty(Password))
 			{
-				
-				var user = _context.User.Where(x => x.Email == Email).FirstOrDefault();
+                PasswordHasher<User> Hasher = new PasswordHasher<User>();
 
+                var user = _context.User.Where(x => x.Email == Email).FirstOrDefault();
+
+				
 				if (user != null)
 				{
-					return Redirect("/Users/Details/" + user.Id);
+                    if (Hasher.VerifyHashedPassword(new User(), user.Password, Password) == PasswordVerificationResult.Success)
+                    {
+                        return Redirect("/Users/Details/" + user.Id);
+                    }
 				}
 			}
 			
