@@ -73,8 +73,7 @@ namespace Assignment_1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Email,Password,FirstName,LastName,BirthDate,ConfirmPassword")] User user)
-        public async Task<IActionResult> Create([Bind("Id,Email,Password,FirstName,LastName,BirthDate,UserType")] User user)
+        public async Task<IActionResult> Create([Bind("Id,Email,Password,FirstName,LastName,BirthDate,ConfirmPassword,UserType")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -108,8 +107,7 @@ namespace Assignment_1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Email,Password,FirstName,LastName,BirthDate,UserType")] User user)
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Email,Password,FirstName,LastName,BirthDate,ConfirmPassword")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Email,Password,FirstName,LastName,BirthDate,ConfirmPassword,UserType")] User user)
         {
             if (id != user.Id)
             {
