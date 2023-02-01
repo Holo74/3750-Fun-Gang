@@ -29,6 +29,8 @@ namespace Assignment_1.Models
         [DateValidation(ErrorMessage = "User Age must be at least 16")]
         [Required]
         [DataType(DataType.Date)]
-        public DateTime BirthDate{ get; set;}
+        public DateTime BirthDate { get; set; }
+      //  [Required]
+        public string UserType { get; set; }
     }
 }

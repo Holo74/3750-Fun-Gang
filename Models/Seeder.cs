@@ -25,7 +25,8 @@ namespace Assignment_1.Models
                     Password= Hasher.HashPassword(new User(), "password"),
                     FirstName= "James",
                     LastName= "Holden",
-                    BirthDate= DateTime.Parse("01-01-2001")
+                    BirthDate= DateTime.Parse("01-01-2001"),
+                    UserType = "Student"
                     });
                 context.SaveChanges();
             }
