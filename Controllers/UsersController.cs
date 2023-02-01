@@ -23,7 +23,7 @@ namespace Assignment_1.Controllers
         // GET: Users
         public async Task<IActionResult> Index(int? Id)
         {
-              return Redirect("/Users/Details/" + Id);
+              return View(await _context.User.ToListAsync());
         }
 
         // GET: Users/Details/5
