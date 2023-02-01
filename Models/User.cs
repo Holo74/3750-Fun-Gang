@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.CompilerServices;
+
 namespace Assignment_1.Models
 {
     public class User
@@ -19,10 +21,14 @@ namespace Assignment_1.Models
         [Compare(otherProperty:"Password"), Display(Name ="Confirm Password")]
         public string ConfirmPassword { get; set; }
 
+        [Required]
         public string FirstName { get; set; }
+        [Required]
         public string LastName { get; set; }
 
+        [DateValidation(ErrorMessage = "User Age must be at least 16")]
+        [Required]
         [DataType(DataType.Date)]
-        public DateTime BirthDate { get; set; }
+        public DateTime BirthDate{ get; set;}
     }
 }
