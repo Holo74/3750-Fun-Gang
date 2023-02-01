@@ -12,11 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment_1.Migrations
 {
     [DbContext(typeof(Assignment_1Context))]
-<<<<<<<< HEAD:Migrations/20230128205831_InitialCreate.Designer.cs
-    [Migration("20230128205831_InitialCreate")]
-========
-    [Migration("20230128190735_InitialCreate")]
->>>>>>>> RealAbel:Migrations/20230128190735_InitialCreate.Designer.cs
+    [Migration("20230201055703_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,6 +34,10 @@ namespace Assignment_1.Migrations
 
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("ConfirmPassword")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .IsRequired()
