@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Assignment_1.Data;
 using Assignment_1.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace Assignment_1.Controllers
 {
@@ -20,9 +21,9 @@ namespace Assignment_1.Controllers
         }
 
         // GET: Users
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? Id)
         {
-              return View(await _context.User.ToListAsync());
+              return Redirect("/Users/Details/" + Id);
         }
 
         // GET: Users/Details/5
@@ -42,7 +43,7 @@ namespace Assignment_1.Controllers
 
             return View(user);
         }
-
+        /*
         //GET Users/Details/X
 		public async Task<IActionResult> Validate(int? id)
 		{
@@ -60,6 +61,7 @@ namespace Assignment_1.Controllers
 
 			return Redirect("/Users/Details/" + id);
 		}
+        */
 		// GET: Users/Create
 		public IActionResult Create()
         {
@@ -75,11 +77,13 @@ namespace Assignment_1.Controllers
         {
             if (ModelState.IsValid)
             {
+                PasswordHasher<User> Hasher = new PasswordHasher<User>();
+                user.Password = Hasher.HashPassword(new Models.User(), user.Password);//hash before sending to database
                 _context.Add(user);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return Redirect("/Login/");
         }
 
         // GET: Users/Edit/5
@@ -130,9 +134,9 @@ namespace Assignment_1.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return Redirect("/Users/Details/" + user.Id);
         }
 
         // GET: Users/Delete/5
