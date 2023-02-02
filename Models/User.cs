@@ -21,13 +21,14 @@ namespace Assignment_1.Models
         [Compare(otherProperty:"Password"), Display(Name ="Confirm Password"), NotMapped]
         public string ConfirmPassword { get; set; }
 
-        [Required]
+       // [Required]
         public string FirstName { get; set; }
-        [Required]
+        //[Required]
         public string LastName { get; set; }
 
         [DateValidation(ErrorMessage = "User Age must be at least 16")]
-        [Required]
+
+        //[Required]
         [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
       //  [Required]
