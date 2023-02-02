@@ -39,7 +39,7 @@ namespace Assignment_1.Controllers
 				{
                     if (Hasher.VerifyHashedPassword(new User(), user.Password, Password) == PasswordVerificationResult.Success)
                     {
-                        return Redirect("/Users/" + user.Id);
+                        return Redirect("/Users/?Id=" + user.Id);
                     }
 				}
 			}

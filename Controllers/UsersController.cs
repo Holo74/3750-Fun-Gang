@@ -23,7 +23,12 @@ namespace Assignment_1.Controllers
         // GET: Users
         public async Task<IActionResult> Index(int? Id)
         {
-              return View(await _context.User.ToListAsync());
+            if(Id != null)
+            {
+                var user = _context.User.Where(x => x.Id == Id).First();
+                return View(user);
+            }
+            return View();
         }
 
         // GET: Users/Details/5
