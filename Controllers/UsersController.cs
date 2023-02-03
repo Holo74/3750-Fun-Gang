@@ -89,14 +89,15 @@ namespace Assignment_1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Email,Password,FirstName,LastName,BirthDate,ConfirmPassword,UserType")] User user)
         {
-            if (ModelState.IsValid)
-            {
+            //TODO: Fix this. We need model state validation before the meeting. 
+           // if (ModelState.IsValid)
+            //{
                 PasswordHasher<User> Hasher = new PasswordHasher<User>();
                 user.Password = Hasher.HashPassword(new Models.User(), user.Password);//hash before sending to database
                 _context.Add(user);
                 await _context.SaveChangesAsync();
-                //return RedirectToAction(nameof(Index));
-            }
+                return RedirectToAction(nameof(Index));
+            //}
             return Redirect("/Login/");
         }
 
