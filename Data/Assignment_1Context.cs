@@ -15,5 +15,6 @@ namespace Assignment_1.Data
         }
 
         public DbSet<Assignment_1.Models.User> User { get; set; } = default!;
+        public DbSet<Assignment_1.Models.Class> Class { get; set; } = default!;
     }
 }
