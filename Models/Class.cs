@@ -7,6 +7,7 @@ namespace Assignment_1.Models
 {
     public class Class
     {
+        // NOT COMPLETELY ACCURATE BY ANY MEANS YET **************************************************************
         public int ClassId { get; set; }
         public int UserId { get; set; }
         public string Department { get; set; }

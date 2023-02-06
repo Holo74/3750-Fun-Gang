@@ -13,6 +13,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.UserId) @*temporary, so we can make sure it only shows the teacher's courses*@
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Department)
             </th>
             <th>
@@ -37,9 +40,15 @@
         </tr>
     </thead>
     <tbody>
+        @*
+            *************** Shows every course that this user is teaching ***********************************************************
+        *@
         @foreach (var item in Model)
         {
             <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserId) @*temporary, so we can make sure it only shows the teacher's courses*@
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Department)
                 </td>
