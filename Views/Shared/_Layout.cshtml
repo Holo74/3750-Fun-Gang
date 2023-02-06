@@ -11,17 +11,17 @@
 <body>
     <script>
 
-    var el = document.getElementById('content');
-    var content;
+        var el = document.getElementById('TeacherOrStudent');
+        var TeacherOrStudent;
 
     if (userType==Teacher) {
-            content = '< li class="nav-item" ><a class="nav-link text-dark" asp - area="" asp - controller="Home" asp - action="Classes" > Classes < /a>< /li>';
+            TeacherOrStudent = '< li class="nav-item" ><a class="nav-link text-dark" asp - area="" asp - controller="Home" asp - action="Classes" > Classes < /a>< /li>';
     }
     if (userType==Student) {
-            content = '< li class="nav-item" ><a class="nav-link text-dark" asp - area="" asp - controller="Home" asp - action="Index" > Registration < /a>< /li>';
+            TeacherOrStudent = '< li class="nav-item" ><a class="nav-link text-dark" asp - area="" asp - controller="Home" asp - action="Index" > Registration < /a>< /li>';
     }
 
-    el.insertAdjacentHTML('afterbegin', content);
+    el.insertAdjacentHTML('afterbegin', TeacherOrStudent);
 
     </script>
     <header>
@@ -37,7 +37,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home / Log In</a>
                         </li>
-                        <li id="content"></li>
+                        <li id="TeacherOrStudent"></li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Calendar" asp-action="CalendarPage">Calendar</a>
                         </li>
