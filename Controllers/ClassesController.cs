@@ -14,7 +14,7 @@ namespace Assignment_1.Controllers
         
         public IActionResult Index()
         {
-            var Course = _context.Class; // gets the class table from the database (still need to show only that specific teacher's courses)
+            var Course = _context.Class; // gets the class table from the database **(still need to show only that specific teacher's courses)**
             return View(Course); //outputs the data
         }
 
@@ -22,5 +22,7 @@ namespace Assignment_1.Controllers
         {
             return View(); // just brings the create page up
         }
+
+        // Need a submit class to update the database
     }
 }
