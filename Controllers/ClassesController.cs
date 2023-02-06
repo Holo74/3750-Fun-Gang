@@ -14,6 +14,15 @@ namespace Assignment_1.Controllers
         
         public IActionResult Index()
         {
+            /*needs to take a user as input for this query to work
+             * need to find a way of passing in the currently logged in user to this function
+             * var Course = _context.Class;//default?
+             * if(user.type == "student"){
+             * Course = //where course.courseId exists in students course list
+             * }else{
+             * Course = /where course.userID == user.id
+             * }
+             */
             var Course = _context.Class; // gets the class table from the database **(still need to show only that specific teacher's courses)**
             return View(Course); //outputs the data
         }
