@@ -7,7 +7,11 @@
 <h1>Details</h1>
 
 <div>
-    <h4>User</h4>
+    <h4>
+        Welcome, 
+        @Html.DisplayFor(model => model.FirstName)
+        @Html.DisplayFor(model => model.LastName)
+    </h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">

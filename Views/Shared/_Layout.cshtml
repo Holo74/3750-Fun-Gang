@@ -9,6 +9,21 @@
     <link rel="stylesheet" href="~/Assignment_1.styles.css" asp-append-version="true" />
 </head>
 <body>
+    <script>
+
+    var el = document.getElementById('content');
+    var content;
+
+    if (userType==Teacher) {
+            content = '< li class="nav-item" ><a class="nav-link text-dark" asp - area="" asp - controller="Home" asp - action="Classes" > Classes < /a>< /li>';
+    }
+    if (userType==Student) {
+            content = '< li class="nav-item" ><a class="nav-link text-dark" asp - area="" asp - controller="Home" asp - action="Index" > Registration < /a>< /li>';
+    }
+
+    el.insertAdjacentHTML('afterbegin', content);
+
+    </script>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
@@ -22,8 +37,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home / Log In</a>
                         </li>
+                        <li id="content"></li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Calendar" asp-action="CalendarPage">Calendar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Profile</a>
                         </li>
                     </ul>
                 </div>
