@@ -9,21 +9,6 @@
     <link rel="stylesheet" href="~/Assignment_1.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <script>
-
-        var el = document.getElementById('TeacherOrStudent');
-        var TeacherOrStudent;
-
-    if (userType==Teacher) {
-            TeacherOrStudent = '< li class="nav-item" ><a class="nav-link text-dark" asp - area="" asp - controller="Home" asp - action="Classes" > Classes < /a>< /li>';
-    }
-    if (userType==Student) {
-            TeacherOrStudent = '< li class="nav-item" ><a class="nav-link text-dark" asp - area="" asp - controller="Home" asp - action="Index" > Registration < /a>< /li>';
-    }
-
-    el.insertAdjacentHTML('afterbegin', TeacherOrStudent);
-
-    </script>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
@@ -38,10 +23,27 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home / Log In</a>
                         </li>
                         <li id="TeacherOrStudent"></li>
+                        @if (ViewData["Student"] != null)
+                        {
+                            @if (ViewData["Student"].ToString() == "Student")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Registration</a>
+                                </li>
+                            }
+                            @if (ViewData["Student"].ToString() != "Student")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Classes</a>
+                                </li>
+                            }
+                        }
+
+                        
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Calendar" asp-action="CalendarPage">Calendar</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" >
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Profile</a>
                         </li>
                     </ul>

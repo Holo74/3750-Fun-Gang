@@ -23,9 +23,10 @@ namespace Assignment_1.Controllers
         // GET: Users
         public async Task<IActionResult> Index(int? Id)
         {
-            if(Id != null)
+            if (Id != null)
             {
                 var user = _context.User.Where(x => x.Id == Id).First();
+                ViewData["Student"] = user.UserType;
                 return View(user);
             }
             return View();

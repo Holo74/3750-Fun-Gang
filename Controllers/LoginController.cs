@@ -37,12 +37,25 @@ namespace Assignment_1.Controllers
 				
 				if (user != null)
 				{
+                    ViewData["Student"] = user.UserType;
                     if (Hasher.VerifyHashedPassword(new User(), user.Password, Password) == PasswordVerificationResult.Success)
                     {
                         return Redirect("/Users/?Id=" + user.Id);
                     }
-				}
-			}
+                }
+				//            if (user.UserType == "Student")
+				//{
+				//ViewData["isStudent"] = true;
+
+				//}
+				//else
+				//{	
+				//	ViewData["isStudent"] = false;
+
+				//            }
+
+				
+            }
 			
 			return Redirect("/Login/");
 		}

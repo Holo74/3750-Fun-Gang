@@ -11,6 +11,21 @@
         Welcome, 
         @Html.DisplayFor(model => model.FirstName)
         @Html.DisplayFor(model => model.LastName)
+
+        @if(Model.UserType == "Student")
+        {
+            <label style="color:red">student</label>
+        }
+        @if(Model.UserType != "Student")
+        {
+            <label style="color:red">instructor</label>
+        }
+
+        
+        
+        
+        @Html.DisplayFor(model => model.UserType)
+
     </h4>
     <hr />
     <dl class="row">
@@ -34,6 +49,9 @@
     </dl>
 </div>
 <div>
+
+    <label visible="Model.UserType == "student"">student</label>
+    <label visible="Model.UserType != " student"">Insturctor</label>
     <a asp-action="Edit" asp-route-id="model.Id">Edit</a> |
     <a asp-action="Details" asp-route-id="model.Id">Details</a>
 </div>
