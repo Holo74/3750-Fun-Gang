@@ -4,7 +4,9 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Welcome</h1>
+<h1>Welcome 
+        @Html.DisplayFor(model => model.FirstName)
+        @Html.DisplayFor(model => model.LastName)</h1>
 <style>
     .h1{
         position:fixed;
@@ -98,27 +100,6 @@
     <a href="#">Assignment4</a>
 </div>
 
-   @* <h4>User</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-    </dl>*@
 
 <div class="links">
     <a asp-action="Edit" asp-route-id="model.Id">Edit</a> |
