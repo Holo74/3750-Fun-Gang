@@ -34,8 +34,13 @@
                 <span asp-validation-for="CourseName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="NumOfCredits" class="control-label"></label>
-                <input asp-for="NumOfCredits" class="form-control" />
+                <label asp-for="NumOfCredits" id="credits" class="control-label">Number of Credits: 3</label>
+                @*
+                    Makes a slider for credits below, I swear I can remember the professor saying
+                    we should do this as a slider but I can't remember for sure. Figured I'd do it just in case.
+                *@
+                <input asp-for="NumOfCredits" class="form-control" type="range" min="0" max="10" value="3" 
+                oninput="document.getElementById('credits').innerHTML = 'Number of Credits: ' + this.value;" id="credits"/> 
                 <span asp-validation-for="NumOfCredits" class="text-danger"></span>
             </div>
             <div class="form-group">

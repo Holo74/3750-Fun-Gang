@@ -1,5 +1,7 @@
 ﻿using Assignment_1.Data;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.FlowAnalysis.DataFlow;
 
 namespace Assignment_1.Controllers
 {
@@ -11,7 +13,8 @@ namespace Assignment_1.Controllers
         {
             _context = context; // makes it so we can get the database at any time
         }
-        
+
+        [HttpGet]
         public IActionResult Index()
         {
             /*needs to take a user as input for this query to work
@@ -23,9 +26,19 @@ namespace Assignment_1.Controllers
              * Course = /where course.userID == user.id
              * }
              */
-            var Course = _context.Class; // gets the class table from the database **(still need to show only that specific teacher's courses)**
-            return View(Course); //outputs the data
+            var id = Request.Query["Id"];
+            var Course = _context.Class;// gets the class table from the database **(still need to show only that specific teacher's courses)**
+            return View(Course);
         }
+
+        // The code below returns the value instead of the view() in users, I don't know how to get it any other way.
+        //
+        //[Route("Users/")]
+        //[HttpGet]
+        //public async Task<string> GetLogInId()
+        //{
+        //    return Request.Query["Id"];
+        //}
 
         public IActionResult Create()
         {

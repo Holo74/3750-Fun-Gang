@@ -15,7 +15,7 @@ namespace Assignment_1.Models
         [Required]
         public string Department { get; set; }
         [Required]
-        public string CourseNumber { get; set; }
+        public int CourseNumber { get; set; }
         [Required]
         public string CourseName { get; set; }
         [Required]
