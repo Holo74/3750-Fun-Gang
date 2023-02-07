@@ -4,29 +4,101 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Welcome</h1>
+<style>
+    .h1{
+        position:fixed;
+        left:1000px;
 
-<div>
-    <h4>
-        Welcome, 
-        @Html.DisplayFor(model => model.FirstName)
-        @Html.DisplayFor(model => model.LastName)
+    }
+    .links
+    {
+        position:fixed;
+        bottom:100px;
+    }
+    .vertical-menu {
+        width: 200px; /* Set a width if you like */
+        position:fixed;
+        right:10px;
+        top:100px;
+        
+    }
 
-        @if(Model.UserType == "Student")
+        .vertical-menu a 
         {
-            <label style="color:red">student</label>
-        }
-        @if(Model.UserType != "Student")
-        {
-            <label style="color:red">instructor</label>
+            background-color: #eee; /* Grey background color */
+            color: black; /* Black text color */
+            display: block; /* Make the links appear below each other */
+            padding: 12px; /* Add some padding */
+            text-decoration: none; /* Remove underline from links */
         }
 
-        
-        
-        
-        @Html.DisplayFor(model => model.UserType)
+       .vertical-menu a:hover 
+       {
+                background-color: #ccc; /* Dark grey background on mouse-over */
+       }
 
-    </h4>
+       .vertical-menu a.active 
+       {
+                background-color: #04AA6D; /* Add a green color to the "active/current" link */
+                color: white;
+       }
+   
+.card {
+  /* Add shadows to create the "card" effect */
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+        width:  20%;
+        margin: 50px;
+        border-radius: 5px;
+        padding: 50px;
+}
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+/* Add some padding inside the card container */
+.container {
+  padding: 2px 16px;
+
+}
+</style>
+<div class="text-center d-flex justify-content-center">
+<div class="card">
+    
+    <div class="container">
+        <h6><b>Name/Number</b></h6>
+        <p>Time</p>
+        <p>Location</p>
+    </div>
+</div>
+<div class="card">
+
+    <div class="container">
+        <h6><b>Name/Number</b></h6>
+        <p>Time</p>
+        <p>Location</p>
+    </div>
+</div>
+<div class="card">
+    <div class="container">
+        <h6><b>Name/Number</b></h6>
+        <p>Time</p>
+        <p>Location</p>
+    </div>
+</div>
+    </div>
+<div class="vertical-menu">
+    <a href="#" class="active">ToDo's</a>
+    <a href="https://localhost:7099/Login/Index/">Assignment1</a>
+    <a href="#">Assignment2</a>
+    <a href="#">Assignment3</a>
+    <a href="#">Assignment4</a>
+</div>
+
+   @* <h4>User</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -46,12 +118,9 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.LastName)
         </dd>
-    </dl>
-</div>
-<div>
+    </dl>*@
 
-    <label visible="Model.UserType == "student"">student</label>
-    <label visible="Model.UserType != " student"">Insturctor</label>
+<div class="links">
     <a asp-action="Edit" asp-route-id="model.Id">Edit</a> |
     <a asp-action="Details" asp-route-id="model.Id">Details</a>
 </div>
