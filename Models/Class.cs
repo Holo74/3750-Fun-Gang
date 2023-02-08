@@ -8,6 +8,7 @@ namespace Assignment_1.Models
     public class Class
     {
         // NOT COMPLETELY ACCURATE YET **************************************************************
+        //make sure to alter submit() in ClassesController if any of this changes
         [Required]
         public int ClassId { get; set; }
         [Required]

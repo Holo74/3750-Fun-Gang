@@ -3,6 +3,7 @@ using Assignment_1.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Session;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Linq;
@@ -19,8 +20,7 @@ namespace Assignment_1.Controllers
 			_context = context;
 		}
 		public IActionResult Index()
-		{
-			//Debug.WriteLine("AAAAAAAAAAAAAAAAAAAAAA");
+		{			
 			return View();
 		}
 
@@ -39,6 +39,8 @@ namespace Assignment_1.Controllers
 				{
                     if (Hasher.VerifyHashedPassword(new User(), user.Password, Password) == PasswordVerificationResult.Success)
                     {
+                        //creates a key (UserID) value (user.Id) pair in the browser session storage, can be retrieved as long as browser not closed
+                        HttpContext.Session.SetInt32("UserID", user.Id);
                         return Redirect("/Users/?Id=" + user.Id);
                     }
 				}
