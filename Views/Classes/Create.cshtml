@@ -1,0 +1,73 @@
+﻿@model Assignment_1.Models.Class
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Class</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Classes" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Department" class="control-label"></label>
+                <select asp-for="Department" name="Department" class="form-control"> @*This is a dropbox in HTML*@
+                    <option value="CS">CS</option>
+                    <option value="MATH">MATH</option>
+                    <option value="ENGL">ENGL</option>
+                    <option value="HIST">HIST</option>
+                    <option value="CHEM">CHEM</option>
+                </select>
+                <span asp-validation-for="Department" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CourseNumber" class="control-label"></label>
+                <input asp-for="CourseNumber" class="form-control" />
+                <span asp-validation-for="CourseNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CourseName" class="control-label"></label>
+                <input asp-for="CourseName" class="form-control" />
+                <span asp-validation-for="CourseName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumOfCredits" id="credits" class="control-label">Number of Credits: 3</label>
+                @*
+                    Makes a slider for credits below, I swear I can remember the professor saying
+                    we should do this as a slider but I can't remember for sure. Figured I'd do it just in case.
+                *@
+                <input asp-for="NumOfCredits" class="form-control" type="range" min="0" max="10" value="3" 
+                oninput="document.getElementById('credits').innerHTML = 'Number of Credits: ' + this.value;" id="credits"/> 
+                <span asp-validation-for="NumOfCredits" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Location" class="control-label"></label>
+                <input asp-for="Location" class="form-control" />
+                <span asp-validation-for="Location" class="text-danger"></span>
+            </div>
+            <div class="form-group"> @* Still need to make it so it's 7 buttons/check boxes for each day of the week *@
+                <label asp-for="DaysOfWeek" class="control-label"></label>
+                <input asp-for="DaysOfWeek" class="form-control" />
+                <span asp-validation-for="DaysOfWeek" class="text-danger"></span>
+            </div>
+            <div class="form-group"> @* Still need to make it so we have a start and end time, whatever we decide to use to get it*@
+                <label asp-for="TimeOfDay" class="control-label"></label>
+                <input asp-for="TimeOfDay" class="form-control" />
+                <span asp-validation-for="TimeOfDay" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Register Class" class="btn btn-primary" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

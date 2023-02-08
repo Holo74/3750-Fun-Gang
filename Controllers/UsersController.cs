@@ -50,10 +50,10 @@ namespace Assignment_1.Controllers
             return View(user);
         }
         public async Task<IActionResult> ViewAll(){
-            //var users = from u in _context.User
-            //            select u;
+            var users = from u in _context.User
+                        select u;
             //something null inside database this doesnt like
-            var users = _context.User.Where(x => x.Id == 17);
+            //var users = _context.User.Where(x => x.Id == 17);
 
             var temp = await users.FirstOrDefaultAsync();
             return View(users);
