@@ -20,7 +20,12 @@ namespace Assignment_1.Controllers
 			_context = context;
 		}
 		public IActionResult Index()
-		{			
+		{
+			var UserID = HttpContext.Session.GetInt32("UserID");
+			if (UserID != null)
+			{
+                return Redirect("/Users/?Id=" + UserID);
+            }
 			return View();
 		}
 
