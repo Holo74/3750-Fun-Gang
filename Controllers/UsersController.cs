@@ -25,9 +25,18 @@ namespace Assignment_1.Controllers
         {
             if (Id != null)
             {
+                ClassUserViewModel classUserView= new ClassUserViewModel();
                 var user = _context.User.Where(x => x.Id == Id).First();
+                classUserView.viewUser= user;
+                var UserID = HttpContext.Session.GetInt32("UserID");
                 ViewData["Student"] = user.UserType;
-                return View(user);
+                var Course = from c in _context.Class select c;// gets the class table from the database **(still need to show only that specific teacher's courses)**
+                if (UserID != null)
+                {
+                    Course = Course.Where(c => c.UserId == UserID);
+                    classUserView.classes = Course.ToList();
+                    return View(classUserView);
+                }
             }
             return View();
         }

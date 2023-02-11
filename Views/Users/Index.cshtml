@@ -1,12 +1,15 @@
-﻿@model Assignment_1.Models.User
-
+﻿@model Assignment_1.Models.ClassUserViewModel
+@*@model IEnumerable<Assignment_1.Models.Class>*@
 @{
     ViewData["Title"] = "Details";
 }
+@{
+    ViewData["Title"] = "Classes";
+}
 
 <h1>Welcome 
-        @Html.DisplayFor(model => model.FirstName)
-        @Html.DisplayFor(model => model.LastName)</h1>
+        @Html.DisplayFor(model => model.viewUser.FirstName)
+        @Html.DisplayFor(model => model.viewUser.LastName)</h1>
 <style>
     .h1{
         position:fixed;
@@ -68,29 +71,64 @@
 }
 </style>
 <div class="text-center d-flex justify-content-center">
-<div class="card">
-    
-    <div class="container">
-        <h6><b>Name/Number</b></h6>
-        <p>Time</p>
-        <p>Location</p>
-    </div>
-</div>
-<div class="card">
+    @if (ViewData["Student"] != null)
+    {
+        @if (ViewData["Student"].ToString() == "Student")
+        {
+            <div class="card">
+                <div class="container">
+                    <h6><b>Name/Number</b></h6>
+                    <p>Time</p>
+                    <p>Location</p>
+                </div>
+            </div>
+            <div class="card">
 
-    <div class="container">
-        <h6><b>Name/Number</b></h6>
-        <p>Time</p>
-        <p>Location</p>
-    </div>
-</div>
-<div class="card">
-    <div class="container">
-        <h6><b>Name/Number</b></h6>
-        <p>Time</p>
-        <p>Location</p>
-    </div>
-</div>
+                <div class="container">
+                    <h6><b>Name/Number</b></h6>
+                    <p>Time</p>
+                    <p>Location</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="container">
+                    <h6><b>Name/Number</b></h6>
+                    <p>Time</p>
+                    <p>Location</p>
+                </div>
+            </div>
+        }
+        @if (ViewData["Student"].ToString() != "Student")
+        {
+            foreach (var item in Model.classes)
+            {
+                <div class="card">
+                    <div class="container">
+                        <h6><b>@Html.DisplayFor(modelItem => item.CourseName) <hr /> @Html.DisplayNameFor(model => item.CourseNumber)</b></h6>
+                        <p>@Html.DisplayFor(modelItem => item.DaysOfWeek) at @Html.DisplayFor(modelItem => item.TimeOfDay)</p>
+                        <p>@Html.DisplayFor(modelItem => item.Location)</p>
+                    </div>
+                </div>
+            }
+        }
+        @*@if (ViewData["Student"].ToString() != "Student")
+        {
+            @foreach (var item in ViewData["UserId"])
+            {
+                @if (ViewData["UserId"] == model => model.UserId)
+                {
+                <div class="card">
+                    <div class="container">
+                            <h6><b>@Html.DisplayFor(modelItem => item.CourseName)/@Html.DisplayNameFor(model => model.CourseNumber)</b></h6>
+                            <p>@Html.DisplayFor(modelItem => item.DaysOfWeek) at @Html.DisplayFor(modelItem => item.TimeOfDay)</p>
+                            <p>@Html.DisplayFor(modelItem => item.Location)</p>
+                    </div>
+                </div>
+                }
+            }
+        }*@
+    }
+
     </div>
 <div class="vertical-menu">
     <a href="#" class="active">ToDo's</a>
