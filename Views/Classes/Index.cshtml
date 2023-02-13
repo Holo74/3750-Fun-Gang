@@ -34,7 +34,10 @@
                 @Html.DisplayNameFor(model => model.DaysOfWeek)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TimeOfDay)
+                @Html.DisplayNameFor(model => model.StartTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndTime)
             </th>
             <th></th>
         </tr>
@@ -68,7 +71,10 @@
                     @Html.DisplayFor(modelItem => item.DaysOfWeek)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.TimeOfDay)
+                    @Html.DisplayFor(modelItem => item.StartTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndTime)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.ClassId">Edit</a> |
