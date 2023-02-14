@@ -47,16 +47,33 @@
                 <label asp-for="Location" class="control-label"></label>
                 <input asp-for="Location" class="form-control" />
                 <span asp-validation-for="Location" class="text-danger"></span>
-            </div>
-            <div class="form-group"> @* Still need to make it so it's 7 buttons/check boxes for each day of the week *@
+            </div>@*
+            <div class="form-group"> @* Still need to make it so it's 7 buttons/check boxes for each day of the week
                 <label asp-for="DaysOfWeek" class="control-label"></label>
                 <input asp-for="DaysOfWeek" class="form-control" />
                 <span asp-validation-for="DaysOfWeek" class="text-danger"></span>
+            </div>*@
+            <div class="form-group"> @* Still need to make it so it's 7 buttons/check boxes for each day of the week *@
+                Monday
+                <input type="checkbox" name="day" value="M" />
+                Tuesday
+                <input type="checkbox" name="day" value="Tu" />
+                Wednesday
+                <input type="checkbox" name="day" value="W" />
+                Thursday
+                <input type="checkbox" name="day" value="Th" />
+                Friday
+                <input type="checkbox" name="day" value="F" />
             </div>
-            <div class="form-group"> @* Still need to make it so we have a start and end time, whatever we decide to use to get it*@
-                <label asp-for="TimeOfDay" class="control-label"></label>
-                <input asp-for="TimeOfDay" class="form-control" />
-                <span asp-validation-for="TimeOfDay" class="text-danger"></span>
+            <div class="form-group">
+                <label asp-for="StartTime" class="control-label"></label>
+                <input asp-for="StartTime" class="form-control" />
+                <span asp-validation-for="StartTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndTime" class="control-label"></label>
+                <input asp-for="EndTime" class="form-control" />
+                <span asp-validation-for="EndTime" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Register Class" class="btn btn-primary" />

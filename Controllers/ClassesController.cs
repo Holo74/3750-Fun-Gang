@@ -60,11 +60,26 @@ namespace Assignment_1.Controllers
 
         // Need a submit class to update the database
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("ClassId,UserId,Department,CourseNumber,CourseName,NumOfCredits,Location,DaysOfWeek,TimeOfDay")] Class c)
+        public async Task<IActionResult> Create(
+            [Bind("ClassId,UserId,Department,CourseNumber,CourseName,NumOfCredits,Location,StartTime,EndTime")] Class c,
+            ICollection<string> day)
         {
             var UserID = HttpContext.Session.GetInt32("UserID");
             if(UserID != null)
             {
+                c.DaysOfWeek = "";
+                IEnumerator<string> e = day.GetEnumerator();//loop through string list thing and add to DaysOfWeek string
+                for (int i = 0; i <= day.Count; i++) { 
+                    if (e.Current != null)
+                    {
+                        if(i > 1)
+                        {
+                            c.DaysOfWeek += " | ";
+                        }
+                        c.DaysOfWeek += (e.Current);
+                    }
+                    e.MoveNext();
+                }
                 c.UserId = UserID == null ? -1 : UserID.Value;//"syntax sugar" c.UserId needs a guarentee that its not getting null
                 _context.Class.Add(c);
                 await _context.SaveChangesAsync();
