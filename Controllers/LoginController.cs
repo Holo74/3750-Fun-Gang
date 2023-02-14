@@ -28,8 +28,14 @@ namespace Assignment_1.Controllers
             }
 			return View();
 		}
+        public IActionResult LogOut()
+        {
+            HttpContext.Session.Remove("UserID");
 
-		public async Task<IActionResult> Validate(string Email, string Password)
+            return Redirect("/Login/");
+        }
+
+        public async Task<IActionResult> Validate(string Email, string Password)
 		{
 			//Debug.WriteLine("Email: " + Email);
 			//Debug.WriteLine("Password: " + Password);

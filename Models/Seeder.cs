@@ -26,7 +26,13 @@ namespace Assignment_1.Models
                     FirstName= "James",
                     LastName= "Holden",
                     BirthDate= DateTime.Parse("01-01-2001"),
-                    UserType = "Student"
+                    UserType = "Student",
+                    Address = "1198N 4500S",
+                    City = "Ogden",
+                    State = "Utah",
+                    ZipCode = "84404"
+
+                    
                     });
                 context.SaveChanges();
             }
