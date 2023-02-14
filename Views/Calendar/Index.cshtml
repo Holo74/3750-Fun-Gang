@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Calendar";
 }
 <!DOCTYPE html>
@@ -7,9 +6,9 @@
 <head>
     <meta charset='utf-8' />
     <script src='~/js/index.global.js'></script>
-    
+
     <script>
-        var userID = @(ViewContext.RouteData.Values["UserID"]);
+        var userID = @(Context.Request.Query["UserID"])
 
         document.addEventListener('DOMContentLoaded', function () {
             var calendarEl = document.getElementById('calendar');
@@ -17,9 +16,8 @@
                 initialView: 'dayGridMonth',
                 events: [
                     {
-                        for (var i = 0; i < 30; i++){
-                            
-                        }
+                        title: 'test thing',
+                        start: '2023-02-13'
                     }
                 ]
             });

@@ -11,7 +11,8 @@ namespace Assignment_1.Controllers
         }
         public IActionResult CalendarPage()
         {
-            return View();
+            var UserID = HttpContext.Session.GetInt32("UserID");
+            return Redirect("Index/?UserID=" + UserID);
         }
     }
 }
