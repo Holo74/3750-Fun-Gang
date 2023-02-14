@@ -62,17 +62,21 @@ namespace Assignment_1.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(
             [Bind("ClassId,UserId,Department,CourseNumber,CourseName,NumOfCredits,Location,StartTime,EndTime")] Class c,
-            ICollection<string> days)
+            ICollection<string> day)
         {
             var UserID = HttpContext.Session.GetInt32("UserID");
             if(UserID != null)
             {
-                c.DaysOfWeek = "e";
-                IEnumerator<string> e = days.GetEnumerator();//loop through string list thing and add to DaysOfWeek string
-                for (int i = 0; i < days.Count; i++) { 
+                c.DaysOfWeek = "";
+                IEnumerator<string> e = day.GetEnumerator();//loop through string list thing and add to DaysOfWeek string
+                for (int i = 0; i <= day.Count; i++) { 
                     if (e.Current != null)
                     {
-                        c.DaysOfWeek += (":" + e.Current);
+                        if(i > 1)
+                        {
+                            c.DaysOfWeek += " | ";
+                        }
+                        c.DaysOfWeek += (e.Current);
                     }
                     e.MoveNext();
                 }
