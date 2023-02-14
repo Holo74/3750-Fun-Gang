@@ -42,15 +42,17 @@ namespace Assignment_1.Controllers
         }
 
         // GET: Users/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details()//int? id)
         {
-            if (id == null || _context.User == null)
+            var UserID = HttpContext.Session.GetInt32("UserID");
+
+            if (UserID == null || _context.User == null)
             {
                 return NotFound();
             }
 
             var user = await _context.User
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.Id == UserID);
             if (user == null)
             {
                 return NotFound();
@@ -113,14 +115,16 @@ namespace Assignment_1.Controllers
         }
 
         // GET: Users/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit()//(int? id)
         {
-            if (id == null || _context.User == null)
+            var UserID = HttpContext.Session.GetInt32("UserID");
+
+            if (UserID == null || _context.User == null)
             {
                 return NotFound();
             }
 
-            var user = await _context.User.FindAsync(id);
+            var user = await _context.User.FindAsync(UserID);
             if (user == null)
             {
                 return NotFound();
@@ -133,7 +137,7 @@ namespace Assignment_1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Email,Password,FirstName,LastName,BirthDate,ConfirmPassword,UserType")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Email,Password,FirstName,LastName,BirthDate,ConfirmPassword,UserType,Address,City,State,ZipCode,PhoneNumber")] User user)
         {
             if (id != user.Id)
             {
@@ -142,8 +146,8 @@ namespace Assignment_1.Controllers
             Console.WriteLine(ModelState.IsValid);
             Console.WriteLine("Model State is valid?");
             Console.WriteLine(ModelState.ErrorCount);
-            if (ModelState.IsValid)
-            {
+         //   if (ModelState.IsValid)
+           // {
                 try
                 {
                     _context.Update(user);
@@ -161,7 +165,7 @@ namespace Assignment_1.Controllers
                     }
                 }
                 //return RedirectToAction(nameof(Index));
-            }
+           // }
             return Redirect("/Users/Details/" + user.Id);
         }
 
