@@ -104,8 +104,8 @@
             {
                 <div class="card">
                     <div class="container">
-                        <h6><b>@Html.DisplayFor(modelItem => item.CourseName) <hr /> @Html.DisplayNameFor(model => item.CourseNumber)</b></h6>
-                        <p>@Html.DisplayFor(modelItem => item.DaysOfWeek) at @Html.DisplayFor(modelItem => item.TimeOfDay)</p>
+                        <h6><b>@Html.DisplayFor(modelItem => item.CourseName) <br /> @Html.DisplayNameFor(model => item.CourseNumber)</b></h6>
+                        <p>@Html.DisplayFor(modelItem => item.DaysOfWeek) <br /> at @Html.DisplayFor(modelItem => item.StartTime) <br /> to @Html.DisplayFor(modelItem => item.EndTime)</p>
                         <p>@Html.DisplayFor(modelItem => item.Location)</p>
                     </div>
                 </div>
