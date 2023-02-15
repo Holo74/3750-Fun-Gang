@@ -27,5 +27,9 @@ namespace Assignment_1.Models
         public string DaysOfWeek { get; set; }
         [Required]
         public string TimeOfDay { get; set; }
+        [Required]
+        public TimeOnly StartTime { get; set; }
+        [Required]
+        public TimeOnly EndTime { get; set; }
     }
 }

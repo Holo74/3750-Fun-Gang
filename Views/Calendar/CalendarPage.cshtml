@@ -1,4 +1,5 @@
-﻿
+﻿@model IEnumerable<Assignment_1.Models.Class>
+
 @{
     ViewData["Title"] = "Calendar";
 }
@@ -7,31 +8,58 @@
 <head>
     <meta charset='utf-8' />
     <script src='~/js/index.global.js'></script>
-    
+
     <script>
-        var userID = @(ViewContext.RouteData.Values["UserID"]);
+        // green pseudo code for what I want to happen
+        /*var userID = @(Model.First().UserId)
+        var nameList = [];
+        var startList = [];
+        var endList = [];
+        var daysList = [];
+
+        @foreach (var item in Model)
+        {
+           // var name = item.CourseName;
+           // var start = item.StartTime;
+           // var end = item.EndTime;
+           // var days = item.DaysOfWeek;
+
+            //nameList.push(name);
+            //startList.push(start);
+            //endList.push(end);
+            //daysList.push(days);
+        }*/
 
         document.addEventListener('DOMContentLoaded', function () {
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                events: [
-                    {
-                        for (var i = 0; i < 30; i++){
-                            
-                        }
-                    }
-                ]
+                initialView: 'dayGridMonth'
             });
-            var testEl = document.getElementById("test");
-            testEl.innerHTML = userID;
+
+            /*var startDate = "2023-01-01"
+            for (var i = 0; i < weeksBetweenJan1stAndMay31st; i++){
+                var dummyDate = startDate;
+                if (daysList[i].Contains("W")) {
+                    calendar.addEvent({ title: nameList[i], start: dummyDate + startList[i], end: dummyDate + endList[i]})
+                }
+                if (daysList[i].Contains("Th")) {
+                    dummyDate = startDate.addDays(1);
+                    calendar.addEvent({ title: nameList[i], start: dummyDate + startList[i], end: dummyDate + endList[i]})
+                }
+                if (daysList[i].Contains("F")) {
+                    dummyDate = startDate.addDays(2);
+                    calendar.addEvent({ title: nameList[i], start: dummyDate + startList[i], end: dummyDate + endList[i]})
+                }
+                // for the rest of the days
+                startDate = startDate.addDays(7);
+            }*/
+            
             calendar.render();
         });
 
     </script>
 </head>
 <body>
-    <p id="test"></p>
     <div id='calendar'></div>
 </body>
 </html>

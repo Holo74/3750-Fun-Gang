@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<Assignment_1.Models.Class>
+
+@{
     ViewData["Title"] = "Calendar";
 }
 <!DOCTYPE html>
@@ -14,12 +16,9 @@
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
-                events: [
-                    {
-                        title: 'test thing',
-                        start: '2023-02-13'
-                    }
-                ]
+                events: function() {
+
+                }
             });
             var testEl = document.getElementById("test");
             testEl.innerHTML = userID;
