@@ -7,6 +7,12 @@ namespace Assignment_1.Controllers
     public class CalendarController : Controller
     {
         private readonly Assignment_1Context _context; // declaration for the context object
+
+        public CalendarController(Assignment_1Context context)
+        {
+            _context = context; // makes it so we can get the database at any time
+        }
+
         public IActionResult Index()
         {
             return View();
