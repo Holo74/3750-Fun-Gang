@@ -137,7 +137,7 @@ namespace Assignment_1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Email,Password,FirstName,LastName,BirthDate,ConfirmPassword,UserType,Address,City,State,ZipCode,PhoneNumber")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Email,FirstName,LastName,BirthDate,UserType,Address,City,State,ZipCode,PhoneNumber")] User user)
         {
             if (id != user.Id)
             {
@@ -146,12 +146,21 @@ namespace Assignment_1.Controllers
             Console.WriteLine(ModelState.IsValid);
             Console.WriteLine("Model State is valid?");
             Console.WriteLine(ModelState.ErrorCount);
-         //   if (ModelState.IsValid)
-           // {
-                try
+            //   if (ModelState.IsValid)
+            // {
+            var olduser = _context.User.Where(x => x.Id == id).FirstOrDefault();
+            try
                 {
-                    _context.Update(user);
+               
+                    user.Password = olduser.Password;
+                user.UserType = olduser.UserType;        
+                user.ConfirmPassword = olduser.Password;
+                _context.ChangeTracker.Clear();
+                _context.Update(user);
                     await _context.SaveChangesAsync();
+                
+                
+                   
                 }
                 catch (DbUpdateConcurrencyException)
                 {
