@@ -1,0 +1,58 @@
+@model IEnumerable<Assignment_1.Models.ViewRegistrationAndClass>
+
+@{
+    ViewData["Title"] = "Registration";
+}
+
+<h1>Registration</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Classes.Department)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Classes.CourseNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Classes.CourseName)
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @*
+        *************** Shows every course that this user is teaching
+        ***********************************************************
+        *@
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Classes.Department)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Classes.CourseNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Classes.CourseName)
+                </td>
+                <td>
+                    <a asp-action="RegisterForClass" asp-route-id="@item.Classes.ClassId">
+                        @if (item.Reg.IsRegistered == 0)
+                        {
+                            Html.Display("Register");
+                        }
+                        else
+                        {
+                            Html.Display("Unenroll");
+                        }
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
