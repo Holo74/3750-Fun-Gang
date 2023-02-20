@@ -41,16 +41,18 @@
                     @Html.DisplayFor(modelItem => item.Classes.CourseName)
                 </td>
                 <td>
-                    <a asp-action="RegisterForClass" asp-route-id="@item.Classes.ClassId">
-                        @if (item.Reg.IsRegistered == 0)
-                        {
-                            Html.Display("Register");
-                        }
-                        else
-                        {
-                            Html.Display("Unenroll");
-                        }
-                    </a>
+                    <form asp-action="RegisterForClass" method="post" asp-route-classId="@item.Classes.ClassId">
+                        <button>
+                            @if (item.Reg != null && item.Reg.IsRegistered == 1)
+                            {
+                                <p>Unenroll</p>
+                            }
+                            else
+                            {
+                                <p>Register</p>
+                            }
+                        </button>
+                    </form>
                 </td>
             </tr>
         }
