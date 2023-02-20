@@ -17,6 +17,18 @@ namespace Assignment_1.Controllers
         {
             var UserID = HttpContext.Session.GetInt32("UserID");
 
+            if (UserID != null)
+            {
+
+                return View(CourseList());
+            }
+            return NotFound();
+        }
+
+        private IEnumerable<Models.ViewRegistrationAndClass>? CourseList()
+        {
+            var UserID = HttpContext.Session.GetInt32("UserID");
+
             var Registered =
             (
                 from r in _context.Registrations select r
@@ -25,24 +37,54 @@ namespace Assignment_1.Controllers
 
             var listedReg = Registered.ToList();
 
+            var CourseQuery =
+            (
+                from c in _context.Class select c
+            ).ToList();
+
             var Course =
             (
-                from c in _context.Class
+                from c in CourseQuery
                 join r in listedReg on c.ClassId equals r.ClassFK
-                select new Models.ViewRegistrationAndClass()
+                into Reg
+                from r in Reg.DefaultIfEmpty()
+                select new Models.ViewRegistrationAndClass { Classes = c, Reg = r }
             );
-            if (UserID != null)
-            {
-
-                return View(Course);
-            }
-            return NotFound();
+            return Course;
         }
 
         [HttpPost]
-        public void RegisterForClass(int classId)
+        public async Task<IActionResult> RegisterForClass(int classId)
         {
+            var UserID = HttpContext.Session.GetInt32("UserID");
+            var Registered = from r in _context.Registrations select r;
+            Registered = Registered.Where(reg => reg.UserFK == UserID && reg.ClassFK == classId);
 
+            var listing = Registered.ToList();
+            Models.Registrations reg = new Models.Registrations()
+            {
+                UserFK = UserID,
+                ClassFK = classId,
+                IsRegistered = 1
+            };
+
+            if (listing.Count == 0)
+            {
+                _context.Registrations.Add(reg);
+            }
+            else
+            {
+                var model = _context.Registrations.FirstOrDefault(id => id.ID == listing[0].ID);
+                reg.ID = listing[0].ID;
+                if (listing[0].IsRegistered == 1)
+                {
+                    reg.IsRegistered = 0;
+                }
+                model.IsRegistered = reg.IsRegistered;
+
+            }
+            _context.SaveChanges();
+            return Redirect("Index");
         }
     }
 }
