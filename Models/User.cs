@@ -38,5 +38,9 @@ namespace Assignment_1.Models
         public string? State { get; set; }
         public string? ZipCode { get; set; }
         public string? PhoneNumber { get;set; }
+        public string? ReferenceOne { get; set; }
+        public string? ReferenceTwo { get; set;}
+        public string? ReferenceThree { get; set;}
+
     }
 }

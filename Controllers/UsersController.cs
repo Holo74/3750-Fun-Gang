@@ -137,7 +137,7 @@ namespace Assignment_1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Email,FirstName,LastName,BirthDate,UserType,Address,City,State,ZipCode,PhoneNumber")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Email,FirstName,LastName,BirthDate,UserType,Address,City,State,ZipCode,PhoneNumber,ReferenceOne,ReferenceTwo,ReferenceThree")] User user)
         {
             if (id != user.Id)
             {

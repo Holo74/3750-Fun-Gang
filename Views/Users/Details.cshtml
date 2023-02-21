@@ -80,6 +80,24 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.PhoneNumber)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReferenceOne)
+        </dt>
+        <dd class="col-sm-10" type="url">
+            <a href ="@Html.DisplayFor(model => model.ReferenceOne)">Reference</a>
+        </dd>
+        <dt class="col-sm-2">
+           @Html.DisplayNameFor(model => model.ReferenceTwo)
+        </dt>
+        <dd class="col-sm-10">
+            <a href ="@Html.DisplayFor(model => model.ReferenceTwo)">Reference</a>
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReferenceThree)
+        </dt>
+        <dd class="col-sm-10">
+            <a href = "@Html.DisplayFor(model => model.ReferenceThree)">Reference</a>
+        </dd>
     </dl>
 </div>
 <div>
