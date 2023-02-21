@@ -1,9 +1,28 @@
-﻿@model Assignment_1.Controllers.CourseInfo
+﻿@model Assignment_1.Models.ClassUserAssignments
 
 @{
     ViewData["Title"] = "Course";
 }
 
 <div class="text-center">
-    <h1>@Model.CourseName</h1>
+    <h1>@Model.Class.CourseName</h1>
 </div>
+
+<table>
+    <th>
+        <tr>
+            <td>
+                Name
+            </td>
+            <td>
+                Day Due
+            </td>
+            <td>
+                Time Due
+            </td>
+        </tr>
+    </th>
+    <tbody>
+
+    </tbody>
+</table>
