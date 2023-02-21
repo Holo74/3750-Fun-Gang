@@ -108,15 +108,17 @@
         {
             foreach (var item in Model.classes)
             {
-                <div class="card">
-                    <div class="container">
-                        <h6><b>@Html.DisplayFor(modelItem => item.CourseName) <br /> @Html.DisplayFor(model =>
-                    item.CourseNumber)</b></h6>
-                        <p>@Html.DisplayFor(modelItem => item.DaysOfWeek) <br /> at @Html.DisplayFor(modelItem => item.StartTime)
-                            <br /> to @Html.DisplayFor(modelItem => item.EndTime)
-                        </p>
-                        <p>@Html.DisplayFor(modelItem => item.Location)</p>
-                    </div>
+                <div class="card" id=@item.ClassId>
+                    <a href="@Url.Action("Index", "Course", new { classID = item.ClassId })">
+                        <div class="container">
+                            <h6><b>@Html.DisplayFor(modelItem => item.CourseName) <br /> @Html.DisplayFor(model =>
+                        item.CourseNumber)</b></h6>
+                            <p>@Html.DisplayFor(modelItem => item.DaysOfWeek) <br /> at @Html.DisplayFor(modelItem => item.StartTime)
+                                <br /> to @Html.DisplayFor(modelItem => item.EndTime)
+                            </p>
+                            <p>@Html.DisplayFor(modelItem => item.Location)</p>
+                        </div>
+                    </a>
                 </div>
             }
         }

@@ -24,7 +24,6 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
 	var services = scope.ServiceProvider;
-	Seeder.Init(services);
 }
 
 	// Configure the HTTP request pipeline.
