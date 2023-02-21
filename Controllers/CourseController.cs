@@ -20,19 +20,32 @@ namespace Assignment_1.Controllers
             var courses = from c in _context.Class select c;
             var course = courses.Where(c => c.ClassId == classId).ToList();
 
-            CourseInfo specificCourse = new CourseInfo();
-            specificCourse.CourseName = course[0].CourseName;
-            specificCourse.CourseNumber = course[0].CourseNumber;
-            specificCourse.Department = course[0].Department;
+            ClassUserAssignments CUA = new ClassUserAssignments();
+
+            if (course.Count != 1)
+            {
+                return NotFound();
+            }
+
+            CUA.Class = course[0];
+
+            // CourseInfo specificCourse = new CourseInfo();
+            // specificCourse.CourseName = course[0].CourseName;
+            // specificCourse.CourseNumber = course[0].CourseNumber;
+            // specificCourse.Department = course[0].Department;
 
             // Does User teach the class?
-            if (course[0].UserId == UserID)
+            if (CUA.Class.UserId == UserID)
             {
-                specificCourse.TeachesClass = true;
+                CUA.User = Models.Helper.ReturnFirstSelected<User>((from u in _context.User where u.Id == UserID select u).ToList());
+                CUA.TeachesClass = true;
             }
-            else { specificCourse.TeachesClass = false; }
+            else
+            {
+                CUA.TeachesClass = false;
+            }
 
-            return View(specificCourse);
+            return View(CUA);
         }
     }
     public class CourseInfo
