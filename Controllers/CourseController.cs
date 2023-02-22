@@ -45,6 +45,8 @@ namespace Assignment_1.Controllers
                 CUA.TeachesClass = false;
             }
 
+            CUA.Assignments = (from a in _context.ClassAssignments where a.ClassId == CUA.Class.ClassId select a).ToList();
+
             return View(CUA);
         }
     }

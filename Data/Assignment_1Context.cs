@@ -17,5 +17,6 @@ namespace Assignment_1.Data
         public DbSet<Assignment_1.Models.User> User { get; set; } = default!;
         public DbSet<Assignment_1.Models.Class> Class { get; set; } = default!; // allows us to get the context for the class table
         public DbSet<Assignment_1.Models.Registrations> Registrations { get; set; } = default!;
+        public DbSet<Assignment_1.Models.ClassAssignments> ClassAssignments { get; set; } = default!;
     }
 }

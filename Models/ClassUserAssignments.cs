@@ -4,8 +4,7 @@ namespace Assignment_1.Models
     {
         public Class Class { get; set; }
         public User User { get; set; }
-        // List of assignments
-        // public List<Assig
+        public List<ClassAssignments> Assignments { get; set; }
 
         public bool TeachesClass { get; set; }
     }

@@ -23,6 +23,34 @@
         </tr>
     </th>
     <tbody>
-
+        @foreach (var item in Model.Assignments)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelData => item.AssignmentTitle);
+                </td>
+                <td>
+                    @Html.DisplayFor(modelData => item.DueDate);
+                </td>
+                <td>
+                    @Html.DisplayFor(modelData => item.DueTime);
+                </td>
+                <td>
+                    <button class="btn btn-primary">
+                        Edit
+                    </button>
+                </td>
+                <td>
+                    <button class="btn btn-primary">
+                        Detele
+                    </button>
+                </td>
+                <td>
+                    <button class="btn btn-primary">
+                        Submissions
+                    </button>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
