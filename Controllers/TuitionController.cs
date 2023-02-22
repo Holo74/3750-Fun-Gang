@@ -10,7 +10,7 @@ namespace Assignment_1.Controllers
     {
         public TuitionController()
         {
-            StripeConfiguration.ApiKey = "sk_test_4eC39HqLyjWDarjtT1zdp7dc";
+            StripeConfiguration.ApiKey = "sk_test_51Mb6siLMv5EI8mC5NUvOtbB5GR8yROjRo4xmnxHzYifnxojwHC22T1u0y19TOS3PJxZ7ocCybKO2qXnyEkrV1Ytt00JF125KMq";
         }
         int savedAmount = 0;//hackey workaround for getting the amount passed into the DB
 
@@ -21,28 +21,29 @@ namespace Assignment_1.Controllers
             var options = new SessionCreateOptions
             {
                 LineItems = new List<SessionLineItemOptions>
-        {
-          new SessionLineItemOptions
-          {
-            PriceData = new SessionLineItemPriceDataOptions
-            {
-              UnitAmount = (amount == 0 ? 50 : amount * 100),
-              Currency = "usd",
-              ProductData = new SessionLineItemPriceDataProductDataOptions
-              {
-                Name = "Tuition_Payment",
-              },
-            },
-            Quantity = 1,
-          },
-        },
+                {
+                  new SessionLineItemOptions
+                  {
+                    PriceData = new SessionLineItemPriceDataOptions
+                    {
+                      UnitAmount = (amount == 0 ? 50 : amount * 100),
+                      Currency = "usd",
+                      ProductData = new SessionLineItemPriceDataProductDataOptions
+                      {
+                        Name = "Tuition_Payment",
+                      },
+                    },
+                    Quantity = 1,
+                  },
+                },
                 Mode = "payment",
-                SuccessUrl = "https://localhost:7099/Tuition/Success/",
+                SuccessUrl = "https://localhost:7099/Tuition/Success?session_id={CHECKOUT_SESSION_ID}",
                 CancelUrl = "https://localhost:7099/Tuition/Cancel",
             };
 
             var service = new SessionService();
             Session session = service.Create(options);
+            session.Id = "TEST_DO_NOT_USE_IN_FUTURE";
 
             Response.Headers.Add("Location", session.Url);
             return new StatusCodeResult(303);
@@ -58,7 +59,7 @@ namespace Assignment_1.Controllers
             Session session = sessionService.Get(session_id);
 
             var customerService = new CustomerService();
-            long? p = session.AmountSubtotal;
+            long? p = session.AmountSubtotal / 100;
             ViewData["amount"] = p;
 
             return View();
