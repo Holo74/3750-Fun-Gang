@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Stripe;
 using Stripe.Checkout;
@@ -13,10 +12,12 @@ namespace Assignment_1.Controllers
         {
             StripeConfiguration.ApiKey = "sk_test_4eC39HqLyjWDarjtT1zdp7dc";
         }
+        int savedAmount = 0;//hackey workaround for getting the amount passed into the DB
 
         [HttpPost("create-checkout-session")]
-        public ActionResult CreateCheckoutSession()
+        public ActionResult CreateCheckoutSession(int amount)
         {
+            savedAmount = amount * 100;
             var options = new SessionCreateOptions
             {
                 LineItems = new List<SessionLineItemOptions>
@@ -25,7 +26,7 @@ namespace Assignment_1.Controllers
           {
             PriceData = new SessionLineItemPriceDataOptions
             {
-              UnitAmount = 2000,
+              UnitAmount = (amount == 0 ? 50 : amount * 100),
               Currency = "usd",
               ProductData = new SessionLineItemPriceDataProductDataOptions
               {
@@ -51,6 +52,15 @@ namespace Assignment_1.Controllers
         [HttpGet("/Tuition/Success")]
         public ActionResult OrderSuccess([FromQuery] string session_id)
         {
+            //send back to DB
+            //ViewData["amount"] = savedAmount;
+            var sessionService = new SessionService();
+            Session session = sessionService.Get(session_id);
+
+            var customerService = new CustomerService();
+            long? p = session.AmountSubtotal;
+            ViewData["amount"] = p;
+
             return View();
         }
 
