@@ -41,7 +41,7 @@ namespace Assignment_1.Models
         public string? PhoneNumber { get; set; }
 
         //[DataType(DataType.Currency)]
-        public decimal Balance { get; set; }
+        public decimal? Balance { get; set; }
         public string? ReferenceOne { get; set; }
         public string? ReferenceTwo { get; set; }
         public string? ReferenceThree { get; set; }
