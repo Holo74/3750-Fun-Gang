@@ -21,6 +21,7 @@ namespace Assignment_1.Controllers
             var UserID = HttpContext.Session.GetInt32("UserID");
             var courses = from c in _context.Class select c;
             var course = courses.Where(c => c.ClassId == classId).ToList();
+            
 
 
             ClassUserAssignments CUA = new ClassUserAssignments();
