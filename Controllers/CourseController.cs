@@ -50,7 +50,7 @@ namespace Assignment_1.Controllers
 
             return View(CUA);
         }
-        public IActionResult Details(int? classId)
+        public IActionResult Details(int classId)
         {
             var courses = from c in _context.Class select c;
             var course = courses.Where(c => c.ClassId == classId).ToList();
