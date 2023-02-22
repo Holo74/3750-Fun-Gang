@@ -3,21 +3,23 @@ using System.Collections.Generic;
 using Microsoft.Extensions.Options;
 using Stripe;
 using Stripe.Checkout;
+using Microsoft.EntityFrameworkCore;
+using Assignment_1.Data;
 
 namespace Assignment_1.Controllers
 {
     public class TuitionController : Controller
     {
-        public TuitionController()
+        private readonly Assignment_1Context _context; // declaration for the context object
+        public TuitionController(Assignment_1Context context)
         {
             StripeConfiguration.ApiKey = "sk_test_51Mb6siLMv5EI8mC5NUvOtbB5GR8yROjRo4xmnxHzYifnxojwHC22T1u0y19TOS3PJxZ7ocCybKO2qXnyEkrV1Ytt00JF125KMq";
+            _context = context; // makes it so we can get the database at any time
         }
-        int savedAmount = 0;//hackey workaround for getting the amount passed into the DB
 
         [HttpPost("create-checkout-session")]
         public ActionResult CreateCheckoutSession(int amount)
         {
-            savedAmount = amount * 100;
             var options = new SessionCreateOptions
             {
                 LineItems = new List<SessionLineItemOptions>
@@ -43,7 +45,6 @@ namespace Assignment_1.Controllers
 
             var service = new SessionService();
             Session session = service.Create(options);
-            session.Id = "TEST_DO_NOT_USE_IN_FUTURE";
 
             Response.Headers.Add("Location", session.Url);
             return new StatusCodeResult(303);
@@ -71,7 +72,14 @@ namespace Assignment_1.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            var UserID = HttpContext.Session.GetInt32("UserID");
+            var user = from u in _context.User select u;// gets the class table from the database **(still need to show only that specific teacher's courses)**
+            if (UserID != null)
+            {
+                user = user.Where(x => x.Id == UserID);
+                return View(user);
+            }
+            return Redirect("/Login/");
         }
     }
 }
