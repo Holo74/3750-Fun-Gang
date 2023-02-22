@@ -7,8 +7,18 @@
 <div class="text-center">
     <h1>@Model.Class.CourseName</h1>
 </div>
+<div class="class">
+    <a  asp-action="Details" asp-route-id="@Model?.Class.ClassId">Create new Assignments</a>
+  @*  <a href="@Url.Action("Index", "ClassAssignments",  { classID = item.ClassId })">*@
+</div>
 
-<table>
+
+
+
+
+
+
+@*<table>
     <th>
         <tr>
             <td>
@@ -25,4 +35,4 @@
     <tbody>
 
     </tbody>
-</table>
+</table>*@
