@@ -39,6 +39,8 @@ namespace Assignment_1.Models
         public string? State { get; set; }
         public string? ZipCode { get; set; }
         public string? PhoneNumber { get;set; }
-        public SqlMoney Balance { get; set; }
+
+        //[DataType(DataType.Currency)]
+        public decimal Balance { get; set; }
     }
 }

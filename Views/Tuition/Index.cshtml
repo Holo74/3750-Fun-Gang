@@ -5,7 +5,7 @@
 </head>
 <body>
     <h1>User Balance: </h1>
-    @Html.DisplayFor(model => model.Balance)
+    $@Html.DisplayFor(model => model.Balance)
     <hr />
     <form action="/create-checkout-session" method="POST">
         <input type="number" name="amount" />

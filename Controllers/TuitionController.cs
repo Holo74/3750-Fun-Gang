@@ -63,6 +63,18 @@ namespace Assignment_1.Controllers
             long? p = session.AmountSubtotal / 100;
             ViewData["amount"] = p;
 
+            var UserID = HttpContext.Session.GetInt32("UserID");
+            var user = from u in _context.User select u;
+            if (UserID != null)
+            {
+                Assignment_1.Models.User a = user.Where(x => x.Id == UserID).First();
+
+                //update user balance in database
+                a.Balance += Convert.ToDecimal(p != null ? p : 0);
+                _context.Update(a);
+                _context.SaveChangesAsync();
+            }
+
             return View();
         }
 
@@ -73,11 +85,11 @@ namespace Assignment_1.Controllers
         public IActionResult Index()
         {
             var UserID = HttpContext.Session.GetInt32("UserID");
-            var user = from u in _context.User select u;// gets the class table from the database **(still need to show only that specific teacher's courses)**
+            var user = from u in _context.User select u;
             if (UserID != null)
             {
-                user = user.Where(x => x.Id == UserID);
-                return View(user);
+                Assignment_1.Models.User a = user.Where(x => x.Id == UserID).First();
+                return View(a);
             }
             return Redirect("/Login/");
         }
