@@ -1,0 +1,49 @@
+﻿@model Assignment_1.Models.ClassAssignments
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="AssignmentTitle" class="control-label"></label>
+                <input asp-for="AssignmentTitle" class="form-control" />
+                <span asp-validation-for="AssignmentTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxPoints" class="control-label"></label>
+                <input asp-for="MaxPoints" class="form-control" />
+                <span asp-validation-for="MaxPoints" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DueDate" class="control-label"></label>
+                <input asp-for="DueDate" class="form-control" />
+                <span asp-validation-for="DueDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DueTime" class="control-label"></label>
+                <input asp-for="DueTime" class="form-control" />
+                <span asp-validation-for="DueTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SubmissionType" class="control-label"></label>
+                <input asp-for="SubmissionType" class="form-control" />
+                <span asp-validation-for="SubmissionType" class="text-danger"></span>
+            </div>
+           
+            <div class="form-group">
+                <input type="submit" value="Sign Up" class="btn btn-primary" />
+            </div>
+
+        </form>
+    </div>
+</div>

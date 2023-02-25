@@ -1,5 +1,6 @@
 ﻿using Assignment_1.Data;
 using Assignment_1.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
@@ -16,9 +17,12 @@ namespace Assignment_1.Controllers
 
         public IActionResult Index(int? classId)
         {
+            //  classId = HttpContext.Session.GetInt32("ClassId");
             var UserID = HttpContext.Session.GetInt32("UserID");
             var courses = from c in _context.Class select c;
             var course = courses.Where(c => c.ClassId == classId).ToList();
+            
+
 
             ClassUserAssignments CUA = new ClassUserAssignments();
 
@@ -49,12 +53,20 @@ namespace Assignment_1.Controllers
 
             return View(CUA);
         }
-    }
-    public class CourseInfo
-    {
-        public string CourseName { get; set; }
-        public string Department { get; set; }
-        public int CourseNumber { get; set; }
-        public bool TeachesClass { get; set; }
+        public IActionResult Details(int classId)
+        {
+            var courses = from c in _context.Class select c;
+            var course = courses.Where(c => c.ClassId == classId).ToList();
+            return View(); // just brings the create page up
+        }
+
+
+        public class CourseInfo
+        {
+            public string CourseName { get; set; }
+            public string Department { get; set; }
+            public int CourseNumber { get; set; }
+            public bool TeachesClass { get; set; }
+        }
     }
 }
