@@ -7,8 +7,8 @@
 <div class="text-center">
     <h1>@Model.Class.CourseName</h1>
 </div>
-<div class="class">
-    <a  asp-action="Details" asp-route-id="@Model?.Class.ClassId">Create new Assignments</a>
+<div class="class" >
+   <a asp-action="Create" asp-route-classId = "@Model.Class.ClassId" >Create New Assignment</a>
   @*  <a href="@Url.Action("Index", "ClassAssignments",  { classID = item.ClassId })">*@
 </div>
 
@@ -18,8 +18,29 @@
 
 
 
-@*<table>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Class ID
+            </th>
+     <th>
+      Assignment title
+     </th>
+
     <th>
+        Due Date
+    </th>
+
+    <th>
+        Due Time
+    </th>
+     <th>
+       Submission Type
+   </th>
+    </tr>
+    </thead>
+   @* <th>
         <tr>
             <td>
                 Name
@@ -31,11 +52,14 @@
                 Time Due
             </td>
         </tr>
-    </th>
+   *@
     <tbody>
         @foreach (var item in Model.Assignments)
         {
             <tr>
+                <td>
+                    @Html.DisplayFor(modelData => item.ClassId);
+                </td>
                 <td>
                     @Html.DisplayFor(modelData => item.AssignmentTitle);
                 </td>
@@ -63,4 +87,4 @@
             </tr>
         }
     </tbody>
-</table>*@
+</table>
