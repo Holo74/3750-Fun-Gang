@@ -69,7 +69,30 @@
                 <td>
                     @Html.DisplayFor(modelData => item.DueTime);
                 </td>
-                @if (@ViewData["Student"].Equals(null))
+
+
+                @*until the below comparison to see if teacher or student works, just show all the buttons*@
+                <td>
+                    <button class="btn btn-primary">
+                        Edit
+                    </button>
+                </td>
+                <td>
+                    <button class="btn btn-primary">
+                        Delete
+                    </button>
+                </td>
+                <td>
+                    <button class="btn btn-primary">
+                        Submissions
+                    </button>
+                </td>
+                <td>
+                    <button class="btn btn-primary">
+                        Submit
+                    </button>
+                </td>
+                @if (@ViewData["Student"] != null)
                 {
                     @if (@ViewData["Student"] != "Student")
                     {
