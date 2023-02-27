@@ -4,6 +4,13 @@ using Assignment_1.Models;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.FlowAnalysis.DataFlow;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace Assignment_1.Controllers
 {
@@ -18,21 +25,21 @@ namespace Assignment_1.Controllers
         public IActionResult Index(int id)
         {
 
-            if (Id != null)
-            {
-                ClassUserViewModel classUserView = new ClassUserViewModel();
-                var user = _context.User.Where(x => x.Id == Id).First();
-                classUserView.viewUser = user;
-                var UserID = HttpContext.Session.GetInt32("UserID");
-                ViewData["Student"] = user.UserType;
-                var Course = from c in _context.Class select c;// gets the class table from the database **(still need to show only that specific teacher's courses)**
-                if (UserID != null)
-                {
-                    Course = Course.Where(c => c.UserId == UserID);
-                    classUserView.classes = Course.ToList();
-                    return View(classUserView);
-                }
-            }
+            //if (id != null)
+            //{
+            //    ClassUserAssignments classUserAssignmentView = new ClassUserAssignments();
+            var user = _context.User.Where(x => x.Id == id).First();
+            //    classUserAssignmentView.User = user;
+            //    var UserID = HttpContext.Session.GetInt32("UserID");
+            ViewData["Student"] = user.UserType;
+            //    var Course = from c in _context.Class select c;
+            //    if (UserID != null)
+            //    {
+            //        Course = Course.Where(c => c.UserId == UserID);
+            //        classUserAssignmentView.Class = Course.ToList();
+            //        return View(classUserAssignmentView);
+            //    }
+            //}
             return View();
         }
         public IActionResult Create() 

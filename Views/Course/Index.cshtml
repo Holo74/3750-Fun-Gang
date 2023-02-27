@@ -69,9 +69,9 @@
                 <td>
                     @Html.DisplayFor(modelData => item.DueTime);
                 </td>
-                @if (ViewData["Student"] != null)
+                @if (@ViewData["Student"] != null)
                 {
-                    @if (ViewData["Student"].ToString() != "Student")
+                    @if (@ViewData["Student"] != "Student")
                     {
                         <td>
                             <button class="btn btn-primary">
