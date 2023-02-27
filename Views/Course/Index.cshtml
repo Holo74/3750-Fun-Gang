@@ -69,7 +69,7 @@
                 <td>
                     @Html.DisplayFor(modelData => item.DueTime);
                 </td>
-                @if (@ViewData["Student"] != null)
+                @if (@ViewData["Student"].Equals(null))
                 {
                     @if (@ViewData["Student"] != "Student")
                     {
