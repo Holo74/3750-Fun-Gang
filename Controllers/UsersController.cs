@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Assignment_1.Data;
 using Assignment_1.Models;
 using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks.Dataflow;
 
 namespace Assignment_1.Controllers
 {
@@ -35,14 +36,15 @@ namespace Assignment_1.Controllers
                 if (UserID != null)
                 {
                     if (user.UserType == "Student")
-                    {
-                        var temp = from Class in Course
-                                 join Registrations in Registration on Class.ClassId equals Registrations.ClassFK
-                                 select Course;
+                    {                        
                         Registration = Registration.Where(r => r.UserFK == UserID);
-                        //Course = Course.Where(c=>c.ClassId==Registration.ClassFK);
-                        //Course = Course.Join(Registration);
-                        Course = temp;
+                        Registration = Registration.Where(r => r.IsRegistered == 1);
+                        Course = from Class in Course
+                                 join r in Registration on Class.ClassId equals r.ClassFK
+                                 select Class;
+
+                        //_context.Registrations.Where(y => y.)
+                        //Course = t;
                     }
                     else
                     {
@@ -50,6 +52,7 @@ namespace Assignment_1.Controllers
 
                     }
                     classUserView.classes = Course.ToList();
+                    
                     //Registration = Registration.Where(r => r.UserFK == UserID);
                     //classUserView.registrations = Registration.ToList();
                     return View(classUserView);
