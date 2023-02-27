@@ -34,12 +34,27 @@ namespace Assignment_1.Controllers
                 var Registration = from r in _context.Registrations select r;// gets the class table from the database **(still need to show only that specific teacher's courses)**
                 if (UserID != null)
                 {
+                    if (user.UserType == "Student")
+                    {
+                        var temp = from Class in Course
+                                 join Registrations in Registration on Class.ClassId equals Registrations.ClassFK
+                                 select Course;
+                        Registration = Registration.Where(r => r.UserFK == UserID);
+                        //Course = Course.Where(c=>c.ClassId==Registration.ClassFK);
+                        //Course = Course.Join(Registration);
+                        Course = temp;
+                    }
+                    else
+                    {
                     Course = Course.Where(c => c.UserId == UserID);
+
+                    }
                     classUserView.classes = Course.ToList();
-                    Registration = Registration.Where(r => r.UserFK == UserID);
-                    classUserView.registrations = Registration;
+                    //Registration = Registration.Where(r => r.UserFK == UserID);
+                    //classUserView.registrations = Registration.ToList();
                     return View(classUserView);
                 }
+
             }
             return View();
         }
