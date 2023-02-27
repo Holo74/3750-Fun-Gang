@@ -30,11 +30,14 @@ namespace Assignment_1.Controllers
                 classUserView.viewUser= user;
                 var UserID = HttpContext.Session.GetInt32("UserID");
                 ViewData["Student"] = user.UserType;
-                var Course = from c in _context.Class select c;// gets the class table from the database **(still need to show only that specific teacher's courses)**
+                var Course = from c in _context.Class select c;
+                var Registration = from r in _context.Registrations select r;// gets the class table from the database **(still need to show only that specific teacher's courses)**
                 if (UserID != null)
                 {
                     Course = Course.Where(c => c.UserId == UserID);
                     classUserView.classes = Course.ToList();
+                    Registration = Registration.Where(r => r.UserFK == UserID);
+                    classUserView.registrations = Registration;
                     return View(classUserView);
                 }
             }
