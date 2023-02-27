@@ -26,5 +26,12 @@ namespace Assignment_1.Controllers
             var AssignmentID = HttpContext.Session.GetInt32("AssignmentID");
             return View();
         }
+
+        public IActionResult Submit(int AssignmentID)
+        {
+            var assignments = from a in _context.ClassAssignments select a;
+            ClassAssignments t = assignments.Where(x => x.Id == AssignmentID).FirstOrDefault();
+            return View(t);
+        }
     }
 }
