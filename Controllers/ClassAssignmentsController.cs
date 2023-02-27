@@ -1,4 +1,5 @@
 ﻿using Assignment_1.Data;
+using Assignment_1.Migrations;
 using Assignment_1.Models;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
@@ -16,9 +17,18 @@ namespace Assignment_1.Controllers
         [HttpGet]
         public IActionResult Index(int id)
         {
-          
+
             //var ClassID = HttpContext.Session.GetInt32("ClassID");
-           // var Assignments = from a in _context.ClassAssignments select a;
+            // var Assignments = from a in _context.ClassAssignments select a;
+            //if (Id != null)
+            //{
+            //    ClassUserViewModel classUserView = new ClassUserViewModel();
+            //    var user = _context.User.Where(x => x.Id == Id).First();
+            //    classUserView.viewUser = user;
+            //    ViewData["Student"] = user.UserType;
+            //    return View(classUserView);
+
+            //}
             return View();
         }
         public IActionResult Create() 

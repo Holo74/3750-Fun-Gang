@@ -69,21 +69,37 @@
                 <td>
                     @Html.DisplayFor(modelData => item.DueTime);
                 </td>
-                <td>
-                    <button class="btn btn-primary">
-                        Edit
-                    </button>
-                </td>
-                <td>
-                    <button class="btn btn-primary">
-                        Delete
-                    </button>
-                </td>
-                <td>
-                    <button class="btn btn-primary">
-                        Submissions
-                    </button>
-                </td>
+                @if (ViewData["Student"] != null)
+                {
+                    @if (ViewData["Student"].ToString() != "Student")
+                    {
+                        <td>
+                            <button class="btn btn-primary">
+                                Edit
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary">
+                                Delete
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary">
+                                Submissions
+                            </button>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <button class="btn btn-primary">
+                                Submit
+                            </button>
+                        </td>
+                    
+                    }
+                    
+                }
             </tr>
         }
     </tbody>
