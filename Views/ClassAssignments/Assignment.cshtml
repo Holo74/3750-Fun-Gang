@@ -19,17 +19,17 @@
 		<div>
 			<p>Submission: @Html.DisplayFor(model => model.Assignment.SubmissionType)</p>
 		</div>
+
+		<div>
+			<p>@Html.DisplayFor(model => model.Assignment.Description)</p>
+		</div>
 	}
 	else
 	{
 		<div>
-			<h3>Submitted: @Html.DisplayFor(model => model.Submission.SubmitDate) at @Html.DisplayFor(model => model.Submission.SubmitTime) </h3>
+			<h3>Submitted: @Html.DisplayFor(model => model.Submission.SubmitDate)</h3>
 		</div>
 	}
-
-	<div>
-		<p>@Html.DisplayFor(model => model.Assignment.Description)</p>
-	</div>
 	
 </div>
 <hr />

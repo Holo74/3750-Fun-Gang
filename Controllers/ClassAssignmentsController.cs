@@ -64,7 +64,7 @@ namespace Assignment_1.Controllers
             s.AssignmentFK = AssignmentID == null ? 0 : AssignmentID.Value;
             s.ClassFK = 7;
             //s.Data= Data;
-            s.SubmitDate= DateTime.Now.Date;
+            s.SubmitDate= DateTime.Now;
             //s.SubmitTime= default(DateTime).Add(DateTime.Now.TimeOfDay);
 
 			_context.AssignmentSubmissions.Add(s);
