@@ -38,7 +38,11 @@ namespace Assignment_1.Controllers
             //check database for existing entry
             int? UserID = HttpContext.Session.GetInt32("UserID");
             int ClassID = ASVM.Assignment.ClassId;
-            HttpContext.Session.SetInt32("AssignmentID",ClassID);//just in case
+
+            //in case not already set, used in the submit()
+            HttpContext.Session.SetInt32("AssignmentID",ID);
+            HttpContext.Session.SetInt32("ClassID",ClassID);
+
             int AssignmentID = ID;
             var submission = from s in _context.AssignmentSubmissions select s;
             if (UserID != null && ASVM.Assignment != null)
@@ -60,9 +64,10 @@ namespace Assignment_1.Controllers
             //AssignmentSubmissions s = new AssignmentSubmissions();
             int? UserID = HttpContext.Session.GetInt32("UserID");
             int? AssignmentID = HttpContext.Session.GetInt32("AssignmentID");
+            int? ClassID = HttpContext.Session.GetInt32("ClassID");
             s.UserFK = UserID == null ? 0 : UserID.Value;
             s.AssignmentFK = AssignmentID == null ? 0 : AssignmentID.Value;
-            s.ClassFK = 7;
+            s.ClassFK = ClassID == null ? 0 : ClassID.Value;
             //s.Data= Data;
             s.SubmitDate= DateTime.Now;
             //s.SubmitTime= default(DateTime).Add(DateTime.Now.TimeOfDay);
@@ -70,7 +75,7 @@ namespace Assignment_1.Controllers
 			_context.AssignmentSubmissions.Add(s);
 			await _context.SaveChangesAsync();
 
-			return RedirectToAction("Assignment", new {ID = 7});//hardcode for testing
+			return RedirectToAction("Assignment", new {ID = AssignmentID});//hardcode for testing
         }
     }
 }
