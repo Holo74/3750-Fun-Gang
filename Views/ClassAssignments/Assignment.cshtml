@@ -1,0 +1,42 @@
+﻿@model Assignment_1.Models.AssignmentSubmissionViewModel
+@{
+	ViewData["Title"] = "Assignment";
+}
+
+<div class="d-flex flex-column">
+	<div>
+		<h2>@Html.DisplayFor(model => model.Assignment.AssignmentTitle)</h2>
+		<hr />
+	</div>
+	<div>
+		<h2>Points:@Html.DisplayFor(model => model.Assignment.MaxPoints) </h2>
+	</div>
+	@if (Model.Submission == null)
+	{
+		<div>
+			<h3>Due: @Html.DisplayFor(model => model.Assignment.DueDate) at @Html.DisplayFor(model => model.Assignment.DueTime) </h3>
+		</div>
+	}
+	else
+	{
+		<div>
+			<h3>Submitted: @Html.DisplayFor(model => model.Submission.SubmitDate) at @Html.DisplayFor(model => model.Submission.SubmitTime) </h3>
+		</div>
+	}
+
+	<div>
+		<p>@Html.DisplayFor(model => model.Assignment.Description)</p>
+	</div>
+	<div>
+		<p>Submission: @Html.DisplayFor(model => model.Assignment.SubmissionType)</p>
+	</div>
+</div>
+<hr />
+@if (Model.Submission == null)
+{
+	<form asp-action="Submit">
+		<textarea name="Data"></textarea>
+		<input type="submit" class="btn btn-primary" />
+	</form>
+}
+
