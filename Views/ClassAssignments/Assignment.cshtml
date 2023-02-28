@@ -16,6 +16,9 @@
 		<div>
 			<h3>Due: @Html.DisplayFor(model => model.Assignment.DueDate) at @Html.DisplayFor(model => model.Assignment.DueTime) </h3>
 		</div>
+		<div>
+			<p>Submission: @Html.DisplayFor(model => model.Assignment.SubmissionType)</p>
+		</div>
 	}
 	else
 	{
@@ -27,9 +30,7 @@
 	<div>
 		<p>@Html.DisplayFor(model => model.Assignment.Description)</p>
 	</div>
-	<div>
-		<p>Submission: @Html.DisplayFor(model => model.Assignment.SubmissionType)</p>
-	</div>
+	
 </div>
 <hr />
 @if (Model.Submission == null)
