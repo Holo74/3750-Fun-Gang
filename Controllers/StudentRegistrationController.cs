@@ -19,13 +19,30 @@ namespace Assignment_1.Controllers
 
             if (UserID != null)
             {
-
-                return View(CourseList());
+                Models.FilteredRegistrationAndClass FRC = new Models.FilteredRegistrationAndClass();
+                FRC.VRC = CourseList()?.ToList();
+                FRC.ClassDepartments = (from c in _context.Class select c.Department).Distinct().ToList();
+                return View(FRC);
             }
             return NotFound();
         }
 
-        private IEnumerable<Models.ViewRegistrationAndClass>? CourseList()
+        [HttpPost]
+        public IActionResult FilteredCourseList()
+        {
+            var UserID = HttpContext.Session.GetInt32("UserID");
+
+            if (UserID != null)
+            {
+                Models.FilteredRegistrationAndClass FRC = new Models.FilteredRegistrationAndClass();
+                FRC.VRC = CourseList(Request.Form["department"], Request.Form["keyword"])?.ToList();
+                FRC.ClassDepartments = (from c in _context.Class select c.Department).Distinct().ToList();
+                return View("Index", FRC);
+            }
+            return NotFound();
+        }
+
+        private IEnumerable<Models.ViewRegistrationAndClass>? CourseList(string department = "none", string keyword = "")
         {
             var UserID = HttpContext.Session.GetInt32("UserID");
 
@@ -40,16 +57,27 @@ namespace Assignment_1.Controllers
             var CourseQuery =
             (
                 from c in _context.Class select c
-            ).ToList();
+            );
+            if (!department.Equals("none"))
+            {
+                CourseQuery = CourseQuery.Where(c => c.Department.Equals(department));
+            }
 
+            if (keyword.Length > 0)
+            {
+                CourseQuery = CourseQuery.Where(c => c.CourseName.Contains(keyword));
+            }
+
+            var CourseList = CourseQuery.ToList();
             var Course =
             (
-                from c in CourseQuery
+                from c in CourseList
                 join r in listedReg on c.ClassId equals r.ClassFK
                 into Reg
                 from r in Reg.DefaultIfEmpty()
                 select new Models.ViewRegistrationAndClass { Classes = c, Reg = r }
             );
+
             return Course;
         }
 
