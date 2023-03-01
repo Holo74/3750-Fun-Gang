@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Assignment_1.Data;
 using Assignment_1.Models;
 using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks.Dataflow;
 
 namespace Assignment_1.Controllers
 {
@@ -30,13 +31,33 @@ namespace Assignment_1.Controllers
                 classUserView.viewUser= user;
                 var UserID = HttpContext.Session.GetInt32("UserID");
                 ViewData["Student"] = user.UserType;
-                var Course = from c in _context.Class select c;// gets the class table from the database **(still need to show only that specific teacher's courses)**
+                var Course = from c in _context.Class select c;
+                var Registration = from r in _context.Registrations select r;// gets the class table from the database **(still need to show only that specific teacher's courses)**
                 if (UserID != null)
                 {
+                    if (user.UserType == "Student")
+                    {                        
+                        Registration = Registration.Where(r => r.UserFK == UserID);
+                        Registration = Registration.Where(r => r.IsRegistered == 1);
+                        Course = from Class in Course
+                                 join r in Registration on Class.ClassId equals r.ClassFK
+                                 select Class;
+
+                        //_context.Registrations.Where(y => y.)
+                        //Course = t;
+                    }
+                    else
+                    {
                     Course = Course.Where(c => c.UserId == UserID);
+
+                    }
                     classUserView.classes = Course.ToList();
+                    
+                    //Registration = Registration.Where(r => r.UserFK == UserID);
+                    //classUserView.registrations = Registration.ToList();
                     return View(classUserView);
                 }
+
             }
             return View();
         }

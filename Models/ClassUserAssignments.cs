@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc.Rendering;
 namespace Assignment_1.Models
 {
     public class ClassUserAssignments

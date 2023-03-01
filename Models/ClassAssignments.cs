@@ -7,8 +7,9 @@ namespace Assignment_1.Models
 {
     public class ClassAssignments
     {
-        [Required]
-        public int ID { get; set; }
+        //[Required]
+       
+        public int Id { get; set; }
         [Required]
         public int ClassId { get; set; }
         public string? AssignmentTitle { get; set; }
@@ -18,6 +19,7 @@ namespace Assignment_1.Models
         public DateTime? DueDate { get; set; }
         [DataType(DataType.Time)]
         public DateTime? DueTime { get; set; }
+        public string? SubmissionType { get; set; }
 
 
     }
