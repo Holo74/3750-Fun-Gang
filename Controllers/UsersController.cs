@@ -8,21 +8,34 @@ using Microsoft.EntityFrameworkCore;
 using Assignment_1.Data;
 using Assignment_1.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using Assignment_1.Migrations;
+using System.IO.Pipes;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using System.Xml.Linq;
 
 namespace Assignment_1.Controllers
 {
     public class UsersController : Controller
     {
         private readonly Assignment_1Context _context;
+        private readonly IWebHostEnvironment _iwebHost;
 
-        public UsersController(Assignment_1Context context)
+        public UsersController(Assignment_1Context context, IWebHostEnvironment iwebHost)
         {
             _context = context;
+            _iwebHost = iwebHost;
+
         }
 
         // GET: Users
         public async Task<IActionResult> Index(int? Id)
         {
+
+
             if (Id != null)
             {
                 ClassUserViewModel classUserView= new ClassUserViewModel();
@@ -44,6 +57,7 @@ namespace Assignment_1.Controllers
         // GET: Users/Details/5
         public async Task<IActionResult> Details()//int? id)
         {
+            UserView uv = new UserView();
             var UserID = HttpContext.Session.GetInt32("UserID");
 
             if (UserID == null || _context.User == null)
@@ -57,8 +71,24 @@ namespace Assignment_1.Controllers
             {
                 return NotFound();
             }
-
-            return View(user);
+            uv.PhoneNumber = user.PhoneNumber;
+            uv.FirstName = user.FirstName;
+            uv.LastName = user.LastName;
+            uv.Address = user.Address;  
+            uv.City = user.City;
+            uv.State = user.State;
+            uv.ZipCode = user.ZipCode;
+            uv.BirthDate = user.BirthDate;
+            uv.Balance  = user.Balance;
+            uv.Image = user.Image;
+            uv.ReferenceOne = user.ReferenceOne;
+            uv.ReferenceTwo = user.ReferenceTwo;
+            uv.ReferenceThree  = user.ReferenceThree;
+            uv.ConfirmPassword = user.ConfirmPassword;
+            uv.Email = user.Email;
+            uv.Password = user.Password;
+            uv.ShowImage = "~/Images/38.jfif";
+            return View(uv);
         }
         public async Task<IActionResult> ViewAll(){
             var users = from u in _context.User
@@ -115,10 +145,11 @@ namespace Assignment_1.Controllers
         }
 
         // GET: Users/Edit/5
+        
         public async Task<IActionResult> Edit()//(int? id)
         {
             var UserID = HttpContext.Session.GetInt32("UserID");
-
+            
             if (UserID == null || _context.User == null)
             {
                 return NotFound();
@@ -129,34 +160,72 @@ namespace Assignment_1.Controllers
             {
                 return NotFound();
             }
+            //string[] filePaths = System.IO.Directory.GetFiles("wwwroot/Images/", UserID.ToString() + ".*");
+            //if (filePaths.Length > 0)
+            //{
+            //    // The wwwroot can't be included in the path that the page reads.  It starts in that folder.
+            //    string modifiedFolder = filePaths[0].Substring(filePaths[0].IndexOf("/"));
+            //    // Pass the filepath to the model
+            //    Models.FileViewer file = new Models.FileViewer() { FilePath = modifiedFolder };
+            //    //return View(file);
+            //}
+
             return View(user);
         }
+
 
         // POST: Users/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Email,FirstName,LastName,BirthDate,UserType,Address,City,State,ZipCode,PhoneNumber,ReferenceOne,ReferenceTwo,ReferenceThree")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Email,FirstName,LastName,BirthDate,UserType,Address,City,State,ZipCode,PhoneNumber,ReferenceOne,ReferenceTwo,ReferenceThree,Image")]User user)
         {
-            if (id != user.Id)
+            var UserID = HttpContext.Session.GetInt32("UserID");
+            string directory = "wwwroot/Images";
+            Directory.CreateDirectory(directory);
+
+            IFormFile z = Request.Form.Files[0];
+            string fileExtension = z.FileName.Substring(z.FileName.LastIndexOf('.'));
+            string path = directory + "/" + UserID + fileExtension;
+            using (Stream filestream = new FileStream(directory + "/" + UserID + fileExtension, FileMode.Create, FileAccess.Write))
             {
-                return NotFound();
+                // Saves the file to where ever the filestream was pointed to.
+                z.CopyTo(filestream);
+                // Won't save properly without this
+                filestream.Close();
             }
+            //string dircectory = "wwwroot.Images";
+            //Directory.CreateDirectory(dircectory);
+            //IFormFile z = Request.Form.Files[0];
+            //string fileEx = z.FileName.Substring(z.FileName.LastIndexOf('.'));
+            //using (Stream fileStream = new FileStream(dircectory + "/" + "0" + fileEx, FileMode.Create, FileAccess.Write))
+            //{
+            //    z.CopyTo(fileStream);
+            //    fileStream.Close();
+            //}
+
+
+
+            //var x = Request.Form.Files[0];
+            // store this file in profileimage folder. 
+            // store the path in the database with user.
             Console.WriteLine(ModelState.IsValid);
             Console.WriteLine("Model State is valid?");
             Console.WriteLine(ModelState.ErrorCount);
             //   if (ModelState.IsValid)
             // {
             var olduser = _context.User.Where(x => x.Id == id).FirstOrDefault();
+
             try
                 {
-               
-                    user.Password = olduser.Password;
+                user.Image = path;
+                user.Password = olduser.Password;
                 user.UserType = olduser.UserType;        
                 user.ConfirmPassword = olduser.Password;
                 _context.ChangeTracker.Clear();
                 _context.Update(user);
+               
                     await _context.SaveChangesAsync();
                 
                 
@@ -219,5 +288,49 @@ namespace Assignment_1.Controllers
         {
           return _context.User.Any(e => e.Id == id);
         }
+    }
+    public class UserView
+    {
+        public int Id { get; set; }
+
+        //[RegularExpression(@"^[a-zA-Z\.]*+@+[a-zA-Z\.]*$")]
+        [Required]
+        public string Email { get; set; }
+
+        // Requirements.  A single lower cases letter.  1 upper case letter.  1 decimal.  At least 1 special character.  Min length of 8 characters
+        [Validators.PasswordValidation]
+        //[StringLength(80, MinimumLength = 6)]
+        [Required]
+        public string Password { get; set; }
+        [Compare(otherProperty: "Password"), Display(Name = "Confirm Password"), NotMapped]
+        public string ConfirmPassword { get; set; }
+
+        // [Required]
+        public string FirstName { get; set; }
+        //[Required]
+        public string LastName { get; set; }
+
+        [DateValidation(ErrorMessage = "User Age must be at least 16")]
+
+        //[Required]
+        [DataType(DataType.Date)]
+        public DateTime BirthDate { get; set; }
+        //  [Required]
+        public string UserType { get; set; }
+        public string? Address { get; set; }
+        public string? City { get; set; }
+        public string? State { get; set; }
+        public string? ZipCode { get; set; }
+        public string? PhoneNumber { get; set; }
+
+        //[DataType(DataType.Currency)]
+        public decimal? Balance { get; set; }
+        public string? ReferenceOne { get; set; }
+        public string? ReferenceTwo { get; set; }
+        public string? ReferenceThree { get; set; }
+        //this might not work
+        public string? Image { get; set; } = "";
+        public string? ShowImage { get; set; } = "";
+        //public string? Image { get; set; } = "";
     }
 }
