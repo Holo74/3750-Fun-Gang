@@ -52,7 +52,9 @@ namespace Assignment_1.Controllers
             }
 
             CUA.Assignments = (from a in _context.ClassAssignments where a.ClassId == CUA.Class.ClassId select a).ToList();
-          //  CUA.Assignments = _context.ClassAssignments.Where(x => x.ClassId == CUA.Class.ClassId).ToList();
+            //  CUA.Assignments = _context.ClassAssignments.Where(x => x.ClassId == CUA.Class.ClassId).ToList();
+            var t = from u in _context.User select u;
+            CUA.User = t.Where(t => t.Id == UserID).FirstOrDefault();
 
             return View(CUA);
         }

@@ -1,16 +1,19 @@
 ﻿@model Assignment_1.Models.ClassUserAssignments
 
 @{
-    ViewData["Title"] = "Course";
+	ViewData["Title"] = "Course";
 }
 
 <div class="text-center">
-    <h1>@Model.Class.CourseName</h1>
+	<h1>@Model.Class.CourseName</h1>
 </div>
-<div class="class" >
-   <a asp-action="Create" asp-route-classId = "@Model.Class.ClassId" >Create New Assignment</a>
-  @*  <a href="@Url.Action("Index", "ClassAssignments",  { classID = item.ClassId })">*@
-</div>
+@if (Model.User.UserType != "Student")
+{
+	<div class="class">
+		<a asp-action="Create" asp-route-classId="@Model.Class.ClassId">Create New Assignment</a>
+		@*  <a href="@Url.Action("Index", "ClassAssignments",  { classID = item.ClassId })">*@
+	</div>
+}
 
 
 
@@ -19,111 +22,109 @@
 
 
 <table class="table">
-    <thead>
-        <tr>
-            <th>
-                Class ID
-            </th>
-     <th>
-      Assignment title
-     </th>
+	<thead>
+		<tr>
+			<th>
+				Class ID
+			</th>
+			<th>
+				Assignment title
+			</th>
 
-    <th>
-        Due Date
-    </th>
+			<th>
+				Due Date
+			</th>
 
-    <th>
-        Due Time
-    </th>
-     <th>
-       Submission Type
-   </th>
-    </tr>
-    </thead>
-   @* <th>
-        <tr>
-            <td>
-                Name
-            </td>
-            <td>
-                Day Due
-            </td>
-            <td>
-                Time Due
-            </td>
-        </tr>
-   *@
-    <tbody>
-        @foreach (var item in Model.Assignments)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelData => item.ClassId);
-                </td>
-                <td>
-                    @Html.DisplayFor(modelData => item.AssignmentTitle);
-                </td>
-                <td>
-                    @Html.DisplayFor(modelData => item.DueDate);
-                </td>
-                <td>
-                    @Html.DisplayFor(modelData => item.DueTime);
-                </td>
+			<th>
+				Due Time
+			</th>
+			<th>
+				Submission Type
+			</th>
+		</tr>
+	</thead>
+	@* <th>
+	<tr>
+	<td>
+	Name
+	</td>
+	<td>
+	Day Due
+	</td>
+	<td>
+	Time Due
+	</td>
+	</tr>
+	*@
+	<tbody>
+		@foreach (var item in Model.Assignments)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelData => item.ClassId)
+				</td>
+				<td>
+					@Html.DisplayFor(modelData => item.AssignmentTitle)
+				</td>
+				<td>
+					@Html.DisplayFor(modelData => item.DueDate)
+				</td>
+				<td>
+					@Html.DisplayFor(modelData => item.DueTime)
+				</td>
 
 
-                @*until the below comparison to see if teacher or student works, just show all the buttons*@
-                <td>
-                    <button class="btn btn-primary">
-                        Edit
-                    </button>
-                </td>
-                <td>
-                    <button class="btn btn-primary">
-                        Delete
-                    </button>
-                </td>
-                <td>
-                    <button class="btn btn-primary">
-                        Submissions
-                    </button>
-                </td>
-                <td>
-                    <button class="btn btn-primary">
-                        Submit
-                    </button>
-                </td>
-                @if (@ViewData["Student"] != null)
-                {
-                    @if (@ViewData["Student"] != "Student")
-                    {
-                        <td>
-                            <button class="btn btn-primary">
-                                Edit
-                            </button>
-                        </td>
-                        <td>
-                            <button class="btn btn-primary">
-                                Delete
-                            </button>
-                        </td>
-                        <td>
-                            <button class="btn btn-primary">
-                                Submissions
-                            </button>
-                        </td>
-                    }
-                    else
-                    {
-                        <td>
-                            <button class="btn btn-primary">
-                                Submit
-                            </button>
-                        </td>
-                    
-                    }
-                    
-                }
-            </tr>
-        }
-    </tbody>
+				@*until the below comparison to see if teacher or student works, just show all the buttons*@
+				@if (Model.User.UserType != "Student")
+				{
+					<td>
+						<button class="btn btn-primary">
+							Edit
+						</button>
+					</td>
+					<td>
+						<button class="btn btn-primary">
+							Delete
+						</button>
+					</td>
+					<td>
+						<button class="btn btn-primary">
+							Submissions
+						</button>
+					</td>
+				}
+				else
+				{
+					<td>
+						<a class="btn btn-primary" href="ClassAssignments/Assignment/?ID=@item.Id">Submit</a>
+					</td>
+				}
+				@if (Model.User.UserType != "Student")
+				{
+					<td>
+						<button class="btn btn-primary">
+							Edit
+						</button>
+					</td>
+					<td>
+						<button class="btn btn-primary">
+							Delete
+						</button>
+					</td>
+					<td>
+						<button class="btn btn-primary">
+							Submissions
+						</button>
+					</td>
+				}
+				else
+				{
+					<td>
+						<a class="btn btn-primary" href="ClassAssignments/Assignment/?ID=@item.Id">Submit</a>
+					</td>
+
+				}
+			</tr>
+		}
+	</tbody>
 </table>
