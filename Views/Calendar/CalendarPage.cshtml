@@ -13,7 +13,7 @@
 
         var objs = [];
         for (var i = 0; i < data.length; i++) {
-            objs.push({ start: String(data[i].startTime), end: String(data[i].endTime), title: String(data[i].title) });
+            objs.push({ start: String(data[i].startTime), end: String(data[i].endTime), title: String(data[i].title), color: String(data[i].color) });
         }
 
         document.addEventListener('DOMContentLoaded', function () {
@@ -26,6 +26,16 @@
         });
 
     </script>
+    <style>
+        .fc-event-time {
+            color: black;
+        }
+
+        .fc-event-title{
+            color: black;
+        }
+    </style>
+
 </head>
 <body>
     <div id='calendar'></div>
