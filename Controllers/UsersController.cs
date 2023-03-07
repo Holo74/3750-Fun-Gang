@@ -87,8 +87,22 @@ namespace Assignment_1.Controllers
             uv.ConfirmPassword = user.ConfirmPassword;
             uv.Email = user.Email;
             uv.Password = user.Password;
-            uv.ShowImage = "~/Images/38.jfif";
+            uv.UserType = user.UserType;
+            uv.ShowImage = TransformImagePath(user.Image);
             return View(uv);
+        }
+
+        private string TransformImagePath (string? imagePath)
+        {
+            if (imagePath != null)
+            {
+                string newString = string.Empty;
+                System.Diagnostics.Debug.WriteLine(imagePath);
+                //newString = imagePath.Remove"../.." 
+                newString = imagePath.Replace("wwwroot", "../..");
+                return newString;
+            }
+            return string.Empty;
         }
         public async Task<IActionResult> ViewAll(){
             var users = from u in _context.User
@@ -160,15 +174,6 @@ namespace Assignment_1.Controllers
             {
                 return NotFound();
             }
-            //string[] filePaths = System.IO.Directory.GetFiles("wwwroot/Images/", UserID.ToString() + ".*");
-            //if (filePaths.Length > 0)
-            //{
-            //    // The wwwroot can't be included in the path that the page reads.  It starts in that folder.
-            //    string modifiedFolder = filePaths[0].Substring(filePaths[0].IndexOf("/"));
-            //    // Pass the filepath to the model
-            //    Models.FileViewer file = new Models.FileViewer() { FilePath = modifiedFolder };
-            //    //return View(file);
-            //}
 
             return View(user);
         }
@@ -195,26 +200,10 @@ namespace Assignment_1.Controllers
                 // Won't save properly without this
                 filestream.Close();
             }
-            //string dircectory = "wwwroot.Images";
-            //Directory.CreateDirectory(dircectory);
-            //IFormFile z = Request.Form.Files[0];
-            //string fileEx = z.FileName.Substring(z.FileName.LastIndexOf('.'));
-            //using (Stream fileStream = new FileStream(dircectory + "/" + "0" + fileEx, FileMode.Create, FileAccess.Write))
-            //{
-            //    z.CopyTo(fileStream);
-            //    fileStream.Close();
-            //}
-
-
-
-            //var x = Request.Form.Files[0];
-            // store this file in profileimage folder. 
-            // store the path in the database with user.
+          
             Console.WriteLine(ModelState.IsValid);
             Console.WriteLine("Model State is valid?");
             Console.WriteLine(ModelState.ErrorCount);
-            //   if (ModelState.IsValid)
-            // {
             var olduser = _context.User.Where(x => x.Id == id).FirstOrDefault();
 
             try

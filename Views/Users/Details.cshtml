@@ -12,14 +12,14 @@
 </h1>
 
 <div>
-   @* <h4>User</h4>*@
+  
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Image)
         </dt>
         <dd class="col-sm-10">
-            <img src="~/Images/38.jfif"/>
+            <img src="@Model.ShowImage"/>
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Email)
@@ -27,12 +27,12 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Email)
         </dd>
-        @*<dt class = "col-sm-2">
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Password)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Password)
-        </dd>*@
+        </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.FirstName)
         </dt>
