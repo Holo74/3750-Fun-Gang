@@ -2,7 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.SqlTypes;
+using System.Drawing;
 using System.Runtime.CompilerServices;
+using Microsoft.AspNetCore.Http;
 
 namespace Assignment_1.Models
 {
@@ -45,6 +47,9 @@ namespace Assignment_1.Models
         public string? ReferenceOne { get; set; }
         public string? ReferenceTwo { get; set; }
         public string? ReferenceThree { get; set; }
+        //this might not work
+        public string? Image { get; set; } = "";
+        //public string? Image { get; set; } = "";
 
     }
 }
