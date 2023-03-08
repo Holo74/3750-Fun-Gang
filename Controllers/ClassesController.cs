@@ -65,14 +65,15 @@ namespace Assignment_1.Controllers
             ICollection<string> day)
         {
             var UserID = HttpContext.Session.GetInt32("UserID");
-            if(UserID != null)
+            if (UserID != null)
             {
                 c.DaysOfWeek = "";
                 IEnumerator<string> e = day.GetEnumerator();//loop through string list thing and add to DaysOfWeek string
-                for (int i = 0; i <= day.Count; i++) { 
+                for (int i = 0; i <= day.Count; i++)
+                {
                     if (e.Current != null)
                     {
-                        if(i > 1)
+                        if (i > 1)
                         {
                             c.DaysOfWeek += " | ";
                         }
