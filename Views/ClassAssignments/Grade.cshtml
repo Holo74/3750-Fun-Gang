@@ -1,0 +1,46 @@
+﻿@model Assignment_1.Models.AssignmentSubmissionViewModel
+@{
+	ViewData["Title"] = "Grade";
+}
+
+<div class="d-flex flex-column">
+	<div>
+		<h2>@Html.DisplayFor(model => model.Assignment.AssignmentTitle)</h2>
+		<hr />
+	</div>
+	<div>
+		<h2>Points: @Html.DisplayFor(model => model.Assignment.MaxPoints) </h2>
+	</div>
+	@if (Model.Submission == null)
+	{
+		<div>
+			<h3>Due: @Html.DisplayFor(model => model.Assignment.DueDate) at @Html.DisplayFor(model => model.Assignment.DueTime) </h3>
+		</div>
+		<div>
+			<p><h4>Submission: </h4>@Html.DisplayFor(model => model.Assignment.SubmissionType)</p>
+		</div>
+
+		<div>
+			<p><h4>Instructions:</h4> @Html.DisplayFor(model => model.Assignment.Description)</p>
+		</div>
+	}
+	else
+	{
+		<div>
+			<h4>Submitted: @Html.DisplayFor(model => model.Submission.First().SubmitDate)</h4>
+		</div>
+	}
+
+</div>
+<div>
+	<p>@*Put a check here for text or file submit type and handle file display?*@
+		@Model.Submission.First().Data
+	</p>
+</div>
+<hr />
+<form asp-action="SetPoints">
+	<input type="number" min="0" max="@Model.Assignment.MaxPoints" />
+	<br />
+	<input value="Submit" type="submit" class="btn btn-primary" />
+</form>
+

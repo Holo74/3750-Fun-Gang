@@ -99,7 +99,7 @@ namespace Assignment_1.Controllers
 			return RedirectToAction("Assignment", new {ID = AssignmentID});//hardcode for testing
         }
 
-        public IActionResult Submissions(int ID)
+        public IActionResult Submissions(int ID)//ID is the id of an assignment
         {
 			AssignmentSubmissionViewModel ASVM = new AssignmentSubmissionViewModel();
             var assignments = from b in _context.ClassAssignments select b;
@@ -107,6 +107,17 @@ namespace Assignment_1.Controllers
             var s = from a in _context.AssignmentSubmissions select a;
             ASVM.Submission = s.Where(x => x.AssignmentFK == ID).ToList();
 
+            return View(ASVM);
+        }
+
+        public IActionResult Grade(int ID)//submission id
+        {
+            AssignmentSubmissionViewModel ASVM = new AssignmentSubmissionViewModel();
+            var sub = from s in _context.AssignmentSubmissions select s;
+            ASVM.Submission = sub.Where(x => x.Id == ID);
+            var asn = from a in _context.ClassAssignments select a;
+            ASVM.Assignment = asn.Where(y => y.Id == ASVM.Submission.First().AssignmentFK).First();
+            
             return View(ASVM);
         }
     }

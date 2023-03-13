@@ -41,9 +41,7 @@
 					@Html.DisplayFor(modelData => item.Points)
 				</td>
 				<td>
-					<button class="btn btn-primary">
-						Grade
-					</button>
+					<a class="btn btn-primary" href="/ClassAssignments/Grade/?ID=@item.Id">Grade</a>
 				</td>
 			</tr>
 		}
