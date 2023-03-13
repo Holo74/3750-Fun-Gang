@@ -69,7 +69,7 @@ namespace Assignment_1.Controllers
             if (UserID != null && ASVM.Assignment != null)
             {
                 //find this users assignment for a class if it exists
-                ASVM.Submission = submission.Where(x => x.UserFK== UserID).Where(y => y.AssignmentFK == AssignmentID).Where(z => z.ClassFK == ClassID).FirstOrDefault();
+                ASVM.Submission = submission.Where(x => x.UserFK== UserID).Where(y => y.AssignmentFK == AssignmentID).Where(z => z.ClassFK == ClassID);
                 
             }
             return View(ASVM);
@@ -97,6 +97,17 @@ namespace Assignment_1.Controllers
 			await _context.SaveChangesAsync();
 
 			return RedirectToAction("Assignment", new {ID = AssignmentID});//hardcode for testing
+        }
+
+        public IActionResult Submissions(int ID)
+        {
+			AssignmentSubmissionViewModel ASVM = new AssignmentSubmissionViewModel();
+            var assignments = from b in _context.ClassAssignments select b;
+            ASVM.Assignment = assignments.Where(y => y.Id== ID).First();
+            var s = from a in _context.AssignmentSubmissions select a;
+            ASVM.Submission = s.Where(x => x.AssignmentFK == ID).ToList();
+
+            return View(ASVM);
         }
     }
 }

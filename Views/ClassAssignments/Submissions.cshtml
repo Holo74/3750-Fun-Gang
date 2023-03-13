@@ -1,0 +1,51 @@
+﻿@model Assignment_1.Models.AssignmentSubmissionViewModel
+
+@{
+	ViewData["Title"] = "Course";
+}
+
+<div class="text-center">
+	<h1>@Model.Assignment.AssignmentTitle</h1>
+</div>
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				Assignment title
+			</th>
+			<th>
+				Student
+			</th>
+			<th>
+				Submitted
+			</th>
+			<th>
+				Grade
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model.Submission)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelData => item.AssignmentFK)
+				</td>
+				<td>
+					@Html.DisplayFor(modelData => item.UserFK)
+				</td>
+				<td>
+					@Html.DisplayFor(modelData => item.SubmitDate)
+				</td>
+				<td>
+					@Html.DisplayFor(modelData => item.Points)
+				</td>
+				<td>
+					<button class="btn btn-primary">
+						Grade
+					</button>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
