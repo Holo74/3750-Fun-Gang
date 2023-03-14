@@ -120,5 +120,10 @@ namespace Assignment_1.Controllers
             
             return View(ASVM);
         }
+
+        public IActionResult SetPoints(int points, int ID)
+        {
+            return View();
+        }
     }
 }

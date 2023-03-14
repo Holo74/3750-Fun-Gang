@@ -14,9 +14,6 @@
 				Assignment title
 			</th>
 			<th>
-				Student
-			</th>
-			<th>
 				Submitted
 			</th>
 			<th>
@@ -29,16 +26,13 @@
 		{
 			<tr>
 				<td>
-					@Html.DisplayFor(modelData => item.AssignmentFK)
-				</td>
-				<td>
-					@Html.DisplayFor(modelData => item.UserFK)
+					@Html.DisplayFor(modelData => Model.Assignment.AssignmentTitle)
 				</td>
 				<td>
 					@Html.DisplayFor(modelData => item.SubmitDate)
 				</td>
 				<td>
-					@Html.DisplayFor(modelData => item.Points)
+					@Html.DisplayFor(modelData => item.Points) / @Html.DisplayFor(modelData => Model.Assignment.MaxPoints)
 				</td>
 				<td>
 					<a class="btn btn-primary" href="/ClassAssignments/Grade/?ID=@item.Id">Grade</a>
