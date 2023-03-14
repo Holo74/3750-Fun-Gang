@@ -121,9 +121,21 @@ namespace Assignment_1.Controllers
             return View(ASVM);
         }
 
-        public IActionResult SetPoints(int points, int ID)
+        [HttpGet]
+        public IActionResult SetPoints()
         {
             return View();
         }
-    }
+
+        [HttpPost]
+		public async Task<IActionResult> SetPoints(int points, int ID)
+		{
+            var s = from a in _context.AssignmentSubmissions select a;
+            AssignmentSubmissions t = s.Where(x => x.Id== ID).First();
+            t.Points = points;
+            _context.Update(t);
+            await _context.SaveChangesAsync();
+			return RedirectToAction("Submissions", new { ID = t.AssignmentFK });
+		}
+	}
 }

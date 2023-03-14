@@ -9,29 +9,13 @@
 		<hr />
 	</div>
 	<div>
-		<h2>Points: @Html.DisplayFor(model => model.Assignment.MaxPoints) </h2>
+		<p>@Html.DisplayFor(model => model.Assignment.Description)</p>
 	</div>
-	@if (Model.Submission == null)
-	{
-		<div>
-			<h3>Due: @Html.DisplayFor(model => model.Assignment.DueDate) at @Html.DisplayFor(model => model.Assignment.DueTime) </h3>
-		</div>
-		<div>
-			<p><h4>Submission: </h4>@Html.DisplayFor(model => model.Assignment.SubmissionType)</p>
-		</div>
-
-		<div>
-			<p><h4>Instructions:</h4> @Html.DisplayFor(model => model.Assignment.Description)</p>
-		</div>
-	}
-	else
-	{
-		<div>
-			<h4>Submitted: @Html.DisplayFor(model => model.Submission.First().SubmitDate)</h4>
-		</div>
-	}
-
+	<div>
+		<h4>Max Points: @Html.DisplayFor(model => model.Assignment.MaxPoints) </h4>
+	</div>
 </div>
+<br />
 <div>
 	<p>@*Put a check here for text or file submit type and handle file display?*@
 		@Model.Submission.First().Data
