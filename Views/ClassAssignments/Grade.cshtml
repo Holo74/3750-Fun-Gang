@@ -14,6 +14,15 @@
 	<div>
 		<h4>Max Points: @Html.DisplayFor(model => model.Assignment.MaxPoints) </h4>
 	</div>
+	<div>
+		<h4>Due: @Html.DisplayFor(model => model.Assignment.DueDate) @Html.DisplayFor(model => model.Assignment.DueTime)</h4>
+		<h4>Submitted: @Html.DisplayFor(model => model.Submission.First().SubmitDate)</h4>
+		@if (Model.Submission.First().SubmitDate > Model.Assignment.DueDate)
+		{
+			<h4 class="text-danger">Late</h4>
+		}
+	</div>
+	
 </div>
 <br />
 <div>
