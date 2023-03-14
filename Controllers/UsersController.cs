@@ -17,6 +17,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 using System.Threading.Tasks.Dataflow;
+using Microsoft.VisualBasic;
 
 namespace Assignment_1.Controllers
 {
@@ -40,6 +41,8 @@ namespace Assignment_1.Controllers
             if (Id != null)
             {
                 ClassUserViewModel classUserView= new ClassUserViewModel();
+                // list constructor default sucks, has to use this
+                classUserView.todoitems = new List<TODOitem>();
                 var user = _context.User.Where(x => x.Id == Id).First();
                 classUserView.viewUser= user;
                 var UserID = HttpContext.Session.GetInt32("UserID");
@@ -65,7 +68,62 @@ namespace Assignment_1.Controllers
 
                     }
                     classUserView.classes = Course.ToList();
-                    
+
+
+
+
+                    Course = from c in _context.Class select c;
+
+                    //step 1: Find out all classes for this student, student id.
+
+                    // step 2: run a loop, and find all assignemnts for each class and accumulate them. 
+
+                    List<ClassAssignments> myassignments = new List<ClassAssignments>();
+                    foreach (var mycourse in Course.ToList())
+                    {
+                        //
+                        //mycourse.ClassId
+                        //
+                        //mycourse.DueDate > today.date
+                        var z = _context.ClassAssignments.Where(y => y.ClassId == mycourse.ClassId).ToList();
+                        myassignments.AddRange(z.ToList());
+
+
+                    }
+
+                    myassignments = myassignments.OrderBy(y => y.DueDate).ToList();
+                    // step 3: sort them by due date and pick the top 5. 
+
+                    var Assignments = _context.ClassAssignments;
+
+                    myassignments = myassignments.Where(a => a.DueTime >= DateTime.Today).ToList();
+
+                    //var AssignmentList = Assignments.ToList();
+                    int breakint = 0;
+                    foreach (var assignment in myassignments)
+                    {
+
+                        TODOitem todo = new TODOitem();
+                        todo.AssignmentTitle = assignment.AssignmentTitle;
+                        todo.dueDate = assignment.DueDate;
+                        todo.dueTime = assignment.DueTime;
+                        var classList = _context.Class.Where(x => x.ClassId == assignment.ClassId).ToList();
+                        if (classList.Count > 0 && classList.Count < 2)
+                        {
+                            todo.CourseNumber = classList[0].CourseNumber;
+                        }
+
+                        classUserView.todoitems.Add(todo);
+                        breakint++;
+                        if(breakint == 5)
+                        {
+                            break;
+                        }
+                    }
+
+                    //classUserView.assignments = AssignmentsTODO.ToList();
+
+
                     //Registration = Registration.Where(r => r.UserFK == UserID);
                     //classUserView.registrations = Registration.ToList();
                     return View(classUserView);

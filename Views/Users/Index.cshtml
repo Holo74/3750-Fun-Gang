@@ -139,14 +139,13 @@
     }
     }*@
     }
-
 </div>
 <div class="vertical-menu">
     <a href="#" class="active">ToDo's</a>
-    <a href="https://localhost:7099/Login/Index/">Assignment1</a>
-    <a href="#">Assignment2</a>
-    <a href="#">Assignment3</a>
-    <a href="#">Assignment4</a>
+    @foreach (var item in Model.todoitems )
+    {
+        <a href="#">@Html.DisplayFor(modelData => item.AssignmentTitle) @Html.DisplayFor(modelData => item.CourseNumber)</a>
+    }
 </div>
 
 
