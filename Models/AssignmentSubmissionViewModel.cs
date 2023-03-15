@@ -3,6 +3,6 @@
     public class AssignmentSubmissionViewModel
     {
         public ClassAssignments? Assignment { get; set; }
-        public AssignmentSubmissions? Submission { get; set; }
+        public IEnumerable<AssignmentSubmissions>? Submission { get; set; }
     }
 }

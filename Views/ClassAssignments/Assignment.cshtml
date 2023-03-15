@@ -11,7 +11,7 @@
 	<div>
 		<h2>Points: @Html.DisplayFor(model => model.Assignment.MaxPoints) </h2>
 	</div>
-	@if (Model.Submission == null)
+	@if (Model.Submission.FirstOrDefault() == null)
 	{
 		<div>
 			<h3>Due: @Html.DisplayFor(model => model.Assignment.DueDate) at @Html.DisplayFor(model => model.Assignment.DueTime) </h3>
@@ -27,13 +27,13 @@
 	else
 	{
 		<div>
-			<h4>Submitted: @Html.DisplayFor(model => model.Submission.SubmitDate)</h4>
+			<h4>Submitted: @Html.DisplayFor(model => model.Submission.FirstOrDefault().SubmitDate)</h4>
 		</div>
 	}
 	
 </div>
 <hr />
-@if (Model.Submission == null)
+@if (Model.Submission.FirstOrDefault() == null)
 {
 	<form asp-action="Submit">
 		<textarea name="Data"></textarea>

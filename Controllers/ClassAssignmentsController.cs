@@ -69,7 +69,7 @@ namespace Assignment_1.Controllers
             if (UserID != null && ASVM.Assignment != null)
             {
                 //find this users assignment for a class if it exists
-                ASVM.Submission = submission.Where(x => x.UserFK== UserID).Where(y => y.AssignmentFK == AssignmentID).Where(z => z.ClassFK == ClassID).FirstOrDefault();
+                ASVM.Submission = submission.Where(x => x.UserFK== UserID).Where(y => y.AssignmentFK == AssignmentID).Where(z => z.ClassFK == ClassID);
                 
             }
             return View(ASVM);
@@ -98,5 +98,44 @@ namespace Assignment_1.Controllers
 
 			return RedirectToAction("Assignment", new {ID = AssignmentID});//hardcode for testing
         }
-    }
+
+        public IActionResult Submissions(int ID)//ID is the id of an assignment
+        {
+			AssignmentSubmissionViewModel ASVM = new AssignmentSubmissionViewModel();
+            var assignments = from b in _context.ClassAssignments select b;
+            ASVM.Assignment = assignments.Where(y => y.Id== ID).First();
+            var s = from a in _context.AssignmentSubmissions select a;
+            ASVM.Submission = s.Where(x => x.AssignmentFK == ID).ToList();
+
+            return View(ASVM);
+        }
+
+        public IActionResult Grade(int ID)//submission id
+        {
+            AssignmentSubmissionViewModel ASVM = new AssignmentSubmissionViewModel();
+            var sub = from s in _context.AssignmentSubmissions select s;
+            ASVM.Submission = sub.Where(x => x.Id == ID);
+            var asn = from a in _context.ClassAssignments select a;
+            ASVM.Assignment = asn.Where(y => y.Id == ASVM.Submission.First().AssignmentFK).First();
+            
+            return View(ASVM);
+        }
+
+        [HttpGet]
+        public IActionResult SetPoints()
+        {
+            return View();
+        }
+
+        [HttpPost]
+		public async Task<IActionResult> SetPoints(int points, int ID)
+		{
+            var s = from a in _context.AssignmentSubmissions select a;
+            AssignmentSubmissions t = s.Where(x => x.Id== ID).First();
+            t.Points = points;
+            _context.Update(t);
+            await _context.SaveChangesAsync();
+			return RedirectToAction("Submissions", new { ID = t.AssignmentFK });
+		}
+	}
 }

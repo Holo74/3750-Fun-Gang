@@ -15,12 +15,6 @@
 	</div>
 }
 
-
-
-
-
-
-
 <table class="table">
 	<thead>
 		<tr>
@@ -37,9 +31,6 @@
 
 			<th>
 				Due Time
-			</th>
-			<th>
-				Submission Type
 			</th>
 		</tr>
 	</thead>
@@ -74,6 +65,7 @@
 				</td>
 
 
+				@*until the below comparison to see if teacher or student works, just show all the buttons*@
 				@if (Model.User.UserType != "Student")
 				{
 					<td>
@@ -87,9 +79,7 @@
 						</button>
 					</td>
 					<td>
-						<button class="btn btn-primary">
-							Submissions
-						</button>
+						<a class="btn btn-primary" href="ClassAssignments/Submissions/?ID=@item.Id">Submissions</a>
 					</td>
 				}
 				else
@@ -98,7 +88,8 @@
 						<a class="btn btn-primary" href="ClassAssignments/Assignment/?ID=@item.Id">Submit</a>
 					</td>
 				}
-				@*@if (Model.User.UserType != "Student")
+				@*
+				@if (Model.User.UserType != "Student")
 				{
 					<td>
 						<button class="btn btn-primary">
