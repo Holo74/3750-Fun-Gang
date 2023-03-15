@@ -35,9 +35,14 @@
 <hr />
 @if (Model.Submission.FirstOrDefault() == null)
 {
-	<form asp-action="Submit">
-		<textarea name="Data"></textarea>
-		<br />
+	<form asp-action="Submit" enctype="multipart/form-data">
+		<div>
+			<label asp-for="Submission.Data" class="control-label"></label>
+			<input name="Data" type="file" />
+			<span asp-validation-for="Submission.Data" class="text-danger"></span>
+		</div>
+		@*<textarea name="Data"></textarea>
+		<br />*@
 		<input value="Submit" type="submit" class="btn btn-primary" />
 	</form>
 }
