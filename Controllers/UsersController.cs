@@ -96,7 +96,7 @@ namespace Assignment_1.Controllers
 
                     var Assignments = _context.ClassAssignments;
 
-                    myassignments = myassignments.Where(a => a.DueTime >= DateTime.Today).ToList();
+                    myassignments = myassignments.Where(a => a.DueDate >= DateTime.Today).ToList();
 
                     //var AssignmentList = Assignments.ToList();
                     int breakint = 0;
