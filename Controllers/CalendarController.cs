@@ -1,6 +1,7 @@
 ﻿using Assignment_1.Data;
 using Assignment_1.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
 
 namespace Assignment_1.Controllers
 {
@@ -69,6 +70,8 @@ namespace Assignment_1.Controllers
                             ev.StartTime = startTime;
                             ev.EndTime = endTime;
                             ev.Title = course.CourseName;
+                            ev.Color = "blue";
+                            ev.TextColor = "blue";
 
                             myEvents.Add(ev);
                         }
@@ -99,6 +102,8 @@ namespace Assignment_1.Controllers
                             ev.StartTime = startTime;
                             ev.EndTime = endTime;
                             ev.Title = course.CourseName;
+                            ev.Color = "blue";
+                            ev.TextColor = "blue";
 
                             myEvents.Add(ev);
                         }
@@ -128,6 +133,8 @@ namespace Assignment_1.Controllers
                             ev.StartTime = startTime;
                             ev.EndTime = endTime;
                             ev.Title = course.CourseName;
+                            ev.Color = "blue";
+                            ev.TextColor = "blue";
 
                             myEvents.Add(ev);
                         }
@@ -157,8 +164,14 @@ namespace Assignment_1.Controllers
                             ev.StartTime = startTime;
                             ev.EndTime = endTime;
                             ev.Title = course.CourseName;
+                            ev.Color = "blue";
+                            ev.TextColor = "blue";
 
                             myEvents.Add(ev);
+                        }
+                        if (course.DaysOfWeek.Contains("Th") && i == 21)
+                        {
+                            return View(myEvents);
                         }
                         if (course.DaysOfWeek.Contains("Th"))
                         {
@@ -186,8 +199,14 @@ namespace Assignment_1.Controllers
                             ev.StartTime = startTime;
                             ev.EndTime = endTime;
                             ev.Title = course.CourseName;
+                            ev.Color = "blue";
+                            ev.TextColor = "blue";
 
                             myEvents.Add(ev);
+                        }
+                        if (course.DaysOfWeek.Contains("F") && i == 21)
+                        {
+                            return View(myEvents);
                         }
                         if (course.DaysOfWeek.Contains("F"))
                         {
@@ -215,8 +234,14 @@ namespace Assignment_1.Controllers
                             ev.StartTime = startTime;
                             ev.EndTime = endTime;
                             ev.Title = course.CourseName;
+                            ev.Color = "blue";
+                            ev.TextColor = "blue";
 
                             myEvents.Add(ev);
+                        }
+                        if (course.DaysOfWeek.Contains("Sa") && i == 21)
+                        {
+                            return View(myEvents);
                         }
                         if (course.DaysOfWeek.Contains("Sa"))
                         {
@@ -244,11 +269,45 @@ namespace Assignment_1.Controllers
                             ev.StartTime = startTime;
                             ev.EndTime = endTime;
                             ev.Title = course.CourseName;
+                            ev.Color = "blue";
+                            ev.TextColor = "blue";
 
                             myEvents.Add(ev);
                         }
 
                         startDate = startDate.AddDays(7);
+                    }
+
+                    var assignments = from a in _context.ClassAssignments select a;
+                    var assignments2 = assignments.Where(a => a.ClassId == course.ClassId).ToList();
+
+                    if (assignments2 != null)
+                    {
+                        for (int i = 0; i < assignments2.Count; i++)
+                        {
+                            var assign = assignments2[i];
+                            EventCS3750 ev = new EventCS3750();
+
+                            string date = assign.DueDate.Value.Year.ToString() + "-0" + assign.DueDate.Value.Month.ToString() + "-";
+                            if (assign.DueDate.Value.Day < 10)
+                            {
+                                date += "0" + assign.DueDate.Value.Day.ToString();
+                            }
+                            else
+                            {
+                                date += assign.DueDate.Value.Day.ToString();
+                            }
+                            string eDate = date + "T" + assign.DueTime.Value.AddSeconds(59).TimeOfDay.ToString();
+                            date += "T" + assign.DueTime.Value.TimeOfDay.ToString();
+
+                            ev.StartTime = date;
+                            ev.EndTime = eDate;
+                            ev.Title = course.Department.ToString() + course.CourseNumber.ToString() + " " + assign.AssignmentTitle.ToString();
+                            ev.Color = "red";
+                            ev.TextColor = "red";
+
+                            myEvents.Add(ev);
+                        }
                     }
                 }
             }
@@ -288,6 +347,8 @@ namespace Assignment_1.Controllers
                             ev.StartTime = startTime;
                             ev.EndTime = endTime;
                             ev.Title = course.CourseName;
+                            ev.Color = "blue";
+                            ev.TextColor = "blue";
 
                             myEvents.Add(ev);
                         }
@@ -318,6 +379,8 @@ namespace Assignment_1.Controllers
                             ev.StartTime = startTime;
                             ev.EndTime = endTime;
                             ev.Title = course.CourseName;
+                            ev.Color = "blue";
+                            ev.TextColor = "blue";
 
                             myEvents.Add(ev);
                         }
@@ -347,6 +410,8 @@ namespace Assignment_1.Controllers
                             ev.StartTime = startTime;
                             ev.EndTime = endTime;
                             ev.Title = course.CourseName;
+                            ev.Color = "blue";
+                            ev.TextColor = "blue";
 
                             myEvents.Add(ev);
                         }
@@ -376,8 +441,14 @@ namespace Assignment_1.Controllers
                             ev.StartTime = startTime;
                             ev.EndTime = endTime;
                             ev.Title = course.CourseName;
+                            ev.Color = "blue";
+                            ev.TextColor = "blue";
 
                             myEvents.Add(ev);
+                        }
+                        if (course.DaysOfWeek.Contains("Th") && i == 21)
+                        {
+                            return View(myEvents);
                         }
                         if (course.DaysOfWeek.Contains("Th"))
                         {
@@ -405,8 +476,14 @@ namespace Assignment_1.Controllers
                             ev.StartTime = startTime;
                             ev.EndTime = endTime;
                             ev.Title = course.CourseName;
+                            ev.Color = "blue";
+                            ev.TextColor = "blue";
 
                             myEvents.Add(ev);
+                        }
+                        if (course.DaysOfWeek.Contains("F") && i == 21)
+                        {
+                            return View(myEvents);
                         }
                         if (course.DaysOfWeek.Contains("F"))
                         {
@@ -434,8 +511,14 @@ namespace Assignment_1.Controllers
                             ev.StartTime = startTime;
                             ev.EndTime = endTime;
                             ev.Title = course.CourseName;
+                            ev.Color = "blue";
+                            ev.TextColor = "blue";
 
                             myEvents.Add(ev);
+                        }
+                        if (course.DaysOfWeek.Contains("Sa") && i == 21)
+                        {
+                            return View(myEvents);
                         }
                         if (course.DaysOfWeek.Contains("Sa"))
                         {
@@ -463,11 +546,45 @@ namespace Assignment_1.Controllers
                             ev.StartTime = startTime;
                             ev.EndTime = endTime;
                             ev.Title = course.CourseName;
+                            ev.Color = "blue";
+                            ev.TextColor = "blue";
 
                             myEvents.Add(ev);
                         }
 
                         startDate = startDate.AddDays(7);
+                    }
+
+                    var assignments = from a in _context.ClassAssignments select a;
+                    var assignments2 = assignments.Where(a => a.ClassId == course.ClassId).ToList();
+
+                    if (assignments2 != null)
+                    {
+                        for (int i = 0; i < assignments2.Count; i++)
+                        {
+                            var assign = assignments2[i];
+                            EventCS3750 ev = new EventCS3750();
+
+                            string date = assign.DueDate.Value.Year.ToString() + "-0" + assign.DueDate.Value.Month.ToString() + "-";
+                            if (assign.DueDate.Value.Day < 10)
+                            {
+                                date += "0" + assign.DueDate.Value.Day.ToString();
+                            }
+                            else
+                            {
+                                date += assign.DueDate.Value.Day.ToString();
+                            }
+                            string eDate = date + "T" + assign.DueTime.Value.AddSeconds(59).TimeOfDay.ToString();
+                            date += "T" + assign.DueTime.Value.TimeOfDay.ToString();
+
+                            ev.StartTime = date;
+                            ev.EndTime = eDate;
+                            ev.Title = course.Department.ToString() + course.CourseNumber.ToString() + " " + assign.AssignmentTitle.ToString();
+                            ev.Color = "red";
+                            ev.TextColor = "red";
+
+                            myEvents.Add(ev);
+                        }
                     }
                 }
             }
@@ -480,5 +597,7 @@ namespace Assignment_1.Controllers
         public string StartTime { get; set; }
         public string EndTime { get; set; }
         public string Title { get; set; }
+        public string Color { get; set; }
+        public string TextColor { get; set; }
     }
 }
