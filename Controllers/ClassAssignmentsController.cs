@@ -93,7 +93,23 @@ namespace Assignment_1.Controllers
             s.SubmitDate= DateTime.Now;
             //s.SubmitTime= default(DateTime).Add(DateTime.Now.TimeOfDay);
 
-			_context.AssignmentSubmissions.Add(s);
+
+            string directory = "wwwroot/Submissions";
+            Directory.CreateDirectory(directory);
+            IFormFile z = Request.Form.Files[0];
+            string fileExtension = z.FileName.Substring(z.FileName.LastIndexOf('.'));
+            string path = directory + "/" + UserID +"."+AssignmentID + fileExtension;
+            using (Stream filestream = new FileStream(directory + "/" + UserID +"."+ AssignmentID + fileExtension, FileMode.Create, FileAccess.Write))
+            {
+                // Saves the file to where ever the filestream was pointed to.
+                z.CopyTo(filestream);
+                // Won't save properly without this
+                filestream.Close();
+            }
+
+            s.Data = path;
+        
+            _context.AssignmentSubmissions.Add(s);
 			await _context.SaveChangesAsync();
 
 			return RedirectToAction("Assignment", new {ID = AssignmentID});//hardcode for testing
