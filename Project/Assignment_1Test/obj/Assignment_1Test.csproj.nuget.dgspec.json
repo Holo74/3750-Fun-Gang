@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\daxto\\Source\\Repos\\Holo74\\3750-Fun-Gang\\Project\\Assignment_1Test\\Assignment_1Test.csproj": {}
+    "D:\\college\\CS3750\\files\\Assignment_1\\Project\\Assignment_1Test\\Assignment_1Test.csproj": {}
   },
   "projects": {
-    "C:\\Users\\daxto\\Source\\Repos\\Holo74\\3750-Fun-Gang\\Project\\3750-Fun-Gang-Real\\Assignment_1.csproj": {
+    "D:\\college\\CS3750\\files\\Assignment_1\\Project\\3750-Fun-Gang-Real\\Assignment_1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\daxto\\Source\\Repos\\Holo74\\3750-Fun-Gang\\Project\\3750-Fun-Gang-Real\\Assignment_1.csproj",
+        "projectUniqueName": "D:\\college\\CS3750\\files\\Assignment_1\\Project\\3750-Fun-Gang-Real\\Assignment_1.csproj",
         "projectName": "Assignment_1",
-        "projectPath": "C:\\Users\\daxto\\Source\\Repos\\Holo74\\3750-Fun-Gang\\Project\\3750-Fun-Gang-Real\\Assignment_1.csproj",
-        "packagesPath": "C:\\Users\\daxto\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\daxto\\Source\\Repos\\Holo74\\3750-Fun-Gang\\Project\\3750-Fun-Gang-Real\\obj\\",
+        "projectPath": "D:\\college\\CS3750\\files\\Assignment_1\\Project\\3750-Fun-Gang-Real\\Assignment_1.csproj",
+        "packagesPath": "C:\\Users\\alexander\\.nuget\\packages\\",
+        "outputPath": "D:\\college\\CS3750\\files\\Assignment_1\\Project\\3750-Fun-Gang-Real\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\daxto\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\alexander\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -83,25 +78,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\daxto\\Source\\Repos\\Holo74\\3750-Fun-Gang\\Project\\Assignment_1Test\\Assignment_1Test.csproj": {
+    "D:\\college\\CS3750\\files\\Assignment_1\\Project\\Assignment_1Test\\Assignment_1Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\daxto\\Source\\Repos\\Holo74\\3750-Fun-Gang\\Project\\Assignment_1Test\\Assignment_1Test.csproj",
+        "projectUniqueName": "D:\\college\\CS3750\\files\\Assignment_1\\Project\\Assignment_1Test\\Assignment_1Test.csproj",
         "projectName": "Assignment_1Test",
-        "projectPath": "C:\\Users\\daxto\\Source\\Repos\\Holo74\\3750-Fun-Gang\\Project\\Assignment_1Test\\Assignment_1Test.csproj",
-        "packagesPath": "C:\\Users\\daxto\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\daxto\\Source\\Repos\\Holo74\\3750-Fun-Gang\\Project\\Assignment_1Test\\obj\\",
+        "projectPath": "D:\\college\\CS3750\\files\\Assignment_1\\Project\\Assignment_1Test\\Assignment_1Test.csproj",
+        "packagesPath": "C:\\Users\\alexander\\.nuget\\packages\\",
+        "outputPath": "D:\\college\\CS3750\\files\\Assignment_1\\Project\\Assignment_1Test\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\daxto\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\alexander\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -109,15 +100,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\daxto\\Source\\Repos\\Holo74\\3750-Fun-Gang\\Project\\3750-Fun-Gang-Real\\Assignment_1.csproj": {
-                "projectPath": "C:\\Users\\daxto\\Source\\Repos\\Holo74\\3750-Fun-Gang\\Project\\3750-Fun-Gang-Real\\Assignment_1.csproj"
+              "D:\\college\\CS3750\\files\\Assignment_1\\Project\\3750-Fun-Gang-Real\\Assignment_1.csproj": {
+                "projectPath": "D:\\college\\CS3750\\files\\Assignment_1\\Project\\3750-Fun-Gang-Real\\Assignment_1.csproj"
               }
             }
           }
@@ -169,7 +159,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
