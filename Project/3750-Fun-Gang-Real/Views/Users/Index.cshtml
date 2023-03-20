@@ -144,10 +144,10 @@
     <a href="#" class="active">ToDo's</a>
     @foreach (var item in Model.todoitems )
     {
-        <a href="#">@Html.DisplayFor(modelData => item.AssignmentTitle) class: @Html.DisplayFor(modelData => item.CourseNumber)</a>
+        <a href="@Url.Action("Assignment", "ClassAssignments", new { ID = item.ID })">@Html.DisplayFor(modelData => item.AssignmentTitle)<br>class: @Html.DisplayFor(modelData => item.CourseNumber)</a>
     }
 </div>
-
+@*@Url.Action("Index", "Assignment", new { assignmentID = item.ID })*@
 
 <div class="links">
 

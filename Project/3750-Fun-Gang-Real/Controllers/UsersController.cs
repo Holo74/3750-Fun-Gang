@@ -91,22 +91,40 @@ namespace Assignment_1.Controllers
 
                     }
 
-                    myassignments = myassignments.OrderBy(y => y.DueDate).ToList();
-                    // step 3: sort them by due date and pick the top 5. 
+                    List<ClassAssignments> futureAssignmentList = new List<ClassAssignments>();
+                    foreach(var x in myassignments)
+                    {
+                        DateTime dt = new DateTime(x.DueDate.Value.Year, x.DueDate.Value.Month, x.DueDate.Value.Day, x.DueTime.Value.Hour, x.DueTime.Value.Minute, x.DueTime.Value.Second);
+                        if(dt > DateTime.Now)
+                        {
+                            futureAssignmentList.Add(x);
+                        }
 
-                    var Assignments = _context.ClassAssignments;
+                    }
+					futureAssignmentList = futureAssignmentList.OrderBy(y => y.DueDate.Value.DayOfYear).OrderBy(z => z.DueTime.Value.Date.TimeOfDay.Hours).ToList();
+					//futureAssignmentList = futureAssignmentList.OrderBy(y => y.DueTime.Value.Hour).ToList();
+					//futureAssignmentList = futureAssignmentList.OrderBy(y => y.DueTime.Value.Minute).ToList();
+					//futureAssignmentList = futureAssignmentList.OrderBy(y => y.DueTime.Value.Second).ToList();
+					// step 3: sort them by due date and pick the top 5. 
 
-                    myassignments = myassignments.Where(a => a.DueDate >= DateTime.Today).ToList();
+					var Assignments = _context.ClassAssignments;
 
-                    //var AssignmentList = Assignments.ToList();
-                    int breakint = 0;
-                    foreach (var assignment in myassignments)
+     //               myassignments = myassignments.Where(a => a.DueDate >= DateTime.Today).ToList();
+					//myassignments = myassignments.Where(a => a.DueTime.Value.Hour >= DateTime.Today.Hour).ToList();
+					//myassignments = myassignments.Where(a => a.DueTime.Value.Minute >= DateTime.Today.Minute).ToList();
+					//myassignments = myassignments.Where(a => a.DueTime.Value.Second >= DateTime.Today.Second).ToList();
+
+					//var AssignmentList = Assignments.ToList();
+					int breakint = 0;
+                    foreach (var assignment in futureAssignmentList)
                     {
 
                         TODOitem todo = new TODOitem();
+                        todo.ID = assignment.Id;
                         todo.AssignmentTitle = assignment.AssignmentTitle;
                         todo.dueDate = assignment.DueDate;
                         todo.dueTime = assignment.DueTime;
+                        //var minute = todo.dueTime.Value.Minute;
                         var classList = _context.Class.Where(x => x.ClassId == assignment.ClassId).ToList();
                         if (classList.Count > 0 && classList.Count < 2)
                         {
