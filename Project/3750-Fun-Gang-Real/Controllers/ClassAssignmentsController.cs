@@ -123,6 +123,25 @@ namespace Assignment_1.Controllers
             var s = from a in _context.AssignmentSubmissions select a;
             ASVM.Submission = s.Where(x => x.AssignmentFK == ID).ToList();
 
+            // Added all this list code to get the users because I can't use the entire database (crashes)
+            // might still crash unless we fix the problem in the users table
+            List<int> IDs = new List<int>();
+
+            for (int i = 0; i < ASVM.Submission.Count(); i++)
+            {
+                if (!IDs.Contains(ASVM.Submission.ElementAt(i).UserFK)){
+                    IDs.Add(ASVM.Submission.ElementAt(i).UserFK);
+                }
+            }
+
+            List<User> Users = new List<User>();
+            for (int i = 0; i < IDs.Count(); i++)
+            {
+                Users.Add(_context.User.Where(u => u.Id == IDs.ElementAt(i)).First());
+            }
+
+            ASVM.User = Users;
+
             return View(ASVM);
         }
 

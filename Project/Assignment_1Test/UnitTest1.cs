@@ -16,7 +16,7 @@ namespace Assignment_1Test
 
             DbContextOptions<Assignment_1Context> options = new DbContextOptions<Assignment_1Context>();
             DbContextOptionsBuilder builder = new DbContextOptionsBuilder(options);
-            SqlServerDbContextOptionsExtensions.UseSqlServer(builder, "Server=titan.cs.weber.edu,10433;Database=LMS_FunGang;User Id=LMS_FunGang;Password=FunGang5!;", null);
+            SqlServerDbContextOptionsExtensions.UseSqlServer(builder, "Server=titan.cs.weber.edu,10433;Database=LMS_FunGang;User Id=LMS_FunGang;Password=FunGang!5;", null);
             _context = new Assignment_1Context((DbContextOptions<Assignment_1Context>)builder.Options);
         }
 
