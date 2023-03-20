@@ -130,13 +130,14 @@ namespace Assignment_1.Controllers
             for (int i = 0; i < ASVM.Submission.Count(); i++)
             {
                 if (!IDs.Contains(ASVM.Submission.ElementAt(i).UserFK)){
-                    IDs.Add(ASVM.Submission.ElementAt(i).UserFK);
+                    IDs.Add(ASVM.Submission.ElementAt(i).UserFK); // adds IDs that are not already in the list
                 }
             }
 
             List<User> Users = new List<User>();
             for (int i = 0; i < IDs.Count(); i++)
             {
+                // adds Users who submitted something to table one by one
                 Users.Add(_context.User.Where(u => u.Id == IDs.ElementAt(i)).First());
             }
 
