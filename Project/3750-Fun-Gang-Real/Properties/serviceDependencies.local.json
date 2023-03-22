@@ -1,3 +1,14 @@
 {
-  "dependencies": {}
+  "dependencies": {
+    "secrets1": {
+      "type": "secrets.user"
+    },
+    "mssql1": {
+      "secretStore": "LocalSecretsFile",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/fun-gang/databases/db",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:Assignment_1Context",
+      "dynamicId": null
+    }
+  }
 }

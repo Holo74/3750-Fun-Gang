@@ -4,7 +4,16 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>40146e82-082d-4f09-be30-2f4911483120</UserSecretsId>
   </PropertyGroup>
+  
+  <PropertyGroup Condition=" '$(Configuration)' == '' Or '$(Configuration)' == 'Debug'">
+  <EnvironmentName>Development</EnvironmentName>
+</PropertyGroup>
+
+<PropertyGroup Condition=" '$(Configuration)' != '' AND '$(Configuration)' != 'Debug' ">
+  <EnvironmentName>Production</EnvironmentName>
+</PropertyGroup>
 
   <ItemGroup>
     <Content Remove="wwwroot\js\index.global.js" />
