@@ -13,7 +13,12 @@
 
         var objs = [];
         for (var i = 0; i < data.length; i++) {
-            objs.push({ start: String(data[i].startTime), end: String(data[i].endTime), title: String(data[i].title), color: String(data[i].color) });
+            if (String(data[i].url) != ''){
+                objs.push({ start: String(data[i].startTime), end: String(data[i].endTime), title: String(data[i].title), color: String(data[i].color), url: String(data[i].url) });
+            }
+            else{
+                objs.push({ start: String(data[i].startTime), end: String(data[i].endTime), title: String(data[i].title), color: String(data[i].color) });
+            }
         }
 
         document.addEventListener('DOMContentLoaded', function () {
