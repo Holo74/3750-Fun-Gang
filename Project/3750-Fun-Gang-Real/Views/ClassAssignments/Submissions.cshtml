@@ -66,7 +66,7 @@
 	<thead>
 		<tr>
 			<th>
-				Assignment title
+				Student
 			</th>
 			<th>
 				Submitted
@@ -81,7 +81,7 @@
 		{
 			<tr>
 				<td>
-					@Html.DisplayFor(modelData => Model.Assignment.AssignmentTitle)
+					@Html.DisplayFor(modelData => Model.User.Where(u => u.Id == item.UserFK).First().FirstName) @Html.DisplayFor(modelData => Model.User.Where(u => u.Id == item.UserFK).First().LastName)
 				</td>
 				<td>
 					@Html.DisplayFor(modelData => item.SubmitDate)

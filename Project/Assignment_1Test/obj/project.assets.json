@@ -11372,19 +11372,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\alexander\\.nuget\\packages\\": {}
+    "C:\\Users\\exoxa\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\college\\CS3750\\files\\Assignment_1\\Project\\Assignment_1Test\\Assignment_1Test.csproj",
+      "projectUniqueName": "C:\\Users\\exoxa\\source\\repos\\Holo74\\3750-Fun-Gang\\Project\\Assignment_1Test\\Assignment_1Test.csproj",
       "projectName": "Assignment_1Test",
-      "projectPath": "D:\\college\\CS3750\\files\\Assignment_1\\Project\\Assignment_1Test\\Assignment_1Test.csproj",
-      "packagesPath": "C:\\Users\\alexander\\.nuget\\packages\\",
-      "outputPath": "D:\\college\\CS3750\\files\\Assignment_1\\Project\\Assignment_1Test\\obj\\",
+      "projectPath": "C:\\Users\\exoxa\\source\\repos\\Holo74\\3750-Fun-Gang\\Project\\Assignment_1Test\\Assignment_1Test.csproj",
+      "packagesPath": "C:\\Users\\exoxa\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\exoxa\\source\\repos\\Holo74\\3750-Fun-Gang\\Project\\Assignment_1Test\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\alexander\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\exoxa\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -11398,8 +11398,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\college\\CS3750\\files\\Assignment_1\\Project\\3750-Fun-Gang-Real\\Assignment_1.csproj": {
-              "projectPath": "D:\\college\\CS3750\\files\\Assignment_1\\Project\\3750-Fun-Gang-Real\\Assignment_1.csproj"
+            "C:\\Users\\exoxa\\source\\repos\\Holo74\\3750-Fun-Gang\\Project\\3750-Fun-Gang-Real\\Assignment_1.csproj": {
+              "projectPath": "C:\\Users\\exoxa\\source\\repos\\Holo74\\3750-Fun-Gang\\Project\\3750-Fun-Gang-Real\\Assignment_1.csproj"
             }
           }
         }
@@ -11451,7 +11451,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }
