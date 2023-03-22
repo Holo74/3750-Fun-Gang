@@ -16,7 +16,7 @@ namespace Assignment_1Test
 
             DbContextOptions<Assignment_1Context> options = new DbContextOptions<Assignment_1Context>();
             DbContextOptionsBuilder builder = new DbContextOptionsBuilder(options);
-            SqlServerDbContextOptionsExtensions.UseSqlServer(builder, "Server=titan.cs.weber.edu,10433;Database=LMS_FunGang;User Id=LMS_FunGang;Password=FunGang5!;", null);
+            SqlServerDbContextOptionsExtensions.UseSqlServer(builder, "Server=titan.cs.weber.edu,10433;Database=LMS_FunGang;User Id=LMS_FunGang;Password=FunGang!5;", null);
             _context = new Assignment_1Context((DbContextOptions<Assignment_1Context>)builder.Options);
         }
 
@@ -47,5 +47,43 @@ namespace Assignment_1Test
             _context.Class.Remove(course);
             await _context.SaveChangesAsync();
         }
-    }
+
+        [TestMethod]
+		public async Task StudentCanRegisterForCourse()
+		{
+			//find student id that exists (id = 43 is teststud)
+			//query for how many courses the student is signed up for
+
+			var user = _context.User.Where(x => x.Id == 43).ToList();
+			var numOfClassesBefore = _context.Registrations.Where(c => c.UserFK == user[0].Id && c.IsRegistered == 1).ToList();
+			int lengthBefore = numOfClassesBefore.Count();
+
+			//find a class already in the registration table
+			var registrationList = _context.Registrations.Where(d => d.ID == 27).ToList();
+
+            if (registrationList.Count> 0)
+            {
+                var registration = registrationList[0];
+                registration.IsRegistered = 1; 
+                //make the student register for a course
+			    //query for how many courses the student is registered for (should be one more than last time)
+			    await _context.SaveChangesAsync();
+
+			    //if thats true, pass. else, fail
+
+			    var numOfClassesAfter = _context.Registrations.Where(c => c.UserFK == user[0].Id && c.IsRegistered == 1).ToList();
+			    int lengthAfter = numOfClassesAfter.Count();
+
+			    Assert.AreEqual(lengthAfter, lengthBefore + 1);
+
+				registration.IsRegistered = 0;
+				//_context.Registrations.Remove()
+				await _context.SaveChangesAsync();
+            }
+
+
+
+			
+		}
+	}
 }
