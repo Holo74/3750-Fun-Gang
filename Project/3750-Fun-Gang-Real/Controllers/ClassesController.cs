@@ -138,38 +138,43 @@ namespace Assignment_1.Controllers
             return Redirect("/Classes");
         }
 
-        //    public async Task<IActionResult> Details(int? id)
-        //    {
-        //        if (id == null || _context.Class == null)
-        //        {
-        //            return NotFound();
-        //        }
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null || _context.Class == null)
+            {
+                return NotFound();
+            }
 
-        //        var course = await _context.Class
-        //            .FirstOrDefaultAsync(m => m.ClassId == id);
-        //        if (course == null)
-        //        {
-        //            return NotFound();
-        //        }
+            var course = await _context.Class
+                .FirstOrDefaultAsync(m => m.ClassId == id);
+            if (course == null)
+            {
+                return NotFound();
+            }
 
-        //        return View(course);
-        //    }
-        //    [HttpPost, ActionName("Delete")]
-        //    [ValidateAntiForgeryToken]
-        //    public async Task<IActionResult> Details(int id)
-        //    {
-        //        if (_context.Class == null)
-        //        {
-        //            return Problem("Entity set 'Assignment_1Context.User'  is null.");
-        //        }
-        //        var course = await _context.Class.FindAsync(id);
+            return View(course);
+        }
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id,Class c)
+        {
+            var course = await _context.Class.FindAsync(id);
+            _context.Class.Remove(c);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
 
-        //            _context.Class.Remove(course);
+            //if (_context.Class == null)
+            //{
+            //    return Problem("Entity set 'Assignment_1Context.User'  is null.");
+            //}
+            //var course = await _context.Class.FindAsync(id);
+
+            //_context.Class.Remove(course);
 
 
-        //        await _context.SaveChangesAsync();
-        //        return Redirect("/Classes");
-        //    }
-        //}
+            //await _context.SaveChangesAsync();
+            //return Redirect("/Classes");
+        }
     }
 }
+
