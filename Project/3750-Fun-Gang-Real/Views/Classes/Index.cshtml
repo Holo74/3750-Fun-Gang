@@ -77,9 +77,10 @@
                     @Html.DisplayFor(modelItem => item.EndTime)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.ClassId">Edit</a> |
+                    <a asp-action="Edit" asp-route-id="@item.ClassId">Edit</a>
+                    @*<a href="@Url.Action("Edit", new { classID = item.ClassId })">Edit</a>*@
                     <a asp-action="Details" asp-route-id="@item.ClassId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ClassId">Delete</a>
+                   
                 </td>
             </tr>
         }

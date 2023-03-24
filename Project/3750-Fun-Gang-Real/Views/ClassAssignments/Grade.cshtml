@@ -26,9 +26,7 @@
 </div>
 <br />
 <div>
-	<p>@*Put a check here for text or file submit type and handle file display?*@
-		@Model.Submission.First().Data
-	</p>
+ <a href ="@Model.Submission.First().Data"download="filename">Download</a>
 </div>
 <hr />
 <form asp-action="SetPoints">

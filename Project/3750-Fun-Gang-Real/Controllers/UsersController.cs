@@ -293,11 +293,7 @@ namespace Assignment_1.Controllers
                 user.ConfirmPassword = olduser.Password;
                 _context.ChangeTracker.Clear();
                 _context.Update(user);
-               
                     await _context.SaveChangesAsync();
-                
-                
-                   
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -310,8 +306,6 @@ namespace Assignment_1.Controllers
                         throw;
                     }
                 }
-                //return RedirectToAction(nameof(Index));
-           // }
             return Redirect("/Users/Details/" + user.Id);
         }
 
