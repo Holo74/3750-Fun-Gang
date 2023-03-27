@@ -23,17 +23,37 @@ namespace Assignment_1.Controllers
              
             var courses = from c in _context.Class select c;
             var course = courses.Where(c => c.ClassId == classId).ToList();
-            
+            var assignments = from d in _context.ClassAssignments select d;
+            var assignment = assignments.Where(d => d.ClassId == classId).ToList();
+            var submissions = from e in _context.AssignmentSubmissions select e;
+            submissions = submissions.Where(e => e.UserFK == UserID);
+            var submissionList = submissions.Where(f => f.ClassFK== classId).ToList();
 
 
-            ClassUserAssignments CUA = new ClassUserAssignments();
+
+
+			StudentAssignmentListViewModel SALV = new StudentAssignmentListViewModel();
+
+            SALV.Assignments = new List<AssignmentSubmissionViewModel>();
+
+            foreach(var a in submissionList)
+            {
+                AssignmentSubmissionViewModel b= new AssignmentSubmissionViewModel();
+
+                //b.Submission=submissions.Where(e => e.AssignmentFK == a.Id).ToList();
+                b.Submission.Append(a);
+                b.Assignment= assignments.Where(g => g.Id == a.AssignmentFK).FirstOrDefault();
+
+                SALV.Assignments.Add(b);
+
+            }
 
             if (course.Count != 1)
             {
                 return NotFound();
             }
 
-            CUA.Class = course[0];
+			SALV.Class = course[0];
 
             // CourseInfo specificCourse = new CourseInfo();
             // specificCourse.CourseName = course[0].CourseName;
@@ -41,22 +61,25 @@ namespace Assignment_1.Controllers
             // specificCourse.Department = course[0].Department;
 
             // Does User teach the class?
-            if (CUA.Class.UserId == UserID)
+            if (SALV.Class.UserId == UserID)
             {
-                CUA.User = Models.Helper.ReturnFirstSelected<User>((from u in _context.User where u.Id == UserID select u).ToList());
-                CUA.TeachesClass = true;
+				SALV.User = Models.Helper.ReturnFirstSelected<User>((from u in _context.User where u.Id == UserID select u).ToList());
+				SALV.TeachesClass = true;
             }
             else
             {
-                CUA.TeachesClass = false;
+                SALV.TeachesClass = false;
             }
 
-            CUA.Assignments = (from a in _context.ClassAssignments where a.ClassId == CUA.Class.ClassId select a).ToList();
+			//SALV.Assignments.Add();
+
+            
+            //SALV.Assignments = (from a in _context.ClassUserAssignments where a.ClassId == SALV.Class.ClassId select a).ToList();
             //  CUA.Assignments = _context.ClassAssignments.Where(x => x.ClassId == CUA.Class.ClassId).ToList();
             var t = from u in _context.User select u;
-            CUA.User = t.Where(t => t.Id == UserID).FirstOrDefault();
+            SALV.User = t.Where(t => t.Id == UserID).FirstOrDefault();
 
-            return View(CUA);
+            return View(SALV);
         }
         public IActionResult Create(int classId)
         {

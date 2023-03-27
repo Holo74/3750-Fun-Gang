@@ -1,4 +1,4 @@
-﻿@model Assignment_1.Models.ClassUserAssignments
+﻿@model Assignment_1.Models.StudentAssignmentListViewModel
 
 @{
 	ViewData["Title"] = "Course";
@@ -19,9 +19,6 @@
 	<thead>
 		<tr>
 			<th>
-				Class ID
-			</th>
-			<th>
 				Assignment title
 			</th>
 
@@ -31,6 +28,9 @@
 
 			<th>
 				Due Time
+			</th>
+			<th>
+				Points
 			</th>
 		</tr>
 	</thead>
@@ -52,22 +52,25 @@
 		{
 			<tr>
 				<td>
-					@Html.DisplayFor(modelData => item.ClassId)
+					@Html.DisplayFor(modelData => item.Assignment.AssignmentTitle)
 				</td>
 				<td>
-					@Html.DisplayFor(modelData => item.AssignmentTitle)
+					@Html.DisplayFor(modelData => item.Assignment.DueDate)
 				</td>
 				<td>
-					@Html.DisplayFor(modelData => item.DueDate)
-				</td>
-				<td>
-					@Html.DisplayFor(modelData => item.DueTime)
-				</td>
+					@Html.DisplayFor(modelData => item.Assignment.DueTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelData => item.Submission.FirstOrDefault().Points) / @Html.DisplayFor(modelData => item.Assignment.MaxPoints)
+                </td>
 
 
 				@*until the below comparison to see if teacher or student works, just show all the buttons*@
 				@if (Model.User.UserType != "Student")
 				{
+					<td>
+						@Html.DisplayFor(modelData => item.Assignment.MaxPoints)
+					</td>
 					<td>
 						<button class="btn btn-primary">
 							Edit
@@ -79,13 +82,13 @@
 						</button>
 					</td>
 					<td>
-						<a class="btn btn-primary" href="ClassAssignments/Submissions/?ID=@item.Id">Submissions</a>
+						<a class="btn btn-primary" href="ClassAssignments/Submissions/?ID=@item.Assignment.Id">Submissions</a>
 					</td>
 				}
 				else
 				{
 					<td>
-						<a class="btn btn-primary" href="ClassAssignments/Assignment/?ID=@item.Id">Submit</a>
+						<a class="btn btn-primary" href="ClassAssignments/Assignment/?ID=@item.Assignment.Id">Submit</a>
 					</td>
 				}
 				@*
