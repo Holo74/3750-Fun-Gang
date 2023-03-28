@@ -3,6 +3,9 @@ using Assignment_1;
 using Assignment_1.Models;
 using Assignment_1.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Assignment_1.Controllers;
+using Microsoft.VisualStudio.TestPlatform.Utilities;
+using Stripe;
 
 namespace Assignment_1Test
 {
@@ -63,11 +66,14 @@ namespace Assignment_1Test
 
             if (registrationList.Count> 0)
             {
-                var registration = registrationList[0];
-                registration.IsRegistered = 1; 
+                //var registration = registrationList[0];
+                StudentRegistrationController registrations = new StudentRegistrationController(_context);
+                //27 is a class made for unit testing
+                await registrations.RegisterForClass(27);
+                //registration.IsRegistered = 1; 
                 //make the student register for a course
 			    //query for how many courses the student is registered for (should be one more than last time)
-			    await _context.SaveChangesAsync();
+			    //await _context.SaveChangesAsync();
 
 			    //if thats true, pass. else, fail
 
@@ -76,9 +82,9 @@ namespace Assignment_1Test
 
 			    Assert.AreEqual(lengthAfter, lengthBefore + 1);
 
-				registration.IsRegistered = 0;
-				//_context.Registrations.Remove()
-				await _context.SaveChangesAsync();
+                await registrations.RegisterForClass(27);
+                //_context.Registrations.Remove()
+                await _context.SaveChangesAsync();
             }
 
 
