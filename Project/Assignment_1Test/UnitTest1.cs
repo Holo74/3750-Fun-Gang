@@ -3,6 +3,8 @@ using Assignment_1;
 using Assignment_1.Models;
 using Assignment_1.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Assignment_1.Controllers;
+using System.Security.Cryptography;
 
 namespace Assignment_1Test
 {
@@ -81,5 +83,44 @@ namespace Assignment_1Test
 				await _context.SaveChangesAsync();
             }			
 		}
+
+        [TestMethod]
+        public async Task AssignmentCanBeGraded()
+        {
+            var submissions = (from a in _context.AssignmentSubmissions select a).ToList();
+            int Tries = 3;//maximum submissions to test
+
+            //test first (Tries) submissions retrieved
+            foreach(var submission in submissions )
+            {
+                if(Tries > 0)
+                {
+                    ClassAssignmentsController c = new ClassAssignmentsController(_context);
+
+                    //random point value to assign
+                    int randomPoints = new Random().Next(1, 11);
+					
+                    //call set points function on current submission with teh random value
+					await c.SetPoints(randomPoints, submission.Id);
+
+                    AssignmentSubmissions a = _context.AssignmentSubmissions.Where(x => x.Id == submission.Id).FirstOrDefault();
+
+                    Assert.IsNotNull(a);
+
+                    if(a != null)
+                    {
+                        Assert.AreEqual(randomPoints, a.Points);
+                    }
+
+                    Tries--;
+                }
+                else
+                {
+                    break;
+                }
+
+            }
+           
+        }
 	}
 }
