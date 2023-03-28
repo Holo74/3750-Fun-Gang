@@ -79,11 +79,7 @@ namespace Assignment_1Test
 				registration.IsRegistered = 0;
 				//_context.Registrations.Remove()
 				await _context.SaveChangesAsync();
-            }
-
-
-
-			
+            }			
 		}
 	}
 }
