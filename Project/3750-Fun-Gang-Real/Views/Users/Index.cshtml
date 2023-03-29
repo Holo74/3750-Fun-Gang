@@ -7,6 +7,20 @@
     ViewData["Title"] = "Classes";
 }
 
+<script>
+    function showNotification(){
+        var menu = document.getElementById("notification-menu")
+        if(menu.hidden == true)
+        {
+            menu.hidden = false;
+        }
+        else
+        {
+            menu.hidden = true;
+        }
+    }
+</script>
+
 <h1>Welcome
     @Html.DisplayFor(model => model.viewUser.FirstName)
     @Html.DisplayFor(model => model.viewUser.LastName)</h1>
@@ -21,6 +35,22 @@
         position: fixed;
         bottom: 100px;
     }
+
+    .notification{
+        width:10px;
+        position:fixed;
+        right:313px;
+        top:65px;
+    }
+
+	.notification-menu {
+		width: 10px;
+		position: fixed;
+        right: 352px;
+        top: 106px;
+        z-index:4;
+        background-color: #f5bb00;
+	}
 
     .vertical-menu {
         width: 200px;
@@ -140,14 +170,31 @@
     }*@
     }
 </div>
+
+<div class="notification">
+    <button onclick="showNotification()">
+        n
+    </button>
+</div>
+
+<div hidden class="notification-menu" id="notification-menu">
+    <ul>
+        <li>Dummy 1</li>
+        <li>Dummy 2</li>
+        <li>Dummy 3</li>
+        <li>Dummy 4</li>
+        <li>Dummy 5</li>
+    </ul>
+</div>
+
 <div class="vertical-menu">
     <a href="#" class="active">ToDo's</a>
     @foreach (var item in Model.todoitems )
     {
-        <a href="#">@Html.DisplayFor(modelData => item.AssignmentTitle) class: @Html.DisplayFor(modelData => item.CourseNumber)</a>
+        <a href="@Url.Action("Assignment", "ClassAssignments", new { ID = item.ID })">@Html.DisplayFor(modelData => item.AssignmentTitle)<br>class: @Html.DisplayFor(modelData => item.CourseNumber)</a>
     }
 </div>
-
+@*@Url.Action("Index", "Assignment", new { assignmentID = item.ID })*@
 
 <div class="links">
 
