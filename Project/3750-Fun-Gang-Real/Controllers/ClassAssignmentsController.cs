@@ -107,7 +107,15 @@ namespace Assignment_1.Controllers
                 
             }
 
-            ASVM.StudentBin = ASVM.Submission == null? 0 :(int)(10 * ((float)ASVM.Submission.First().Points / (float)maxPoints));
+            ASVM.StudentBin = 0;
+            if(ASVM.Submission != null && ASVM.Submission.Count() > 0) {
+
+                if(ASVM.Submission.First().Points != null)
+                {
+                    ASVM.StudentBin = (int)(10 * ((float)ASVM.Submission.First().Points / (float)maxPoints));
+                }
+            }
+           
             return View(ASVM);
         }
 
