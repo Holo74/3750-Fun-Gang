@@ -7,18 +7,18 @@ namespace Assignment_1.Models
 {
     public class Class
     {
-        public Class(int userId, string department, int courseNumber, string courseName, int numOfCredits, string location, string daysOfWeek, DateTime startTime, DateTime endTime)
-        {
-            UserId = userId;
-            Department = department;
-            CourseNumber = courseNumber;
-            CourseName = courseName;
-            NumOfCredits = numOfCredits;
-            Location = location;
-            DaysOfWeek = daysOfWeek;
-            StartTime = startTime;
-            EndTime = endTime;
-        }
+        //public Class(int userId, string department, int courseNumber, string courseName, int numOfCredits, string location, string daysOfWeek, DateTime startTime, DateTime endTime)
+        //{
+        //    UserId = userId;
+        //    Department = department;
+        //    CourseNumber = courseNumber;
+        //    CourseName = courseName;
+        //    NumOfCredits = numOfCredits;
+        //    Location = location;
+        //    DaysOfWeek = daysOfWeek;
+        //    StartTime = startTime;
+        //    EndTime = endTime;
+        //}
     
         // NOT COMPLETELY ACCURATE YET **************************************************************
         //make sure to alter submit() in ClassesController if any of this changes

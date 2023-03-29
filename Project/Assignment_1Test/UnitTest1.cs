@@ -36,9 +36,22 @@ namespace Assignment_1Test
             //make the instructor create a course (pass all information for course creation)
             //query for how many courses the professor is teaching (should be one more than last time)
 
-            Class course = new Class(user[0].Id, "ENGL", 2010, "Writing", 4, "Elizabeth Hall", "M | W", DateTime.Now, DateTime.Now.AddHours(1));
-            _context.Class.Add(course);
-            await _context.SaveChangesAsync();
+            Class course = new Class();
+            course.Department = "CS";
+            course.CourseNumber = 3456;
+            course.CourseName = "Dummy Class";
+            course.NumOfCredits = 3;
+            course.Location = "The Place";
+            course.StartTime = DateTime.Now;
+            course.EndTime = DateTime.Now.AddHours(1);
+
+            List<string> days = new List<string>();
+            days.Add("M");
+            days.Add("W");
+            ICollection<string> day = days;
+
+            ClassesController classes = new ClassesController(_context);
+            await classes.CreateMain(user[0].Id, course, days);
 
             //if thats true, pass. else, fail
 
