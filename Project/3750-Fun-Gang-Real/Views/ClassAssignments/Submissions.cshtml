@@ -10,7 +10,7 @@
     <script type="text/javascript">
 
         // Load the Visualization API and the corechart package.
-        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.load('current', { 'packages': ['corechart','bar'] });
 
         // Set a callback to run when the Google Visualization API is loaded.
         google.charts.setOnLoadCallback(drawChart);
@@ -25,13 +25,16 @@
             // Converts the model list into an array
             var pieInfo = @Html.Raw(Json.Serialize(Model.Submission));
 			var assignmentInfo = @Html.Raw(Json.Serialize(Model.Assignment));
+			var bins = @Html.Raw(Json.Serialize(Model.GradeBins));
+			var s = @Html.Raw(Json.Serialize(Model.Submission.ToArray().Length));
 
-			var info = [["Student", "Grades"]]
+			var info = [["Student", "Grades",{role: 'style'}]]
+			let  colors = new Array( 'red', 'red', 'red', 'red', 'red', 'red', 'orange', 'yellow', 'green', 'green', 'cyan');
 
-            // Each object in the list is a class.  Meaning you can access the properties by doing .{name of property}
-            for (let i = 0; i < pieInfo.length; i++) {
-                info.push([pieInfo[i].userFK.toString(), pieInfo[i].points])
-            }
+			// Each object in the list is a class.  Meaning you can access the properties by doing .{name of property}
+			for (let i = 0; i <= 10; i++) {
+				info.push([(i*10).toString(), bins[i], colors[i]])
+			}
 			console.log(pieInfo)
 			console.log(info)
 
@@ -39,20 +42,21 @@
 
 			var view = new google.visualization.DataView(data);
 
-            // Set chart options
-            var options = {
-                'title': "Grades",
-				hAxis: { title: 'Grades', minValue: 0, maxValue: assignmentInfo.maxPoints },
-				vAxis: {title: 'Students'},
+			// Set chart options
+			var options = {
+				'title': "Grades",
+				hAxis: { title: 'Grade Percentage'},
+				vAxis: { title: 'Students', minValue: 0, maxValue: s },
 				width: 600,
 				height: 400,
 				legend: { position: "none" },
 
 
-            };
+			};
+
 
             // Instantiate and draw our chart, passing in some options.
-			var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+			var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
 			chart.draw(view, options);
         }
     </script>
@@ -97,4 +101,5 @@
 	</tbody>
 </table>
 
+@*if user is teacher*@
 <div id="chart_div"></div>
