@@ -2,10 +2,4 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/.vs
-/Project/Assignment_1Test/bin/Debug/net6.0/CoverletSourceRootsMapping
-/Project/Assignment_1Test/bin/Release/net6.0/CoverletSourceRootsMapping
-/Project/Assignment_1Test/obj/Debug/net6.0/Assignment_1Test.assets.cache
-/Project/Assignment_1Test/obj/Release/net6.0
-/Project/Assignment_1Test/obj/Debug/net6.0/Assignment_1Test.GeneratedMSBuildEditorConfig.editorconfig
-/Project/Assignment_1Test/obj/Debug/net6.0/Assignment_1Test.csproj.AssemblyReference.cache
+.vs/
