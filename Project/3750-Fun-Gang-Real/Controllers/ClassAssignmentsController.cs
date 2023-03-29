@@ -60,9 +60,39 @@ namespace Assignment_1.Controllers
             int? UserID = HttpContext.Session.GetInt32("UserID");
             int ClassID = ASVM.Assignment.ClassId;
 
+            //-------------< gets all assignments for the chart >--------------
+            var l = from k in _context.AssignmentSubmissions select k;
+            ASVM.Submission = l.Where(x => x.AssignmentFK == ID).ToList();
+
+            int maxPoints = 100;
+            if (ASVM.Assignment != null)
+            {
+                maxPoints = ASVM.Assignment.MaxPoints.Value;
+            }
+
+            foreach (var item in ASVM.Submission)
+            {
+
+                int t = item.Points == null ? 0 : item.Points.Value;//get point value if it exists
+
+                //get grade fraction, multiply by 10 (90/100 -> 0.9 -> 9.0) and cast to int, use this value as index of asvm grade bin and incriment it
+                t = (int)(10 * ((float)t / (float)maxPoints));
+                if (t <= 10)
+                {
+                    ASVM.GradeBins[t]++;
+                }
+                else
+                {
+                    //if it gets here then the points earned is > 100% of possible points
+                    ASVM.GradeBins[10]++;
+                }
+                
+            }
+            //-----------------------------------------------------------------
             //in case not already set, used in the submit()
             HttpContext.Session.SetInt32("AssignmentID",ID);
             HttpContext.Session.SetInt32("ClassID",ClassID);
+            //ASVM.GradeBins = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6 };
 
             int AssignmentID = ID;
             var submission = from s in _context.AssignmentSubmissions select s;
@@ -72,6 +102,8 @@ namespace Assignment_1.Controllers
                 ASVM.Submission = submission.Where(x => x.UserFK== UserID).Where(y => y.AssignmentFK == AssignmentID).Where(z => z.ClassFK == ClassID);
                 
             }
+
+            ASVM.StudentBin = ASVM.Submission == null? 0 :(int)(10 * ((float)ASVM.Submission.First().Points / (float)maxPoints));
             return View(ASVM);
         }
 

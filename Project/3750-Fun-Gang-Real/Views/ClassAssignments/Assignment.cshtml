@@ -1,49 +1,117 @@
 ﻿@model Assignment_1.Models.AssignmentSubmissionViewModel
 @{
-	ViewData["Title"] = "Assignment";
+    ViewData["Title"] = "Assignment";
 }
 
-<div class="d-flex flex-column">
-	<div>
-		<h2>@Html.DisplayFor(model => model.Assignment.AssignmentTitle)</h2>
-		<hr />
-	</div>
-	<div>
-		<h2>Points: @Html.DisplayFor(model => model.Assignment.MaxPoints) </h2>
-	</div>
-	@if (Model.Submission.FirstOrDefault() == null)
-	{
-		<div>
-			<h3>Due: @Html.DisplayFor(model => model.Assignment.DueDate) at @Html.DisplayFor(model => model.Assignment.DueTime) </h3>
-		</div>
-		<div>
-			<p><h4>Submission: </h4>@Html.DisplayFor(model => model.Assignment.SubmissionType)</p>
-		</div>
+<head>
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
 
-		<div>
-			<p><h4>Instructions:</h4> @Html.DisplayFor(model => model.Assignment.Description)</p>
-		</div>
-	}
-	else
-	{
-		<div>
-			<h4>Submitted: @Html.DisplayFor(model => model.Submission.FirstOrDefault().SubmitDate)</h4>
-		</div>
-	}
-	
+        // Load the Visualization API and the corechart package.
+        google.charts.load('current', { 'packages': ['corechart', 'bar'] });
+
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.charts.setOnLoadCallback(drawChart);
+
+        // Callback that creates and populates a data table,
+        // instantiates the pie chart, passes in the data and
+        // draws it.
+        function drawChart() {
+
+            // Create the data table.
+
+            // Converts the model list into an array
+            var bins = @Html.Raw(Json.Serialize(Model.GradeBins));
+
+            var s = @Html.Raw(Json.Serialize(Model.Submission == null? 0 : Model.Submission.ToArray().Length));
+            var x = @Html.Raw(Json.Serialize(Model.StudentBin));
+            console.log(x);
+
+                    var info = [["Student", "Grades", { role: 'style' }]]
+            let colors = new Array('fill-color: red', 'fill-color: red', 'fill-color: red', 'fill-color: red', 'fill-color: red',
+                'fill-color: red', 'fill-color: orange', 'fill-color: yellow', 'fill-color: green', 'fill-color: green', 'fill-color: cyan');
+
+            // Each object in the list is a class.  Meaning you can access the properties by doing .{name of property}
+            for (let i = 0; i <= 10; i++) {
+                if(i == x){
+                    colors[i] += '; stroke-width: 8; stroke-color: black';
+                }
+                info.push([(i * 10).toString(), bins[i], colors[i]])
+            }
+
+            var data = new google.visualization.arrayToDataTable(info);
+
+            var view = new google.visualization.DataView(data);
+
+            // Set chart options
+            var options = {
+                'title': "Grades",
+                hAxis: { title: 'Grade Percentage' },
+                vAxis: { title: 'Students', minValue: 0, maxValue: s },
+                width: 600,
+                height: 400,
+                legend: { position: "none" },
+
+
+            };
+
+
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+            chart.draw(view, options);
+        }
+    </script>
+</head>
+
+<div class="d-flex flex-column">
+    <div>
+        <h2>@Html.DisplayFor(model => model.Assignment.AssignmentTitle)</h2>
+        <hr />
+    </div>
+    <div>
+        <h2>Points: @Html.DisplayFor(model => model.Assignment.MaxPoints) </h2>
+    </div>
+    @if (Model.Submission != null && Model.Submission.FirstOrDefault() == null)
+    {
+        <div>
+            <h3>Due: @Html.DisplayFor(model => model.Assignment.DueDate) at @Html.DisplayFor(model => model.Assignment.DueTime) </h3>
+        </div>
+        <div>
+            <p><h4>Submission: </h4>@Html.DisplayFor(model => model.Assignment.SubmissionType)</p>
+        </div>
+
+        <div>
+            <p><h4>Instructions:</h4> @Html.DisplayFor(model => model.Assignment.Description)</p>
+        </div>
+    }
+    else
+    {
+        if(Model.Submission != null)
+        {
+            <div>
+                <h4>Submitted: @Html.DisplayFor(model => model.Submission.FirstOrDefault().SubmitDate)</h4>
+            </div>
+        }
+    }
+
 </div>
 <hr />
-@if (Model.Submission.FirstOrDefault() == null)
+@if (Model.Submission != null && Model.Submission.FirstOrDefault() == null)
 {
-	<form asp-action="Submit" enctype="multipart/form-data">
-		<div>
-			<label asp-for="Submission.First().Data" class="control-label"></label>
-			<input name="Data" type="file" />
-			<span asp-validation-for="Submission.First().Data" class="text-danger"></span>
-		</div>
-		@*<textarea name="Data"></textarea>
-		<br />*@
-		<input value="Submit" type="submit" class="btn btn-primary" />
-	</form>
+    <form asp-action="Submit" enctype="multipart/form-data">
+        <div>
+            <label asp-for="Submission.First().Data" class="control-label"></label>
+            <input name="Data" type="file" />
+            <span asp-validation-for="Submission.First().Data" class="text-danger"></span>
+        </div>
+        @*<textarea name="Data"></textarea>
+    <br />*@
+        <input value="Submit" type="submit" class="btn btn-primary" />
+    </form>
+}
+else
+{
+    <div id="chart_div"></div>
 }
 
