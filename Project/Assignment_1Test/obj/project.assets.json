@@ -2283,6 +2283,21 @@
           }
         }
       },
+      "Selenium.WebDriver/4.8.2": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.1"
+        },
+        "compile": {
+          "lib/net6.0/WebDriver.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/WebDriver.dll": {}
+        },
+        "build": {
+          "buildTransitive/Selenium.WebDriver.targets": {}
+        }
+      },
       "Stripe.net/41.7.0": {
         "type": "package",
         "dependencies": {
@@ -3890,6 +3905,7 @@
         "dependencies": {
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.14",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.12",
+          "Selenium.WebDriver": "4.8.2",
           "Stripe.net": "41.7.0"
         },
         "compile": {
@@ -7436,6 +7452,31 @@
         "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
         "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.nuspec",
         "runtimes/ubuntu.16.10-x64/native/System.Security.Cryptography.Native.OpenSsl.so"
+      ]
+    },
+    "Selenium.WebDriver/4.8.2": {
+      "sha512": "gNCaZrR32U2e9pyS+HXSqNHdcrIbqulOkcmycFoDL/tM5la4tELaZ3FpPRbq7tjJK3cKs5lLqVVFM9PfY1WW5g==",
+      "type": "package",
+      "path": "selenium.webdriver/4.8.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/Selenium.WebDriver.targets",
+        "buildTransitive/Selenium.WebDriver.targets",
+        "images/icon.png",
+        "lib/net45/WebDriver.dll",
+        "lib/net46/WebDriver.dll",
+        "lib/net47/WebDriver.dll",
+        "lib/net48/WebDriver.dll",
+        "lib/net5.0/WebDriver.dll",
+        "lib/net6.0/WebDriver.dll",
+        "lib/netstandard2.0/WebDriver.dll",
+        "lib/netstandard2.1/WebDriver.dll",
+        "manager/linux/selenium-manager",
+        "manager/macos/selenium-manager",
+        "manager/windows/selenium-manager.exe",
+        "selenium.webdriver.4.8.2.nupkg.sha512",
+        "selenium.webdriver.nuspec"
       ]
     },
     "Stripe.net/41.7.0": {
@@ -11368,23 +11409,24 @@
       "MSTest.TestFramework >= 2.2.8",
       "Microsoft.EntityFrameworkCore >= 6.0.14",
       "Microsoft.NET.Test.Sdk >= 17.1.0",
+      "Selenium.WebDriver >= 4.8.2",
       "coverlet.collector >= 3.1.2"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\exoxa\\.nuget\\packages\\": {}
+    "C:\\Users\\njk00\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\exoxa\\source\\repos\\Holo74\\3750-Fun-Gang\\Project\\Assignment_1Test\\Assignment_1Test.csproj",
+      "projectUniqueName": "C:\\Users\\njk00\\Documents\\Git stuff\\Project\\Assignment_1Test\\Assignment_1Test.csproj",
       "projectName": "Assignment_1Test",
-      "projectPath": "C:\\Users\\exoxa\\source\\repos\\Holo74\\3750-Fun-Gang\\Project\\Assignment_1Test\\Assignment_1Test.csproj",
-      "packagesPath": "C:\\Users\\exoxa\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\exoxa\\source\\repos\\Holo74\\3750-Fun-Gang\\Project\\Assignment_1Test\\obj\\",
+      "projectPath": "C:\\Users\\njk00\\Documents\\Git stuff\\Project\\Assignment_1Test\\Assignment_1Test.csproj",
+      "packagesPath": "C:\\Users\\njk00\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\njk00\\Documents\\Git stuff\\Project\\Assignment_1Test\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\exoxa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\njk00\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -11398,8 +11440,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\exoxa\\source\\repos\\Holo74\\3750-Fun-Gang\\Project\\3750-Fun-Gang-Real\\Assignment_1.csproj": {
-              "projectPath": "C:\\Users\\exoxa\\source\\repos\\Holo74\\3750-Fun-Gang\\Project\\3750-Fun-Gang-Real\\Assignment_1.csproj"
+            "C:\\Users\\njk00\\Documents\\Git stuff\\Project\\3750-Fun-Gang-Real\\Assignment_1.csproj": {
+              "projectPath": "C:\\Users\\njk00\\Documents\\Git stuff\\Project\\3750-Fun-Gang-Real\\Assignment_1.csproj"
             }
           }
         }
@@ -11430,6 +11472,10 @@
             "target": "Package",
             "version": "[17.1.0, )"
           },
+          "Selenium.WebDriver": {
+            "target": "Package",
+            "version": "[4.8.2, )"
+          },
           "coverlet.collector": {
             "target": "Package",
             "version": "[3.1.2, )"
@@ -11451,7 +11497,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.103\\RuntimeIdentifierGraph.json"
       }
     }
   }

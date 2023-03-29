@@ -1,16 +1,19 @@
 using Microsoft.AspNetCore.Mvc;
 using Assignment_1.Data;
 using System.Linq;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace Assignment_1.Controllers
 {
     public class StudentRegistrationController : Controller
     {
         private readonly Assignment_1Context _context;
+        private IMemoryCache _cache;
 
-        public StudentRegistrationController(Assignment_1Context context)
+        public StudentRegistrationController(Assignment_1Context context, IMemoryCache cache)
         {
             _context = context;
+            _cache = cache;
         }
 
         public IActionResult Index()
@@ -86,6 +89,7 @@ namespace Assignment_1.Controllers
         {
             var UserID = HttpContext.Session.GetInt32("UserID");
             await RegisterForClassLogic(UserID.Value, classId);
+            _cache.Remove(CacheKeys.UserView);
             return Redirect("Index");
         }
         public async Task RegisterForClassLogic(int UserID, int classId)
