@@ -1,5 +1,4 @@
 ﻿using Assignment_1.Data;
-using Assignment_1.Migrations;
 using Assignment_1.Models;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;

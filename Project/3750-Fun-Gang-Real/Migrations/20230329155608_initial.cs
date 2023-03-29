@@ -5,63 +5,29 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Assignment_1.Migrations
 {
-    public partial class Id : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "Address",
-                table: "User",
-                type: "nvarchar(max)",
-                nullable: true);
-
-            migrationBuilder.AddColumn<decimal>(
-                name: "Balance",
-                table: "User",
-                type: "decimal(18,2)",
-                nullable: true);
-
-            migrationBuilder.AddColumn<string>(
-                name: "City",
-                table: "User",
-                type: "nvarchar(max)",
-                nullable: true);
-
-            migrationBuilder.AddColumn<string>(
-                name: "PhoneNumber",
-                table: "User",
-                type: "nvarchar(max)",
-                nullable: true);
-
-            migrationBuilder.AddColumn<string>(
-                name: "ReferenceOne",
-                table: "User",
-                type: "nvarchar(max)",
-                nullable: true);
-
-            migrationBuilder.AddColumn<string>(
-                name: "ReferenceThree",
-                table: "User",
-                type: "nvarchar(max)",
-                nullable: true);
-
-            migrationBuilder.AddColumn<string>(
-                name: "ReferenceTwo",
-                table: "User",
-                type: "nvarchar(max)",
-                nullable: true);
-
-            migrationBuilder.AddColumn<string>(
-                name: "State",
-                table: "User",
-                type: "nvarchar(max)",
-                nullable: true);
-
-            migrationBuilder.AddColumn<string>(
-                name: "ZipCode",
-                table: "User",
-                type: "nvarchar(max)",
-                nullable: true);
+            migrationBuilder.CreateTable(
+                name: "AssignmentSubmissions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserFK = table.Column<int>(type: "int", nullable: false),
+                    AssignmentFK = table.Column<int>(type: "int", nullable: false),
+                    ClassFK = table.Column<int>(type: "int", nullable: false),
+                    Points = table.Column<int>(type: "int", nullable: true),
+                    Data = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SubmitDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    SubmitTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Modified = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AssignmentSubmissions", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
                 name: "Class",
@@ -96,7 +62,7 @@ namespace Assignment_1.Migrations
                     MaxPoints = table.Column<int>(type: "int", nullable: true),
                     DueDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DueTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    SubmissionType = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    SubmissionType = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -117,10 +83,42 @@ namespace Assignment_1.Migrations
                 {
                     table.PrimaryKey("PK_Registrations", x => x.ID);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "User",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    State = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ZipCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ReferenceOne = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ReferenceTwo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ReferenceThree = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Balance = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastedLoggedIn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_User", x => x.Id);
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "AssignmentSubmissions");
+
             migrationBuilder.DropTable(
                 name: "Class");
 
@@ -130,41 +128,8 @@ namespace Assignment_1.Migrations
             migrationBuilder.DropTable(
                 name: "Registrations");
 
-            migrationBuilder.DropColumn(
-                name: "Address",
-                table: "User");
-
-            migrationBuilder.DropColumn(
-                name: "Balance",
-                table: "User");
-
-            migrationBuilder.DropColumn(
-                name: "City",
-                table: "User");
-
-            migrationBuilder.DropColumn(
-                name: "PhoneNumber",
-                table: "User");
-
-            migrationBuilder.DropColumn(
-                name: "ReferenceOne",
-                table: "User");
-
-            migrationBuilder.DropColumn(
-                name: "ReferenceThree",
-                table: "User");
-
-            migrationBuilder.DropColumn(
-                name: "ReferenceTwo",
-                table: "User");
-
-            migrationBuilder.DropColumn(
-                name: "State",
-                table: "User");
-
-            migrationBuilder.DropColumn(
-                name: "ZipCode",
-                table: "User");
+            migrationBuilder.DropTable(
+                name: "User");
         }
     }
 }

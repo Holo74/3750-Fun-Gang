@@ -5,6 +5,14 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+  
+<PropertyGroup Condition=" '$(Configuration)' == '' Or '$(Configuration)' == 'Debug'">
+  <EnvironmentName>Development</EnvironmentName>
+</PropertyGroup>
+
+<PropertyGroup Condition=" '$(Configuration)' != '' AND '$(Configuration)' != 'Debug' ">
+  <EnvironmentName>Production</EnvironmentName>
+</PropertyGroup>
 
   <ItemGroup>
     <Content Remove="wwwroot\js\index.global.js" />
