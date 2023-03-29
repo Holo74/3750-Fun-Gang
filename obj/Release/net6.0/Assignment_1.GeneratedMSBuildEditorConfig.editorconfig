@@ -9,93 +9,281 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Assignment_1
 build_property.RootNamespace = Assignment_1
-build_property.ProjectDir = C:\Users\daxto\source\repos\Holo74\3750-Fun-Gang\
+build_property.ProjectDir = C:\Users\Chase\OneDrive\Documents\Coollenge\CS3750\GroupProject\Draft3\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\daxto\source\repos\Holo74\3750-Fun-Gang
+build_property.MSBuildProjectDirectory = C:\Users\Chase\OneDrive\Documents\Coollenge\CS3750\GroupProject\Draft3
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/daxto/source/repos/Holo74/3750-Fun-Gang/Views/Accounts/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudHNcQ3JlYXRlLmNzaHRtbA==
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Project/3750-Fun-Gang-Real/Views/Calendar/CalendarPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJvamVjdFwzNzUwLUZ1bi1HYW5nLVJlYWxcVmlld3NcQ2FsZW5kYXJcQ2FsZW5kYXJQYWdlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/daxto/source/repos/Holo74/3750-Fun-Gang/Views/Accounts/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudHNcRGVsZXRlLmNzaHRtbA==
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Project/3750-Fun-Gang-Real/Views/Calendar/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJvamVjdFwzNzUwLUZ1bi1HYW5nLVJlYWxcVmlld3NcQ2FsZW5kYXJcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/daxto/source/repos/Holo74/3750-Fun-Gang/Views/Accounts/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudHNcRGV0YWlscy5jc2h0bWw=
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Project/3750-Fun-Gang-Real/Views/ClassAssignments/Assignment.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJvamVjdFwzNzUwLUZ1bi1HYW5nLVJlYWxcVmlld3NcQ2xhc3NBc3NpZ25tZW50c1xBc3NpZ25tZW50LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/daxto/source/repos/Holo74/3750-Fun-Gang/Views/Accounts/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudHNcRWRpdC5jc2h0bWw=
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Project/3750-Fun-Gang-Real/Views/ClassAssignments/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJvamVjdFwzNzUwLUZ1bi1HYW5nLVJlYWxcVmlld3NcQ2xhc3NBc3NpZ25tZW50c1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/daxto/source/repos/Holo74/3750-Fun-Gang/Views/Accounts/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudHNcSW5kZXguY3NodG1s
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Project/3750-Fun-Gang-Real/Views/ClassAssignments/Grade.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJvamVjdFwzNzUwLUZ1bi1HYW5nLVJlYWxcVmlld3NcQ2xhc3NBc3NpZ25tZW50c1xHcmFkZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/daxto/source/repos/Holo74/3750-Fun-Gang/Views/Calendar/CalendarPage.cshtml]
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Project/3750-Fun-Gang-Real/Views/ClassAssignments/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJvamVjdFwzNzUwLUZ1bi1HYW5nLVJlYWxcVmlld3NcQ2xhc3NBc3NpZ25tZW50c1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Project/3750-Fun-Gang-Real/Views/ClassAssignments/SetPoints.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJvamVjdFwzNzUwLUZ1bi1HYW5nLVJlYWxcVmlld3NcQ2xhc3NBc3NpZ25tZW50c1xTZXRQb2ludHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Project/3750-Fun-Gang-Real/Views/ClassAssignments/Submissions.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJvamVjdFwzNzUwLUZ1bi1HYW5nLVJlYWxcVmlld3NcQ2xhc3NBc3NpZ25tZW50c1xTdWJtaXNzaW9ucy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Project/3750-Fun-Gang-Real/Views/ClassAssignments/Submit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJvamVjdFwzNzUwLUZ1bi1HYW5nLVJlYWxcVmlld3NcQ2xhc3NBc3NpZ25tZW50c1xTdWJtaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Project/3750-Fun-Gang-Real/Views/Classes/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJvamVjdFwzNzUwLUZ1bi1HYW5nLVJlYWxcVmlld3NcQ2xhc3Nlc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Project/3750-Fun-Gang-Real/Views/Classes/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJvamVjdFwzNzUwLUZ1bi1HYW5nLVJlYWxcVmlld3NcQ2xhc3Nlc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Project/3750-Fun-Gang-Real/Views/Classes/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJvamVjdFwzNzUwLUZ1bi1HYW5nLVJlYWxcVmlld3NcQ2xhc3Nlc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Project/3750-Fun-Gang-Real/Views/Classes/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJvamVjdFwzNzUwLUZ1bi1HYW5nLVJlYWxcVmlld3NcQ2xhc3Nlc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Project/3750-Fun-Gang-Real/Views/Course/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJvamVjdFwzNzUwLUZ1bi1HYW5nLVJlYWxcVmlld3NcQ291cnNlXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Project/3750-Fun-Gang-Real/Views/Course/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJvamVjdFwzNzUwLUZ1bi1HYW5nLVJlYWxcVmlld3NcQ291cnNlXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Project/3750-Fun-Gang-Real/Views/Course/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJvamVjdFwzNzUwLUZ1bi1HYW5nLVJlYWxcVmlld3NcQ291cnNlXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Project/3750-Fun-Gang-Real/Views/File/Uploader.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJvamVjdFwzNzUwLUZ1bi1HYW5nLVJlYWxcVmlld3NcRmlsZVxVcGxvYWRlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Project/3750-Fun-Gang-Real/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJvamVjdFwzNzUwLUZ1bi1HYW5nLVJlYWxcVmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Project/3750-Fun-Gang-Real/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJvamVjdFwzNzUwLUZ1bi1HYW5nLVJlYWxcVmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Project/3750-Fun-Gang-Real/Views/Login/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJvamVjdFwzNzUwLUZ1bi1HYW5nLVJlYWxcVmlld3NcTG9naW5cSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Project/3750-Fun-Gang-Real/Views/PiechartDemo/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJvamVjdFwzNzUwLUZ1bi1HYW5nLVJlYWxcVmlld3NcUGllY2hhcnREZW1vXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Project/3750-Fun-Gang-Real/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJvamVjdFwzNzUwLUZ1bi1HYW5nLVJlYWxcVmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Project/3750-Fun-Gang-Real/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJvamVjdFwzNzUwLUZ1bi1HYW5nLVJlYWxcVmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Project/3750-Fun-Gang-Real/Views/Signup/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJvamVjdFwzNzUwLUZ1bi1HYW5nLVJlYWxcVmlld3NcU2lnbnVwXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Project/3750-Fun-Gang-Real/Views/StudentRegistration/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJvamVjdFwzNzUwLUZ1bi1HYW5nLVJlYWxcVmlld3NcU3R1ZGVudFJlZ2lzdHJhdGlvblxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Project/3750-Fun-Gang-Real/Views/Tuition/Cancel.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJvamVjdFwzNzUwLUZ1bi1HYW5nLVJlYWxcVmlld3NcVHVpdGlvblxDYW5jZWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Project/3750-Fun-Gang-Real/Views/Tuition/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJvamVjdFwzNzUwLUZ1bi1HYW5nLVJlYWxcVmlld3NcVHVpdGlvblxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Project/3750-Fun-Gang-Real/Views/Tuition/OrderSuccess.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJvamVjdFwzNzUwLUZ1bi1HYW5nLVJlYWxcVmlld3NcVHVpdGlvblxPcmRlclN1Y2Nlc3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Project/3750-Fun-Gang-Real/Views/Users/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJvamVjdFwzNzUwLUZ1bi1HYW5nLVJlYWxcVmlld3NcVXNlcnNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Project/3750-Fun-Gang-Real/Views/Users/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJvamVjdFwzNzUwLUZ1bi1HYW5nLVJlYWxcVmlld3NcVXNlcnNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Project/3750-Fun-Gang-Real/Views/Users/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJvamVjdFwzNzUwLUZ1bi1HYW5nLVJlYWxcVmlld3NcVXNlcnNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Project/3750-Fun-Gang-Real/Views/Users/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJvamVjdFwzNzUwLUZ1bi1HYW5nLVJlYWxcVmlld3NcVXNlcnNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Project/3750-Fun-Gang-Real/Views/Users/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJvamVjdFwzNzUwLUZ1bi1HYW5nLVJlYWxcVmlld3NcVXNlcnNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Project/3750-Fun-Gang-Real/Views/Users/ViewAll.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJvamVjdFwzNzUwLUZ1bi1HYW5nLVJlYWxcVmlld3NcVXNlcnNcVmlld0FsbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Project/3750-Fun-Gang-Real/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJvamVjdFwzNzUwLUZ1bi1HYW5nLVJlYWxcVmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Project/3750-Fun-Gang-Real/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJvamVjdFwzNzUwLUZ1bi1HYW5nLVJlYWxcVmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Views/Calendar/CalendarPage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FsZW5kYXJcQ2FsZW5kYXJQYWdlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/daxto/source/repos/Holo74/3750-Fun-Gang/Views/Home/Index.cshtml]
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Views/Calendar/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FsZW5kYXJcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Views/ClassAssignments/Assignment.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3NBc3NpZ25tZW50c1xBc3NpZ25tZW50LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Views/ClassAssignments/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3NBc3NpZ25tZW50c1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Views/ClassAssignments/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3NBc3NpZ25tZW50c1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Views/ClassAssignments/Submit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3NBc3NpZ25tZW50c1xTdWJtaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Views/Classes/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3Nlc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Views/Classes/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3Nlc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Views/Course/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cnNlXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Views/Course/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cnNlXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Views/Course/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cnNlXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Views/File/Uploader.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmlsZVxVcGxvYWRlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/daxto/source/repos/Holo74/3750-Fun-Gang/Views/Home/Privacy.cshtml]
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/daxto/source/repos/Holo74/3750-Fun-Gang/Views/Login/Index.cshtml]
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Views/Login/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/daxto/source/repos/Holo74/3750-Fun-Gang/Views/Shared/Error.cshtml]
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/daxto/source/repos/Holo74/3750-Fun-Gang/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/daxto/source/repos/Holo74/3750-Fun-Gang/Views/Signup/Index.cshtml]
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Views/Signup/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2lnbnVwXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/daxto/source/repos/Holo74/3750-Fun-Gang/Views/Users/Create.cshtml]
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Views/StudentRegistration/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFJlZ2lzdHJhdGlvblxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Views/Tuition/Cancel.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHVpdGlvblxDYW5jZWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Views/Tuition/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHVpdGlvblxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Views/Tuition/OrderSuccess.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHVpdGlvblxPcmRlclN1Y2Nlc3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Views/Users/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/daxto/source/repos/Holo74/3750-Fun-Gang/Views/Users/Delete.cshtml]
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Views/Users/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/daxto/source/repos/Holo74/3750-Fun-Gang/Views/Users/Details.cshtml]
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Views/Users/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/daxto/source/repos/Holo74/3750-Fun-Gang/Views/Users/Edit.cshtml]
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Views/Users/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/daxto/source/repos/Holo74/3750-Fun-Gang/Views/Users/Index.cshtml]
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Views/Users/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/daxto/source/repos/Holo74/3750-Fun-Gang/Views/Users/ViewAll.cshtml]
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Views/Users/ViewAll.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcVmlld0FsbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/daxto/source/repos/Holo74/3750-Fun-Gang/Views/_ViewImports.cshtml]
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/daxto/source/repos/Holo74/3750-Fun-Gang/Views/_ViewStart.cshtml]
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/daxto/source/repos/Holo74/3750-Fun-Gang/Views/Shared/_Layout.cshtml]
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Project/3750-Fun-Gang-Real/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UHJvamVjdFwzNzUwLUZ1bi1HYW5nLVJlYWxcVmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-e9vb0av5u2
+
+[C:/Users/Chase/OneDrive/Documents/Coollenge/CS3750/GroupProject/Draft3/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-jispjsosog

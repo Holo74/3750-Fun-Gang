@@ -1,0 +1,5 @@
+1.^((aa)*(ab)*(ba)*(bb)*)*$
+2.^(b*(ba|a)+bb+(ab|a)*)$
+3.^(abba|(a|b)+(ab)+(a|b)+(bba)|b+(ab)+(ba)|a+(ab)+(ba)|ba*(bba)|ab*(bba))$
+4.^((a|b)*ab|(bba)(a|b)*)$
+5.^(aba|abb|(b)+bb|b+ba|(ab)+ba|(bb)+ba|(ab)+(a|b)*(ba)|(ab)+(a|b)*(bb)|(bb)+(a|b)*(ba)|(bb)+(a|b)*(bb))$

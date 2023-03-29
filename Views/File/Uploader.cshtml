@@ -1,0 +1,13 @@
+﻿@model Assignment_1.Models.FileViewer;
+@{
+    ViewData["Title"] = "Upload File";
+}
+
+<form asp-action="Uploader" enctype="multipart/form-data">
+    <input name="image" type="file" />
+    <div class="form-group">
+        <input type="submit" value="Submit File" class="btn btn-primary" />
+    </div>
+</form>
+
+<img src=@Model.FilePath />

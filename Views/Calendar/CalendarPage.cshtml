@@ -1,0 +1,33 @@
+﻿@model List<Assignment_1.Controllers.EventCS3750>
+@{
+    ViewData["Title"] = "Calendar";
+}
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8' />
+    <script src='~/js/index.global.js'></script>
+
+    <script>
+        var data = @Html.Raw(Json.Serialize(@Model));
+
+        var objs = [];
+        for (var i = 0; i < data.length; i++) {
+            objs.push({ start: String(data[i].startTime), end: String(data[i].endTime), title: String(data[i].title) });
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                events: objs
+            });
+            calendar.render();
+        });
+
+    </script>
+</head>
+<body>
+    <div id='calendar'></div>
+</body>
+</html>

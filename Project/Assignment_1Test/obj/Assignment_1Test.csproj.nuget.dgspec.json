@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\exoxa\\source\\repos\\Holo74\\3750-Fun-Gang\\Project\\Assignment_1Test\\Assignment_1Test.csproj": {}
+    "C:\\Users\\Chase\\OneDrive\\Documents\\Coollenge\\CS3750\\GroupProject\\Draft3\\Project\\Assignment_1Test\\Assignment_1Test.csproj": {}
   },
   "projects": {
-    "C:\\Users\\exoxa\\source\\repos\\Holo74\\3750-Fun-Gang\\Project\\3750-Fun-Gang-Real\\Assignment_1.csproj": {
+    "C:\\Users\\Chase\\OneDrive\\Documents\\Coollenge\\CS3750\\GroupProject\\Draft3\\Project\\3750-Fun-Gang-Real\\Assignment_1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\exoxa\\source\\repos\\Holo74\\3750-Fun-Gang\\Project\\3750-Fun-Gang-Real\\Assignment_1.csproj",
+        "projectUniqueName": "C:\\Users\\Chase\\OneDrive\\Documents\\Coollenge\\CS3750\\GroupProject\\Draft3\\Project\\3750-Fun-Gang-Real\\Assignment_1.csproj",
         "projectName": "Assignment_1",
-        "projectPath": "C:\\Users\\exoxa\\source\\repos\\Holo74\\3750-Fun-Gang\\Project\\3750-Fun-Gang-Real\\Assignment_1.csproj",
-        "packagesPath": "C:\\Users\\exoxa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\exoxa\\source\\repos\\Holo74\\3750-Fun-Gang\\Project\\3750-Fun-Gang-Real\\obj\\",
+        "projectPath": "C:\\Users\\Chase\\OneDrive\\Documents\\Coollenge\\CS3750\\GroupProject\\Draft3\\Project\\3750-Fun-Gang-Real\\Assignment_1.csproj",
+        "packagesPath": "C:\\Users\\Chase\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Chase\\OneDrive\\Documents\\Coollenge\\CS3750\\GroupProject\\Draft3\\Project\\3750-Fun-Gang-Real\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Users\\Chase\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\exoxa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Chase\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Chase\\AppData\\Roaming\\NuGet\\config\\Godot.Offline.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -78,21 +82,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\exoxa\\source\\repos\\Holo74\\3750-Fun-Gang\\Project\\Assignment_1Test\\Assignment_1Test.csproj": {
+    "C:\\Users\\Chase\\OneDrive\\Documents\\Coollenge\\CS3750\\GroupProject\\Draft3\\Project\\Assignment_1Test\\Assignment_1Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\exoxa\\source\\repos\\Holo74\\3750-Fun-Gang\\Project\\Assignment_1Test\\Assignment_1Test.csproj",
+        "projectUniqueName": "C:\\Users\\Chase\\OneDrive\\Documents\\Coollenge\\CS3750\\GroupProject\\Draft3\\Project\\Assignment_1Test\\Assignment_1Test.csproj",
         "projectName": "Assignment_1Test",
-        "projectPath": "C:\\Users\\exoxa\\source\\repos\\Holo74\\3750-Fun-Gang\\Project\\Assignment_1Test\\Assignment_1Test.csproj",
-        "packagesPath": "C:\\Users\\exoxa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\exoxa\\source\\repos\\Holo74\\3750-Fun-Gang\\Project\\Assignment_1Test\\obj\\",
+        "projectPath": "C:\\Users\\Chase\\OneDrive\\Documents\\Coollenge\\CS3750\\GroupProject\\Draft3\\Project\\Assignment_1Test\\Assignment_1Test.csproj",
+        "packagesPath": "C:\\Users\\Chase\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Chase\\OneDrive\\Documents\\Coollenge\\CS3750\\GroupProject\\Draft3\\Project\\Assignment_1Test\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Users\\Chase\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\exoxa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Chase\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Chase\\AppData\\Roaming\\NuGet\\config\\Godot.Offline.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -106,8 +114,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\exoxa\\source\\repos\\Holo74\\3750-Fun-Gang\\Project\\3750-Fun-Gang-Real\\Assignment_1.csproj": {
-                "projectPath": "C:\\Users\\exoxa\\source\\repos\\Holo74\\3750-Fun-Gang\\Project\\3750-Fun-Gang-Real\\Assignment_1.csproj"
+              "C:\\Users\\Chase\\OneDrive\\Documents\\Coollenge\\CS3750\\GroupProject\\Draft3\\Project\\3750-Fun-Gang-Real\\Assignment_1.csproj": {
+                "projectPath": "C:\\Users\\Chase\\OneDrive\\Documents\\Coollenge\\CS3750\\GroupProject\\Draft3\\Project\\3750-Fun-Gang-Real\\Assignment_1.csproj"
               }
             }
           }
@@ -159,7 +167,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
