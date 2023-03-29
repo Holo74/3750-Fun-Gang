@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Session;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using System.Diagnostics;
 using System.Linq;
 
@@ -13,10 +14,11 @@ namespace Assignment_1.Controllers
 	public class LoginController : Controller
 	{
 		private readonly Assignment_1Context _context;
+		private IMemoryCache _cache;
 
-		public LoginController(Assignment_1Context context)
+		public LoginController(Assignment_1Context context, IMemoryCache cache)
 		{
-
+			_cache = cache;
 			_context = context;
 		}
 		public IActionResult Index()
@@ -31,6 +33,7 @@ namespace Assignment_1.Controllers
         public IActionResult LogOut()
         {
             HttpContext.Session.Remove("UserID");
+			_cache.Remove(CacheKeys.UserView);
 
             return Redirect("/Login/");
         }
