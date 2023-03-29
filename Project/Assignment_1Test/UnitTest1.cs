@@ -67,41 +67,41 @@ namespace Assignment_1Test
         }
 
         [TestMethod]
-		public async Task StudentCanRegisterForCourse()
-		{
-			//find student id that exists (id = 43 is teststud)
-			//query for how many courses the student is signed up for
+        public async Task StudentCanRegisterForCourse()
+        {
+            //find student id that exists (id = 43 is teststud)
+            //query for how many courses the student is signed up for
 
-			var user = _context.User.Where(x => x.Id == 43).ToList();
-			var numOfClassesBefore = _context.Registrations.Where(c => c.UserFK == user[0].Id && c.IsRegistered == 1).ToList();
-			int lengthBefore = numOfClassesBefore.Count();
+            var user = _context.User.Where(x => x.Id == 43).ToList();
+            var numOfClassesBefore = _context.Registrations.Where(c => c.UserFK == user[0].Id && c.IsRegistered == 1).ToList();
+            int lengthBefore = numOfClassesBefore.Count();
 
-			//find a class already in the registration table
-			var registrationList = _context.Registrations.Where(d => d.ID == 27).ToList();
+            //find a class already in the registration table
+            var registrationList = _context.Registrations.Where(d => d.ID == 27).ToList();
 
-            if (registrationList.Count> 0)
+            if (registrationList.Count > 0)
             {
                 //var registration = registrationList[0];
                 StudentRegistrationController registrations = new StudentRegistrationController(_context);
                 //27 is a class made for unit testing
                 await registrations.RegisterForClassLogic(43, 16);
-				//registration.IsRegistered = 1; 
-				//make the student register for a course
-				//query for how many courses the student is registered for (should be one more than last time)
-				//await _context.SaveChangesAsync();
+                //registration.IsRegistered = 1; 
+                //make the student register for a course
+                //query for how many courses the student is registered for (should be one more than last time)
+                //await _context.SaveChangesAsync();
 
-				//if thats true, pass. else, fail
+                //if thats true, pass. else, fail
 
-				var numOfClassesAfter = _context.Registrations.Where(c => c.UserFK == user[0].Id && c.IsRegistered == 1).ToList();
-			    int lengthAfter = numOfClassesAfter.Count();
+                var numOfClassesAfter = _context.Registrations.Where(c => c.UserFK == user[0].Id && c.IsRegistered == 1).ToList();
+                int lengthAfter = numOfClassesAfter.Count();
 
-			    Assert.AreEqual(lengthAfter, lengthBefore + 1);
+                Assert.AreEqual(lengthAfter, lengthBefore + 1);
 
                 await registrations.RegisterForClassLogic(43, 16);
                 //_context.Registrations.Remove()
                 await _context.SaveChangesAsync();
             }
-
+        }
         [TestMethod]
         public async Task AssignmentCanBeGraded()
         {
