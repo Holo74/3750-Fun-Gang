@@ -10058,24 +10058,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\daxto\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Chase\\.nuget\\packages\\": {},
+    "C:\\Users\\Chase\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\daxto\\source\\repos\\Holo74\\3750-Fun-Gang\\Assignment_1.csproj",
+      "projectUniqueName": "C:\\Users\\Chase\\OneDrive\\Documents\\Coollenge\\CS3750\\GroupProject\\Draft3\\Assignment_1.csproj",
       "projectName": "Assignment_1",
-      "projectPath": "C:\\Users\\daxto\\source\\repos\\Holo74\\3750-Fun-Gang\\Assignment_1.csproj",
-      "packagesPath": "C:\\Users\\daxto\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\daxto\\source\\repos\\Holo74\\3750-Fun-Gang\\obj\\",
+      "projectPath": "C:\\Users\\Chase\\OneDrive\\Documents\\Coollenge\\CS3750\\GroupProject\\Draft3\\Assignment_1.csproj",
+      "packagesPath": "C:\\Users\\Chase\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Chase\\OneDrive\\Documents\\Coollenge\\CS3750\\GroupProject\\Draft3\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        "C:\\Users\\Chase\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\daxto\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\Chase\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Chase\\AppData\\Roaming\\NuGet\\config\\Godot.Offline.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -10083,7 +10083,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -10140,7 +10139,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

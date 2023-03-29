@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using System.IO;
+using System.Drawing;
 
 namespace Assignment_1.Controllers
 {
@@ -110,7 +112,7 @@ namespace Assignment_1.Controllers
                 filestream.Close();
             }
 
-            s.Data = path;
+            s.Data = TransformSubPath(path);
         
             _context.AssignmentSubmissions.Add(s);
 			await _context.SaveChangesAsync();
@@ -148,7 +150,18 @@ namespace Assignment_1.Controllers
 
             return View(ASVM);
         }
+        private string TransformSubPath(string? subPath)
+        {
+            if(subPath != null)
+            {
+                string newString = string.Empty;
+                System.Diagnostics.Debug.WriteLine(subPath);
+                newString = subPath.Replace("wwwroot", "../..");
+                return newString;
 
+            }
+            return string.Empty;
+        }
         public IActionResult Grade(int ID)//submission id
         {
             AssignmentSubmissionViewModel ASVM = new AssignmentSubmissionViewModel();
@@ -176,5 +189,24 @@ namespace Assignment_1.Controllers
             await _context.SaveChangesAsync();
 			return RedirectToAction("Submissions", new { ID = t.AssignmentFK });
 		}
+  //      public IActionResult DownloadFile()
+  //      {
+  //          AssignmentSubmissions asub;
+  //          var memory = DownloadSingleFile(asub.Data);
+  //      }
+		//private MemoryStream DownloadSingleFile(string uploadPath)
+  //      {
+  //          var path = Path.Combine(Directory.GetCurrentDirectory(), uploadPath);
+  //          var memory = new MemoryStream();
+  //          if(System.IO.File.Exists(path))
+  //          {
+  //              var net = new System.Net.WebClient();
+  //              var data = net.DownloadData(path);
+  //              var content = new System.IO.MemoryStream(data);
+               
+  //          }
+  //          memory.Position = 0;
+  //          return memory;
+  //      }
 	}
 }

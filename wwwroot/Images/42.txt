@@ -1,0 +1,8 @@
+1.	^(aa|bb|aba|bba|bab|aab|ba|b*|a*|(ab*a(a|b)*)|(bab)(a|b)*|(a)*(bbb)*|(baab)a*|(baab)b*|(bbb)+(a|b)*|(abbb)*a*|(abbb)*(b)*)$
+2.	^(aaa|(bbb)|abbb|ba*b|abbb+a|bbb+a|ba+a|aaa+b|abaa+b|aaa*|bbb*|bba*b*|(bbb)*(aa)*|(aaa)*(bb)*|(aba)(aa)*|(bab)(aa)*|(abb)*(aa)*|(abb)a*b(b)+)$
+3.	^((a|b)*(aa|bb))$
+4.	^((b*ab*ab*ab*)*|b)$
+5.	^(ab|ba|a+b|b+a|ba+a*|ab+aa|(ab)*|(aaaa+b*)|(aaabbb)*|(bbbaaa)*)$
+6.	^((aa|bb|(ab|ba)(aa|bb)*(ba|ab))*(b|(ab|ba)(bb|aa)*a))$
+
+When you copy and paste them in it sometimes shows that question number at the start of the expression.. Just delete the question number and it should work fine!

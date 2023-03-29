@@ -1,0 +1,11 @@
+﻿~8 hours on tutorial
+
+Assignment 1
+0: reviewing tutorial
+2: attempting to build a forms app
+4: restarted with general web app
+6: basic pages created with links
+8: learning how asp.nets built in css classes work and applying to login page
+10: building and seeding database
+~14: spent the past few hours trying to get the login/index form to trigger the login.validate() function
+~15: issue had nothing to do with what i was trying to fix, root cause was button with an incorrect type
