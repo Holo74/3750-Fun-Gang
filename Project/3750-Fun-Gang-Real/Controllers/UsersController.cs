@@ -140,7 +140,30 @@ namespace Assignment_1.Controllers
                     }
 
                     //classUserView.assignments = AssignmentsTODO.ToList();
+                    List<string> notification = new List<string>();
+                    var joinedAssignmentTables =
+                    from submitted in _context.AssignmentSubmissions
+                    join assignment in _context.ClassAssignments on 
+                    submitted.AssignmentFK equals assignment.Id
+                    join assignClass in _context.Class on 
+                    submitted.ClassFK equals assignClass.ClassId
+                    where
+                    submitted.Modified > classUserView.viewUser.LastedLoggedIn
+                    where
+                    submitted.UserFK == classUserView.viewUser.Id
+                    select assignment.AssignmentTitle + " in class " + assignClass.CourseNumber + " was graded";
 
+                    notification.Concat(joinedAssignmentTables);
+
+                    var joinedClassCreatedAssignment =
+                        from assignments in _context.ClassAssignments
+                        join assignClass in _context.Class on
+                        assignments.ClassId equals assignClass.ClassId
+                        select assignClass.CourseName + " Has created a new assignment named " + assignments.AssignmentTitle;
+
+                    notification.Concat(joinedClassCreatedAssignment);
+
+                    classUserView.notifications = notification;
 
                     //Registration = Registration.Where(r => r.UserFK == UserID);
                     //classUserView.registrations = Registration.ToList();

@@ -8,6 +8,7 @@ namespace Assignment_1.Models
         public List<Class> classes { get; set; }
         //public List<ClassAssignments> assignments { get; set; }
         public List<TODOitem> todoitems { get; set; }
+        public List<string> notifications { get; set; }
 
         public string myFilePath { get; set; }
 

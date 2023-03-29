@@ -19,5 +19,7 @@ namespace Assignment_1.Models
         public DateTime? SubmitDate { get; set; }
         [DataType(DataType.Time)]
         public DateTime? SubmitTime { get; set; }
-    }
+        public DateTime? Modified { get; set; }
+
+	}
 }

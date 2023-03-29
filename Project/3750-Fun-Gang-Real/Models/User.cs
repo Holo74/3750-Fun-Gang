@@ -48,5 +48,7 @@ namespace Assignment_1.Models
         //[DataType(DataType.Currency)]
         public decimal? Balance { get; set; }
         public string? Image { get; set; }
-    }
+        public DateTime? LastedLoggedIn { get; set; }
+
+	}
 }
