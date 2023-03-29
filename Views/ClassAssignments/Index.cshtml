@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Assignment_1.Models.ClassAssignments>
+
+@{
+    ViewData["Title"] = "Assignments";
+}
+<h1>Assignments</h1>
+
+@*
+<table class="table">
+<thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ClassId) @*temporary, so we can make sure it only shows the teacher's courses
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AssignmentTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaxPoints)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DueDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DueTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SubmissionType)
+        </th>
+        <th></th>
+    </tr>
+</thead>
+    <tbody>
+       
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClassId) @*temporary, so we can make sure it only shows the teacher's courses
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AssignmentTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaxPoints)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DueDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DueTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubmissionType)
+                </td>
+                
+              
+            </tr>
+        }
+    </tbody>
+</table>
+*@

@@ -1,0 +1,49 @@
+﻿@model Assignment_1.Models.AssignmentSubmissionViewModel
+@{
+	ViewData["Title"] = "Assignment";
+}
+
+<div class="d-flex flex-column">
+	<div>
+		<h2>@Html.DisplayFor(model => model.Assignment.AssignmentTitle)</h2>
+		<hr />
+	</div>
+	<div>
+		<h2>Points: @Html.DisplayFor(model => model.Assignment.MaxPoints) </h2>
+	</div>
+	@if (Model.Submission == null)
+	{
+		<div>
+			<h3>Due: @Html.DisplayFor(model => model.Assignment.DueDate) at @Html.DisplayFor(model => model.Assignment.DueTime) </h3>
+		</div>
+		<div>
+			<p><h4>Submission: </h4>@Html.DisplayFor(model => model.Assignment.SubmissionType)</p>
+		</div>
+
+		<div>
+			<p><h4>Instructions:</h4> @Html.DisplayFor(model => model.Assignment.Description)</p>
+		</div>
+	}
+	else
+	{
+		<div>
+			<h4>Submitted: @Html.DisplayFor(model => model.Submission.SubmitDate)</h4>
+		</div>
+	}
+	
+</div>
+<hr />
+@if (Model.Submission == null)
+{
+	<form asp-action="Submit" enctype="multipart/form-data">
+		<div>
+			<label asp-for="Submission.Data" class="control-label"></label>
+			<input name="Data" type="file" />
+			<span asp-validation-for="Submission.Data" class="text-danger"></span>
+		</div>
+		@*<textarea name="Data"></textarea>
+		<br />*@
+		<input value="Submit" type="submit" class="btn btn-primary" />
+	</form>
+}
+

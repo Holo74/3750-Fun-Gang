@@ -1,0 +1,65 @@
+@model Assignment_1.Models.FilteredRegistrationAndClass
+
+@{
+    ViewData["Title"] = "Registration";
+}
+
+<h1>Registration</h1>
+
+<form asp-action="FilteredCourseList" method="post" asp-controller="StudentRegistration">
+    <input type="text" value="" name="keyword">
+    <select name="department" class="form-control">
+        <option value="none">None</option>
+        @foreach (var item in Model.ClassDepartments)
+        {
+            <option value="@item">@item</option>
+        }
+    </select>
+    <input type="submit" value="filter">
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.VRC.FirstOrDefault().Classes.Department)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VRC.FirstOrDefault().Classes.CourseNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VRC.FirstOrDefault().Classes.CourseName)
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.VRC)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Classes.Department)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Classes.CourseNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Classes.CourseName)
+                </td>
+                <td>
+                    <form asp-action="RegisterForClass" method="post" asp-route-classId="@item.Classes.ClassId">
+                        <button>
+                            @if (item.Reg != null && item.Reg.IsRegistered == 1)
+                            {
+                                <p>Unenroll</p>
+                            }
+                            else
+                            {
+                                <p>Register</p>
+                            }
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

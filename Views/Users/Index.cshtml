@@ -1,0 +1,156 @@
+﻿@model Assignment_1.Models.ClassUserViewModel
+@*@model IEnumerable<Assignment_1.Models.Class>*@
+@{
+    ViewData["Title"] = "Details";
+}
+@{
+    ViewData["Title"] = "Classes";
+}
+
+<h1>Welcome
+    @Html.DisplayFor(model => model.viewUser.FirstName)
+    @Html.DisplayFor(model => model.viewUser.LastName)</h1>
+<style>
+    .h1 {
+        position: fixed;
+        left: 1000px;
+
+    }
+
+    .links {
+        position: fixed;
+        bottom: 100px;
+    }
+
+    .vertical-menu {
+        width: 200px;
+        /* Set a width if you like */
+        position: fixed;
+        right: 10px;
+        top: 100px;
+
+    }
+
+    .vertical-menu a {
+        background-color: #eee;
+        /* Grey background color */
+        color: black;
+        /* Black text color */
+        display: block;
+        /* Make the links appear below each other */
+        padding: 12px;
+        /* Add some padding */
+        text-decoration: none;
+        /* Remove underline from links */
+    }
+
+    .vertical-menu a:hover {
+        background-color: #ccc;
+        /* Dark grey background on mouse-over */
+    }
+
+    .vertical-menu a.active {
+        background-color: #04AA6D;
+        /* Add a green color to the "active/current" link */
+        color: white;
+    }
+
+    .card {
+        /* Add shadows to create the "card" effect */
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        width: 20%;
+        margin: 50px;
+        border-radius: 5px;
+        padding: 50px;
+    }
+
+    /* On mouse-over, add a deeper shadow */
+    .card:hover {
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    /* Add some padding inside the card container */
+    .container {
+        padding: 2px 16px;
+
+    }
+</style>
+<div class="text-center d-flex justify-content-center">
+    @if (ViewData["Student"] != null)
+    {
+        @if (ViewData["Student"].ToString() == "Student")
+        {
+            foreach (var item in Model.classes)
+            {
+                @*@Html.DisplayNameFor(model => model.Classes.Department)*@
+                <div class="card" id=@item.ClassId>
+                    <a href="@Url.Action("Index", "Course", new { classID = item.ClassId })">
+                        <div class="container">
+                            <h6>
+                                <b>
+                                    @Html.DisplayFor(modelItem => item.CourseName) <br /> @Html.DisplayFor(model => item.CourseNumber)
+                                </b>
+                            </h6>
+                            <p>
+                                @Html.DisplayFor(modelItem => item.DaysOfWeek) <br /> at @Html.DisplayFor(modelItem => item.StartTime)
+                                <br /> to @Html.DisplayFor(modelItem => item.EndTime)
+                            </p>
+                            <p>@Html.DisplayFor(modelItem => item.Location)</p>
+                        </div>
+                    </a>
+                </div>
+            }
+        }
+        @if (ViewData["Student"].ToString() != "Student")
+        {
+            foreach (var item in Model.classes)
+            {
+                <div class="card" id=@item.ClassId>
+                    <a href="@Url.Action("Index", "Course", new { classID = item.ClassId })">
+                        <div class="container">
+                            <h6><b>@Html.DisplayFor(modelItem => item.CourseName) <br /> @Html.DisplayFor(model => item.CourseNumber)
+                            </b>
+                            </h6>
+                            <p>@Html.DisplayFor(modelItem => item.DaysOfWeek) <br /> at @Html.DisplayFor(modelItem => item.StartTime)
+                                <br /> to @Html.DisplayFor(modelItem => item.EndTime)
+                            </p>
+                            <p>@Html.DisplayFor(modelItem => item.Location)</p>
+                        </div>
+                    </a>
+                </div>
+            }
+        }
+        
+        @*@if (ViewData["Student"].ToString() != "Student")
+    {
+    @foreach (var item in ViewData["UserId"])
+    {
+    @if (ViewData["UserId"] == model => model.UserId)
+    {
+    <div class="card">
+    <div class="container">
+    <h6><b>@Html.DisplayFor(modelItem => item.CourseName)/@Html.DisplayNameFor(model => model.CourseNumber)</b></h6>
+    <p>@Html.DisplayFor(modelItem => item.DaysOfWeek) at @Html.DisplayFor(modelItem => item.TimeOfDay)</p>
+    <p>@Html.DisplayFor(modelItem => item.Location)</p>
+    </div>
+    </div>
+    }
+    }
+    }*@
+    }
+
+</div>
+<div class="vertical-menu">
+    <a href="#" class="active">ToDo's</a>
+    <a href="https://localhost:7099/Login/Index/">Assignment1</a>
+    <a href="#">Assignment2</a>
+    <a href="#">Assignment3</a>
+    <a href="#">Assignment4</a>
+</div>
+
+
+<div class="links">
+
+    <a asp-action="Details" asp-route-id="model.Id">Account Settings</a>
+</div>

@@ -341,3 +341,12 @@ C:\Users\Mkina\Source\Repos\Assignment_1Test\bin\Debug\net6.0\runtimes\win\lib\n
 C:\Users\Mkina\Source\Repos\Assignment_1Test\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\Users\Mkina\Source\Repos\Assignment_1Test\bin\Debug\net6.0\Assignment_1.dll
 C:\Users\Mkina\Source\Repos\Assignment_1Test\bin\Debug\net6.0\Assignment_1.pdb
+C:\Users\Chase\OneDrive\Documents\Coollenge\CS3750\GroupProject\Draft3\Project\Assignment_1Test\bin\Debug\net6.0\CoverletSourceRootsMapping
+C:\Users\Chase\OneDrive\Documents\Coollenge\CS3750\GroupProject\Draft3\Project\Assignment_1Test\obj\Debug\net6.0\Assignment_1Test.csproj.AssemblyReference.cache
+C:\Users\Chase\OneDrive\Documents\Coollenge\CS3750\GroupProject\Draft3\Project\Assignment_1Test\obj\Debug\net6.0\Assignment_1Test.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Chase\OneDrive\Documents\Coollenge\CS3750\GroupProject\Draft3\Project\Assignment_1Test\obj\Debug\net6.0\Assignment_1Test.AssemblyInfoInputs.cache
+C:\Users\Chase\OneDrive\Documents\Coollenge\CS3750\GroupProject\Draft3\Project\Assignment_1Test\obj\Debug\net6.0\Assignment_1Test.AssemblyInfo.cs
+C:\Users\Chase\OneDrive\Documents\Coollenge\CS3750\GroupProject\Draft3\Project\Assignment_1Test\obj\Debug\net6.0\Assignment_1Test.csproj.CoreCompileInputs.cache
+C:\Users\Chase\OneDrive\Documents\Coollenge\CS3750\GroupProject\Draft3\Project\Assignment_1Test\obj\Debug\net6.0\Assignment_1Test.dll
+C:\Users\Chase\OneDrive\Documents\Coollenge\CS3750\GroupProject\Draft3\Project\Assignment_1Test\obj\Debug\net6.0\refint\Assignment_1Test.dll
+C:\Users\Chase\OneDrive\Documents\Coollenge\CS3750\GroupProject\Draft3\Project\Assignment_1Test\obj\Debug\net6.0\Assignment_1Test.pdb
