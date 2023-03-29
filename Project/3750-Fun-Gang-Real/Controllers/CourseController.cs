@@ -36,17 +36,26 @@ namespace Assignment_1.Controllers
 
             SALV.Assignments = new List<AssignmentSubmissionViewModel>();
 
-            foreach(var a in submissionList)
+            foreach(var c in assignment)
             {
-                AssignmentSubmissionViewModel b= new AssignmentSubmissionViewModel();
+                AssignmentSubmissionViewModel d = new AssignmentSubmissionViewModel();
 
-                //b.Submission=submissions.Where(e => e.AssignmentFK == a.Id).ToList();
-                b.Submission.Append(a);
-                b.Assignment= assignments.Where(g => g.Id == a.AssignmentFK).FirstOrDefault();
-
-                SALV.Assignments.Add(b);
-
+                d.Assignment = c;
+                d.Submission = submissions.Where(e => e.AssignmentFK == c.Id).ToList();
+                SALV.Assignments.Add(d);
             }
+
+            //foreach(var a in submissionList)
+            //{
+            //    AssignmentSubmissionViewModel b= new AssignmentSubmissionViewModel();
+
+            //    b.Submission = submissions.Where(e => e.AssignmentFK == a.Id).ToList();
+            //    b.Submission.Append(a);
+            //    b.Assignment= assignments.Where(g => g.Id == a.AssignmentFK).FirstOrDefault();
+
+            //    SALV.Assignments.Add(b);
+
+            //}
 
             if (course.Count != 1)
             {

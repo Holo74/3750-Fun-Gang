@@ -9,7 +9,7 @@
 		<hr />
 	</div>
 	<div>
-		<h2>Points: @Html.DisplayFor(model => model.Assignment.MaxPoints) </h2>
+		<h2>Points: @Html.DisplayFor(model => model.Submission.FirstOrDefault().Points) / @Html.DisplayFor(model => model.Assignment.MaxPoints) </h2>
 	</div>
 	@if (Model.Submission.FirstOrDefault() == null)
 	{

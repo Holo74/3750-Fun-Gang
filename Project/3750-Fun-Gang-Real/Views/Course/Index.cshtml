@@ -60,9 +60,12 @@
 				<td>
 					@Html.DisplayFor(modelData => item.Assignment.DueTime)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelData => item.Submission.FirstOrDefault().Points) / @Html.DisplayFor(modelData => item.Assignment.MaxPoints)
+				@if (Model.User.UserType == "Student")
+				{
+					<td>
+						@Html.DisplayFor(modelData => item.Submission.FirstOrDefault().Points) / @Html.DisplayFor(modelData => item.Assignment.MaxPoints)
                 </td>
+				}
 
 
 				@*until the below comparison to see if teacher or student works, just show all the buttons*@

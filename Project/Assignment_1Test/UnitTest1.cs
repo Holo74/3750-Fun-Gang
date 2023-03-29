@@ -70,14 +70,14 @@ namespace Assignment_1Test
                 StudentRegistrationController registrations = new StudentRegistrationController(_context);
                 //27 is a class made for unit testing
                 await registrations.RegisterForClass(27);
-                //registration.IsRegistered = 1; 
-                //make the student register for a course
-			    //query for how many courses the student is registered for (should be one more than last time)
-			    //await _context.SaveChangesAsync();
+				//registration.IsRegistered = 1; 
+				//make the student register for a course
+				//query for how many courses the student is registered for (should be one more than last time)
+				//await _context.SaveChangesAsync();
 
-			    //if thats true, pass. else, fail
+				//if thats true, pass. else, fail
 
-			    var numOfClassesAfter = _context.Registrations.Where(c => c.UserFK == user[0].Id && c.IsRegistered == 1).ToList();
+				var numOfClassesAfter = _context.Registrations.Where(c => c.UserFK == user[0].Id && c.IsRegistered == 1).ToList();
 			    int lengthAfter = numOfClassesAfter.Count();
 
 			    Assert.AreEqual(lengthAfter, lengthBefore + 1);
