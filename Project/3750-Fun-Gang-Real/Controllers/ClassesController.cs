@@ -3,16 +3,19 @@ using Assignment_1.Models;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.FlowAnalysis.DataFlow;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace Assignment_1.Controllers
 {
     public class ClassesController : Controller
     {
         private readonly Assignment_1Context _context; // declaration for the context object
+        private IMemoryCache _cache;
 
-        public ClassesController(Assignment_1Context context)
+        public ClassesController(Assignment_1Context context, IMemoryCache cache)
         {
             _context = context; // makes it so we can get the database at any time
+            _cache = cache;
         }
 
         [HttpGet]
@@ -66,6 +69,7 @@ namespace Assignment_1.Controllers
         {
             int? UserID = HttpContext.Session.GetInt32("UserID");
             await CreateMain(UserID ?? default(int), cl, day);
+            _cache.Remove(CacheKeys.UserView);
             return Redirect("/Classes/");//return to index page after creating page
         }
 
