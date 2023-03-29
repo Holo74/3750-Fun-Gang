@@ -85,6 +85,11 @@ namespace Assignment_1.Controllers
         public async Task<IActionResult> RegisterForClass(int classId)
         {
             var UserID = HttpContext.Session.GetInt32("UserID");
+            await RegisterForClassLogic(UserID.Value, classId);
+            return Redirect("Index");
+        }
+        public async Task RegisterForClassLogic(int UserID, int classId)
+        {
             var Registered = from r in _context.Registrations select r;
             Registered = Registered.Where(reg => reg.UserFK == UserID && reg.ClassFK == classId);
 
@@ -112,7 +117,6 @@ namespace Assignment_1.Controllers
 
             }
             _context.SaveChanges();
-            return Redirect("Index");
         }
     }
 }

@@ -69,7 +69,7 @@ namespace Assignment_1Test
                 //var registration = registrationList[0];
                 StudentRegistrationController registrations = new StudentRegistrationController(_context);
                 //27 is a class made for unit testing
-                await registrations.RegisterForClass(27);
+                await registrations.RegisterForClassLogic(43, 16);
 				//registration.IsRegistered = 1; 
 				//make the student register for a course
 				//query for how many courses the student is registered for (should be one more than last time)
@@ -82,7 +82,7 @@ namespace Assignment_1Test
 
 			    Assert.AreEqual(lengthAfter, lengthBefore + 1);
 
-                await registrations.RegisterForClass(27);
+                await registrations.RegisterForClassLogic(43, 16);
                 //_context.Registrations.Remove()
                 await _context.SaveChangesAsync();
             }
