@@ -151,17 +151,21 @@ namespace Assignment_1.Controllers
                     submitted.Modified > classUserView.viewUser.LastedLoggedIn
                     where
                     submitted.UserFK == classUserView.viewUser.Id
-                    select assignment.AssignmentTitle + " in class " + assignClass.CourseNumber + " was graded";
+                    select assignment.AssignmentTitle + " in class " + assignClass.CourseName + " was graded";
 
-                    notification.Concat(joinedAssignmentTables);
+                    notification.AddRange(joinedAssignmentTables.ToList());
 
                     var joinedClassCreatedAssignment =
                         from assignments in _context.ClassAssignments
                         join assignClass in _context.Class on
                         assignments.ClassId equals assignClass.ClassId
+                        join userClasses in _context.Registrations on 
+                        assignments.ClassId equals userClasses.ClassFK
+                        where
+                        userClasses.UserFK == classUserView.viewUser.Id
                         select assignClass.CourseName + " Has created a new assignment named " + assignments.AssignmentTitle;
 
-                    notification.Concat(joinedClassCreatedAssignment);
+                    notification.AddRange(joinedClassCreatedAssignment);
 
                     classUserView.notifications = notification;
 

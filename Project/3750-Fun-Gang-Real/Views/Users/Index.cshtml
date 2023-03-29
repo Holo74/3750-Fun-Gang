@@ -39,14 +39,14 @@
     .notification{
         width:10px;
         position:fixed;
-        right:313px;
+        right: 439px;
         top:65px;
     }
 
 	.notification-menu {
-		width: 10px;
+		width: 522px;
 		position: fixed;
-        right: 352px;
+        right: 215px;
         top: 106px;
         z-index:4;
         background-color: #f5bb00;
@@ -179,11 +179,10 @@
 
 <div hidden class="notification-menu" id="notification-menu">
     <ul>
-        <li>Dummy 1</li>
-        <li>Dummy 2</li>
-        <li>Dummy 3</li>
-        <li>Dummy 4</li>
-        <li>Dummy 5</li>
+        @foreach(var notif in Model.notifications)
+        {
+            <li>@notif</li>
+        }
     </ul>
 </div>
 
