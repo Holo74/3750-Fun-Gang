@@ -123,6 +123,30 @@ namespace Assignment_1.Controllers
             var s = from a in _context.AssignmentSubmissions select a;
             ASVM.Submission = s.Where(x => x.AssignmentFK == ID).ToList();
 
+            int maxPoints = 100;
+            if(ASVM.Assignment != null)
+            {
+                maxPoints = ASVM.Assignment.MaxPoints.Value;
+            }
+
+            foreach(var item in ASVM.Submission)
+            {
+                
+                int t = item.Points == null ? 0 : item.Points.Value;//get point value if it exists
+
+				//get grade fraction, multiply by 10 (90/100 -> 0.9 -> 9.0) and cast to int, use this value as index of asvm grade bin and incriment it
+				t = (int)(10 * ((float)t / (float)maxPoints));
+                if (t <= 10)
+                {
+                    ASVM.GradeBins[t]++;
+                }
+                else
+                {
+                    //if it gets here then the points earned is > 100% of possible points
+                    ASVM.GradeBins[10]++;
+                }
+            }
+
             // Added all this list code to get the users because I can't use the entire database (crashes)
             // might still crash unless we fix the problem in the users table
             List<int> IDs = new List<int>();
