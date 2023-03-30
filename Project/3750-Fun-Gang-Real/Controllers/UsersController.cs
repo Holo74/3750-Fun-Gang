@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
+using Assignment_1.Migrations;
 using System.IO.Pipes;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
@@ -43,17 +44,17 @@ namespace Assignment_1.Controllers
             {
                 _cache.TryGetValue(CacheKeys.UserView, out ClassUserViewModel view);
 
-                if (view == null)
+                if (view == null || view.classes.ElementAt(0) == null)
                 {
                     ClassUserViewModel classUserView = new ClassUserViewModel();
-                    // list constructor default sucks, has to use this
+
                     classUserView.todoitems = new List<TODOitem>();
                     var user = _context.User.Where(x => x.Id == Id).First();
                     classUserView.viewUser = user;
                     var UserID = HttpContext.Session.GetInt32("UserID");
                     ViewData["Student"] = user.UserType;
                     var Course = from c in _context.Class select c;
-                    var Registration = from r in _context.Registrations select r;
+                    var Registration = from r in _context.Registrations select r;// gets the class table from the database **(still need to show only that specific teacher's courses)**
                     if (UserID != null)
                     {
                         if (user.UserType == "Student")
@@ -61,8 +62,8 @@ namespace Assignment_1.Controllers
                             Registration = Registration.Where(r => r.UserFK == UserID);
                             Registration = Registration.Where(r => r.IsRegistered == 1);
                             Course = from Class in Course
-                                        join r in Registration on Class.ClassId equals r.ClassFK
-                                        select Class;
+                                     join r in Registration on Class.ClassId equals r.ClassFK
+                                     select Class;
                         }
                         else
                         {
@@ -128,37 +129,7 @@ namespace Assignment_1.Controllers
                     DateTime date = new DateTime(view.todoitems[0].dueDate.Value.Year, view.todoitems[0].dueDate.Value.Month, view.todoitems[0].dueDate.Value.Day,
                     view.todoitems[0].dueTime.Value.Hour, view.todoitems[0].dueTime.Value.Minute, view.todoitems[0].dueTime.Value.Second);
 
-                    var classes = from c in _context.Class select c;
-                    var regs = _context.Registrations.Where(r => r.UserFK == view.viewUser.Id);
-                    regs = regs.Where(r => r.IsRegistered == 1);
-                    var courses = from Class in classes
-                                  join r in regs on Class.ClassId equals r.ClassFK
-                                  select Class;
-                    var list = courses.ToList();
-                    if (view.classes[view.classes.Count - 1].ClassId != list[list.Count - 1].ClassId || date < DateTime.Now)
-                    {
-                        ClassUserViewModel classUserView = new ClassUserViewModel();
-                        // list constructor default sucks, has to use this
-                        classUserView.todoitems = new List<TODOitem>();
-                        var user = _context.User.Where(x => x.Id == Id).First();
-                        classUserView.viewUser = user;
-                        var UserID = HttpContext.Session.GetInt32("UserID");
-                        ViewData["Student"] = user.UserType;
-                        var Course = from c in _context.Class select c;
-                        var Registration = from r in _context.Registrations select r;
-                        if (UserID != null)
-                        {
-                            if (user.UserType == "Student")
-                            {
-                                Registration = Registration.Where(r => r.UserFK == UserID);
-                                Registration = Registration.Where(r => r.IsRegistered == 1);
-                                Course = from Class in Course
-                                         join r in Registration on Class.ClassId equals r.ClassFK
-                                         select Class;
-                            }
-                            else
-                            {
-                                Course = Course.Where(c => c.UserId == UserID);
+                        notification.Concat(joinedAssignmentTables);
 
                             }
                             classUserView.classes = Course.ToList();
@@ -221,18 +192,17 @@ namespace Assignment_1.Controllers
                     DateTime date = new DateTime(view.todoitems[0].dueDate.Value.Year, view.todoitems[0].dueDate.Value.Month, view.todoitems[0].dueDate.Value.Day,
                     view.todoitems[0].dueTime.Value.Hour, view.todoitems[0].dueTime.Value.Minute, view.todoitems[0].dueTime.Value.Second);
 
-                    var list = _context.Class.Where(x => x.UserId == view.viewUser.Id).ToList();
-                    if (view.classes[view.classes.Count - 1].ClassId != list[list.Count - 1].ClassId || date < DateTime.Now)
+                    if ( date < DateTime.Now)
                     {
                         ClassUserViewModel classUserView = new ClassUserViewModel();
-                        // list constructor default sucks, has to use this
+                        
                         classUserView.todoitems = new List<TODOitem>();
                         var user = _context.User.Where(x => x.Id == Id).First();
                         classUserView.viewUser = user;
                         var UserID = HttpContext.Session.GetInt32("UserID");
                         ViewData["Student"] = user.UserType;
                         var Course = from c in _context.Class select c;
-                        var Registration = from r in _context.Registrations select r;
+                        var Registration = from r in _context.Registrations select r;// gets the class table from the database **(still need to show only that specific teacher's courses)**
                         if (UserID != null)
                         {
                             if (user.UserType == "Student")
@@ -270,7 +240,7 @@ namespace Assignment_1.Controllers
 
                             }
                             futureAssignmentList = futureAssignmentList.OrderBy(y => y.DueDate.Value.DayOfYear).OrderBy(z => z.DueTime.Value.Date.TimeOfDay.Hours).ToList();
-
+                            
                             var Assignments = _context.ClassAssignments;
 
                             int breakint = 0;

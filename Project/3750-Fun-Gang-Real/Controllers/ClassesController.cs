@@ -96,5 +96,94 @@ namespace Assignment_1.Controllers
             await _context.SaveChangesAsync();
             return 1;
         }
+        public async Task<IActionResult> Edit(int? id)
+        {
+
+
+            if (id == null || _context.Class == null)
+            {
+                return NotFound();
+            }
+
+            var course = await _context.Class.FindAsync(id);
+            if (course == null)
+            {
+                return NotFound();
+            }
+
+            return View(course);
+
+
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("ClassId,UserId,Department,CourseNumber,CourseName,NumOfCredits,Location,DaysOfWeek,StartTime,EndTime")] Class c)
+        {
+
+
+
+            var oldclass = _context.Class.Where(x => x.ClassId == id).FirstOrDefault();
+
+            //        try
+            //          {
+            //if(c.Department == null ||c.CourseNumber == null||c.CourseName== null||c.NumOfCredits == null||c.Location == null ||c.DaysOfWeek == null |c.StartTime == null||c.EndTime == null)
+            //{
+            // c.Department = oldclass.Department;
+            // c.CourseNumber= oldclass.CourseNumber;
+            // c.CourseName= oldclass.CourseName;
+            // c.NumOfCredits= oldclass.NumOfCredits;
+            // c.Location= oldclass.Location;
+            // c.DaysOfWeek= oldclass.DaysOfWeek;
+            // c.StartTime= oldclass.StartTime;
+            // c.EndTime= oldclass.EndTime;
+
+            //}
+
+            _context.ChangeTracker.Clear();
+            _context.Update(c);
+            await _context.SaveChangesAsync();
+
+            return Redirect("/Classes");
+        }
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null || _context.Class == null)
+            {
+                return NotFound();
+            }
+
+            var course = await _context.Class
+                .FirstOrDefaultAsync(m => m.ClassId == id);
+            if (course == null)
+            {
+                return NotFound();
+            }
+
+            return View(course);
+        }
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id,Class c)
+        {
+            var course = await _context.Class.FindAsync(id);
+            _context.Class.Remove(c);
+            await _context.SaveChangesAsync();
+            _cache.Remove(CacheKeys.UserView);
+            return RedirectToAction(nameof(Index));
+
+            //if (_context.Class == null)
+            //{
+            //    return Problem("Entity set 'Assignment_1Context.User'  is null.");
+            //}
+            //var course = await _context.Class.FindAsync(id);
+
+            //_context.Class.Remove(course);
+
+
+            //await _context.SaveChangesAsync();
+            //return Redirect("/Classes");
+        }
     }
 }
+
