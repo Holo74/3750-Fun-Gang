@@ -44,17 +44,17 @@ namespace Assignment_1.Controllers
             {
                 _cache.TryGetValue(CacheKeys.UserView, out ClassUserViewModel view);
 
-                if (view == null)
+                if (view == null || view.classes.ElementAt(0) == null)
                 {
                     ClassUserViewModel classUserView = new ClassUserViewModel();
-                    // list constructor default sucks, has to use this
+
                     classUserView.todoitems = new List<TODOitem>();
                     var user = _context.User.Where(x => x.Id == Id).First();
                     classUserView.viewUser = user;
                     var UserID = HttpContext.Session.GetInt32("UserID");
                     ViewData["Student"] = user.UserType;
                     var Course = from c in _context.Class select c;
-                    var Registration = from r in _context.Registrations select r;
+                    var Registration = from r in _context.Registrations select r;// gets the class table from the database **(still need to show only that specific teacher's courses)**
                     if (UserID != null)
                     {
                         if (user.UserType == "Student")
@@ -62,8 +62,8 @@ namespace Assignment_1.Controllers
                             Registration = Registration.Where(r => r.UserFK == UserID);
                             Registration = Registration.Where(r => r.IsRegistered == 1);
                             Course = from Class in Course
-                                        join r in Registration on Class.ClassId equals r.ClassFK
-                                        select Class;
+                                     join r in Registration on Class.ClassId equals r.ClassFK
+                                     select Class;
                         }
                         else
                         {
@@ -119,102 +119,34 @@ namespace Assignment_1.Controllers
                             }
                         }
 
+                        List<string> notification = new List<string>();
+                        var joinedAssignmentTables =
+                        from submitted in _context.AssignmentSubmissions
+                        join assignment in _context.ClassAssignments on
+                        submitted.AssignmentFK equals assignment.Id
+                        join assignClass in _context.Class on
+                        submitted.ClassFK equals assignClass.ClassId
+                        where
+                        submitted.Modified > classUserView.viewUser.LastedLoggedIn
+                        where
+                        submitted.UserFK == classUserView.viewUser.Id
+                        select assignment.AssignmentTitle + " in class " + assignClass.CourseNumber + " was graded";
+
+                        notification.Concat(joinedAssignmentTables);
+
+                        var joinedClassCreatedAssignment =
+                            from assignments in _context.ClassAssignments
+                            join assignClass in _context.Class on
+                            assignments.ClassId equals assignClass.ClassId
+                            select assignClass.CourseName + " Has created a new assignment named " + assignments.AssignmentTitle;
+
+                        notification.Concat(joinedClassCreatedAssignment);
+
+                        classUserView.notifications = notification;
+
                         CacheKeys.UserView = classUserView;
                         _cache.Set(CacheKeys.UserView, classUserView);
                         return View(classUserView);
-                    }
-                }
-                else if (view.viewUser.UserType == "Student")
-                {
-                    DateTime date = new DateTime(view.todoitems[0].dueDate.Value.Year, view.todoitems[0].dueDate.Value.Month, view.todoitems[0].dueDate.Value.Day,
-                    view.todoitems[0].dueTime.Value.Hour, view.todoitems[0].dueTime.Value.Minute, view.todoitems[0].dueTime.Value.Second);
-
-                    var classes = from c in _context.Class select c;
-                    var regs = _context.Registrations.Where(r => r.UserFK == view.viewUser.Id);
-                    regs = regs.Where(r => r.IsRegistered == 1);
-                    var courses = from Class in classes
-                                  join r in regs on Class.ClassId equals r.ClassFK
-                                  select Class;
-                    var list = courses.ToList();
-                    if (view.classes[view.classes.Count - 1].ClassId != list[list.Count - 1].ClassId || date < DateTime.Now)
-                    {
-                        ClassUserViewModel classUserView = new ClassUserViewModel();
-                        // list constructor default sucks, has to use this
-                        classUserView.todoitems = new List<TODOitem>();
-                        var user = _context.User.Where(x => x.Id == Id).First();
-                        classUserView.viewUser = user;
-                        var UserID = HttpContext.Session.GetInt32("UserID");
-                        ViewData["Student"] = user.UserType;
-                        var Course = from c in _context.Class select c;
-                        var Registration = from r in _context.Registrations select r;
-                        if (UserID != null)
-                        {
-                            if (user.UserType == "Student")
-                            {
-                                Registration = Registration.Where(r => r.UserFK == UserID);
-                                Registration = Registration.Where(r => r.IsRegistered == 1);
-                                Course = from Class in Course
-                                         join r in Registration on Class.ClassId equals r.ClassFK
-                                         select Class;
-                            }
-                            else
-                            {
-                                Course = Course.Where(c => c.UserId == UserID);
-
-                            }
-                            classUserView.classes = Course.ToList();
-
-                            Course = from c in _context.Class select c;
-
-                            List<ClassAssignments> myassignments = new List<ClassAssignments>();
-                            foreach (var mycourse in Course.ToList())
-                            {
-                                var z = _context.ClassAssignments.Where(y => y.ClassId == mycourse.ClassId).ToList();
-                                myassignments.AddRange(z.ToList());
-                            }
-
-                            List<ClassAssignments> futureAssignmentList = new List<ClassAssignments>();
-                            foreach (var x in myassignments)
-                            {
-                                DateTime dt = new DateTime(x.DueDate.Value.Year, x.DueDate.Value.Month, x.DueDate.Value.Day, x.DueTime.Value.Hour, x.DueTime.Value.Minute, x.DueTime.Value.Second);
-                                if (dt > DateTime.Now)
-                                {
-                                    futureAssignmentList.Add(x);
-                                }
-
-                            }
-                            futureAssignmentList = futureAssignmentList.OrderBy(y => y.DueDate.Value.DayOfYear).OrderBy(z => z.DueTime.Value.Date.TimeOfDay.Hours).ToList();
-
-                            var Assignments = _context.ClassAssignments;
-
-                            int breakint = 0;
-                            foreach (var assignment in futureAssignmentList)
-                            {
-
-                                TODOitem todo = new TODOitem();
-                                todo.ID = assignment.Id;
-                                todo.AssignmentTitle = assignment.AssignmentTitle;
-                                todo.dueDate = assignment.DueDate;
-                                todo.dueTime = assignment.DueTime;
-                                //var minute = todo.dueTime.Value.Minute;
-                                var classList = _context.Class.Where(x => x.ClassId == assignment.ClassId).ToList();
-                                if (classList.Count > 0 && classList.Count < 2)
-                                {
-                                    todo.CourseNumber = classList[0].CourseNumber;
-                                }
-
-                                classUserView.todoitems.Add(todo);
-                                breakint++;
-                                if (breakint == 5)
-                                {
-                                    break;
-                                }
-                            }
-
-                            CacheKeys.UserView = classUserView;
-                            _cache.Set(CacheKeys.UserView, classUserView);
-                            return View(classUserView);
-                        }
                     }
                 }
                 else
@@ -222,18 +154,17 @@ namespace Assignment_1.Controllers
                     DateTime date = new DateTime(view.todoitems[0].dueDate.Value.Year, view.todoitems[0].dueDate.Value.Month, view.todoitems[0].dueDate.Value.Day,
                     view.todoitems[0].dueTime.Value.Hour, view.todoitems[0].dueTime.Value.Minute, view.todoitems[0].dueTime.Value.Second);
 
-                    var list = _context.Class.Where(x => x.UserId == view.viewUser.Id).ToList();
-                    if (view.classes[view.classes.Count - 1].ClassId != list[list.Count - 1].ClassId || date < DateTime.Now)
+                    if ( date < DateTime.Now)
                     {
                         ClassUserViewModel classUserView = new ClassUserViewModel();
-                        // list constructor default sucks, has to use this
+                        
                         classUserView.todoitems = new List<TODOitem>();
                         var user = _context.User.Where(x => x.Id == Id).First();
                         classUserView.viewUser = user;
                         var UserID = HttpContext.Session.GetInt32("UserID");
                         ViewData["Student"] = user.UserType;
                         var Course = from c in _context.Class select c;
-                        var Registration = from r in _context.Registrations select r;
+                        var Registration = from r in _context.Registrations select r;// gets the class table from the database **(still need to show only that specific teacher's courses)**
                         if (UserID != null)
                         {
                             if (user.UserType == "Student")
@@ -271,7 +202,7 @@ namespace Assignment_1.Controllers
 
                             }
                             futureAssignmentList = futureAssignmentList.OrderBy(y => y.DueDate.Value.DayOfYear).OrderBy(z => z.DueTime.Value.Date.TimeOfDay.Hours).ToList();
-
+                            
                             var Assignments = _context.ClassAssignments;
 
                             int breakint = 0;
@@ -297,6 +228,31 @@ namespace Assignment_1.Controllers
                                     break;
                                 }
                             }
+
+                            List<string> notification = new List<string>();
+                            var joinedAssignmentTables =
+                            from submitted in _context.AssignmentSubmissions
+                            join assignment in _context.ClassAssignments on
+                            submitted.AssignmentFK equals assignment.Id
+                            join assignClass in _context.Class on
+                            submitted.ClassFK equals assignClass.ClassId
+                            where
+                            submitted.Modified > classUserView.viewUser.LastedLoggedIn
+                            where
+                            submitted.UserFK == classUserView.viewUser.Id
+                            select assignment.AssignmentTitle + " in class " + assignClass.CourseNumber + " was graded";
+
+                            notification.Concat(joinedAssignmentTables);
+
+                            var joinedClassCreatedAssignment =
+                                from assignments in _context.ClassAssignments
+                                join assignClass in _context.Class on
+                                assignments.ClassId equals assignClass.ClassId
+                                select assignClass.CourseName + " Has created a new assignment named " + assignments.AssignmentTitle;
+
+                            notification.Concat(joinedClassCreatedAssignment);
+
+                            classUserView.notifications = notification;
 
                             CacheKeys.UserView = classUserView;
                             _cache.Set(CacheKeys.UserView, classUserView);

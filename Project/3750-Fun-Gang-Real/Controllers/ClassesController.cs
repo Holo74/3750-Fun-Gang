@@ -169,6 +169,7 @@ namespace Assignment_1.Controllers
             var course = await _context.Class.FindAsync(id);
             _context.Class.Remove(c);
             await _context.SaveChangesAsync();
+            _cache.Remove(CacheKeys.UserView);
             return RedirectToAction(nameof(Index));
 
             //if (_context.Class == null)

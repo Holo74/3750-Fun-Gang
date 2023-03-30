@@ -19,6 +19,10 @@
             menu.hidden = true;
         }
     }
+
+    document.addEventListener("click", function() {
+        console.log(@Html.Raw(Json.Serialize(@ViewData)));
+    })
 </script>
 
 <h1>Welcome
@@ -107,9 +111,9 @@
     }
 </style>
 <div class="text-center d-flex justify-content-center">
-    @if (ViewData["Student"] != null)
+    @if (Model.viewUser.UserType != null)
     {
-        @if (ViewData["Student"].ToString() == "Student")
+        @if (Model.viewUser.UserType == "Student")
         {
             foreach (var item in Model.classes)
             {
@@ -132,7 +136,7 @@
                 </div>
             }
         }
-        @if (ViewData["Student"].ToString() != "Student")
+        @if (Model.viewUser.UserType != "Student")
         {
             foreach (var item in Model.classes)
             {
