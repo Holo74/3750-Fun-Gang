@@ -6,14 +6,15 @@
 <html lang='en'>
 <head>
     <meta charset='utf-8' />
-    <script src='~/js/index.global.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.5/index.global.min.js'></script>
 
     <script>
         var data = @Html.Raw(Json.Serialize(@Model));
-
+        console.log(data);
         var objs = [];
         for (var i = 0; i < data.length; i++) {
-            if (String(data[i].url) != ''){
+            if (String(data[i].url) != null){
+                
                 objs.push({ start: String(data[i].startTime), end: String(data[i].endTime), title: String(data[i].title), color: String(data[i].color), url: String(data[i].url) });
             }
             else{
