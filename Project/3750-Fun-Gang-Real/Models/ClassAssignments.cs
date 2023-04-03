@@ -20,6 +20,7 @@ namespace Assignment_1.Models
         [DataType(DataType.Time)]
         public DateTime? DueTime { get; set; }
         public string? SubmissionType { get; set; }
+        public DateTime? CreatedDate { get; set; }
 
 
     }
