@@ -117,7 +117,7 @@ namespace Assignment_1.Controllers
                                 break;
                             }
                         }
-
+                        classUserView.notifications = GetNotifications(classUserView.viewUser).Result;
                         CacheKeys.UserView = classUserView;
                         _cache.Set(CacheKeys.UserView, classUserView);
                         return View(classUserView);
@@ -209,7 +209,7 @@ namespace Assignment_1.Controllers
                                     break;
                                 }
                             }
-
+                            classUserView.notifications = GetNotifications(classUserView.viewUser).Result;
                             CacheKeys.UserView = classUserView;
                             _cache.Set(CacheKeys.UserView, classUserView);
                             return View(classUserView);
@@ -296,6 +296,8 @@ namespace Assignment_1.Controllers
                                     break;
                                 }
                             }
+
+                            classUserView.notifications = GetNotifications(classUserView.viewUser).Result;
 
                             CacheKeys.UserView = classUserView;
                             _cache.Set(CacheKeys.UserView, classUserView);
@@ -408,30 +410,9 @@ namespace Assignment_1.Controllers
                     }
 
                     //classUserView.assignments = AssignmentsTODO.ToList();
-                    List<string> notification = new List<string>();
-                    var joinedAssignmentTables =
-                    from submitted in _context.AssignmentSubmissions
-                    join assignment in _context.ClassAssignments on 
-                    submitted.AssignmentFK equals assignment.Id
-                    join assignClass in _context.Class on 
-                    submitted.ClassFK equals assignClass.ClassId
-                    where
-                    submitted.Modified > classUserView.viewUser.LastedLoggedIn
-                    where
-                    submitted.UserFK == classUserView.viewUser.Id
-                    select assignment.AssignmentTitle + " in class " + assignClass.CourseNumber + " was graded";
+                   
 
-                    notification.Concat(joinedAssignmentTables);
-
-                    var joinedClassCreatedAssignment =
-                        from assignments in _context.ClassAssignments
-                        join assignClass in _context.Class on
-                        assignments.ClassId equals assignClass.ClassId
-                        select assignClass.CourseName + " Has created a new assignment named " + assignments.AssignmentTitle;
-
-                    notification.Concat(joinedClassCreatedAssignment);
-
-                    classUserView.notifications = notification;
+                    classUserView.notifications = GetNotifications(classUserView.viewUser).Result;
 
                     //Registration = Registration.Where(r => r.UserFK == UserID);
                     //classUserView.registrations = Registration.ToList();
@@ -441,6 +422,44 @@ namespace Assignment_1.Controllers
                 }
             }
             return View();
+        }
+
+        private async Task<List<string>> GetNotifications(User viewUser)
+        {
+            List<string> notification = new List<string>();
+            var joinedAssignmentTables =
+            from submitted in _context.AssignmentSubmissions
+            join assignment in _context.ClassAssignments on
+            submitted.AssignmentFK equals assignment.Id
+            join assignClass in _context.Class on
+            submitted.ClassFK equals assignClass.ClassId
+            where
+            submitted.Modified > viewUser.LastedLoggedIn
+            where
+            submitted.UserFK == viewUser.Id
+            select assignment.AssignmentTitle + " in class " + assignClass.CourseName + " was graded";
+
+            notification = notification.Concat(joinedAssignmentTables).ToList();
+
+            var joinedClassCreatedAssignment =
+                from assignments in _context.ClassAssignments
+                join assignClass in _context.Class on
+                assignments.ClassId equals assignClass.ClassId
+                join registClass in _context.Registrations on
+                assignClass.ClassId equals registClass.ClassFK
+                where registClass.UserFK == viewUser.Id
+                where assignments.CreatedDate > viewUser.LastedLoggedIn
+                select assignClass.CourseName + " Has created a new assignment named " + assignments.AssignmentTitle;
+
+            notification = notification.Concat(joinedClassCreatedAssignment).ToList();
+
+            User updatingLastLogin = _context.User.First(x => x.Id == viewUser.Id);
+
+            updatingLastLogin.LastedLoggedIn = DateTime.Now;
+            _context.User.Update(updatingLastLogin);
+            await _context.SaveChangesAsync();
+
+            return notification;
         }
 
         // GET: Users/Details/5
