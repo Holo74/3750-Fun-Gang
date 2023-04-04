@@ -52,16 +52,33 @@
     }
 
     .vertical-menu {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         width: 200px;
         /* Set a width if you like */
-        border: solid;
-        border-width: 4px;
+        border: hidden;
         border-radius: 20px;
-        border-color: orange;
-        display:flex;
-        flex-direction:column;
-        text-align:center;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        overflow: hidden;
     }
+
+    .vertical-menu-item {
+        text-decoration: none;
+        color: darkslategrey;
+        transition: 0.3s;
+        padding:5px;
+        margin:5px;
+    }
+
+        .vertical-menu-item a {
+            text-decoration: none;
+        }
+
+        .vertical-menu-item:hover {
+            border-color:lightblue;
+            background-color: #eedeff;
+        }
 
 
     .card {
@@ -72,12 +89,13 @@
         margin: 50px;
         border-radius: 5px;
         padding: 6px;
-        min-width:100px;
+        min-width: 200px;
     }
 
         /* On mouse-over, add a deeper shadow */
         .card:hover {
             box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+            background-color: #eedeff
         }
 
     /* Add some padding inside the card container */
@@ -86,7 +104,7 @@
     }
 </style>
 <div class="d-flex flex-md-row justify-content-between">
-    <div class="text-center d-flex justify-content-around">
+    <div class="text-center d-flex justify-content-around flex-wrap">
         @if (ViewData["Student"] != null)
         {
             @if (ViewData["Student"].ToString() == "Student")
@@ -154,14 +172,17 @@
         }
     </div>
 
-    <div class="vertical-menu">
-        <div class="active" style="background-color:#66ff99">ToDo's</div>
-        @foreach (var item in Model.todoitems)
-        {
-            <div class="btn-primary">
-                <a href="@Url.Action("Assignment", "ClassAssignments", new { ID = item.ID })">@Html.DisplayFor(modelData => item.AssignmentTitle)<br>class: @Html.DisplayFor(modelData => item.CourseNumber)</a>
-            </div>
-        }
+    <div>
+        <div class="vertical-menu">
+            <div class="active" style="background-color:#dd8844">ToDo's</div>
+            @foreach (var item in Model.todoitems)
+            {
+                /*<div class="vertical-menu-item">*/
+                <a class="vertical-menu-item" href="@Url.Action("Assignment", "ClassAssignments", new { ID = item.ID })">@Html.DisplayFor(modelData => item.AssignmentTitle)<br>class: @Html.DisplayFor(modelData => item.CourseNumber)</a>
+                /*</div>*/
+            }
+            <div class="active" style="background-color:#dd8844">ToDo's</div>
+        </div>
     </div>
 </div>
 <div class="notification">
