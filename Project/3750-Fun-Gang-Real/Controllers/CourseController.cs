@@ -87,6 +87,8 @@ namespace Assignment_1.Controllers
             //  CUA.Assignments = _context.ClassAssignments.Where(x => x.ClassId == CUA.Class.ClassId).ToList();
             var t = from u in _context.User select u;
             SALV.User = t.Where(t => t.Id == UserID).FirstOrDefault();
+            SALV.array[0] = 5;
+            SALV.array[4] = 2;
 
             return View(SALV);
         }
