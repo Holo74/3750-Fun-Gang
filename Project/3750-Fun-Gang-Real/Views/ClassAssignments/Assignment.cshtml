@@ -22,6 +22,7 @@
             // Create the data table.
 
             // Converts the model list into an array
+            //@Model.GradeBins[5] = 6; 
             var bins = @Html.Raw(Json.Serialize(Model.GradeBins));
 
             var s = @Html.Raw(Json.Serialize(Model.Submission == null? 0 : Model.Submission.ToArray().Length));

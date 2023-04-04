@@ -4,6 +4,66 @@
 	ViewData["Title"] = "Course";
 }
 
+
+<head>
+	<!--Load the AJAX API-->
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script type="text/javascript">
+
+		// Load the Visualization API and the corechart package.
+		google.charts.load('current', { 'packages': ['corechart', 'bar'] });
+
+		// Set a callback to run when the Google Visualization API is loaded.
+		google.charts.setOnLoadCallback(drawChart);
+
+		// Callback that creates and populates a data table,
+		// instantiates the pie chart, passes in the data and
+		// draws it.
+		function drawChart() {
+
+			// Create the data table.
+
+			// Converts the model list into an array
+			var bins = @Html.Raw(Json.Serialize(Model.array));
+
+			//console.log(x);
+
+			var info = [["Student", "Grades", { role: 'style' }]]
+			let colors = new Array('fill-color: red', 'fill-color: red', 'fill-color: red', 'fill-color: red', 'fill-color: red',
+				'fill-color: red', 'fill-color: orange', 'fill-color: yellow', 'fill-color: green', 'fill-color: green', 'fill-color: cyan');
+
+			// Each object in the list is a class.  Meaning you can access the properties by doing .{name of property}
+			for (let i = 0; i <= 11; i++) {
+				if (i == x) {
+					colors[i] += '; stroke-width: 8; stroke-color: black';
+				}
+				info.push([(i * 10).toString(), bins[i], colors[i]])
+			}
+
+			var data = new google.visualization.arrayToDataTable(info);
+
+			var view = new google.visualization.DataView(data);
+
+			// Set chart options
+			var options = {
+				'title': "Grades",
+				hAxis: { title: 'Grade Percentage' },
+				vAxis: { title: 'Students', minValue: 0, maxValue: s },
+				width: 600,
+				height: 400,
+				legend: { position: "none" },
+
+
+			};
+
+
+			// Instantiate and draw our chart, passing in some options.
+			var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+			chart.draw(view, options);
+		}
+	</script>
+</head>
+
 <div class="text-center">
 	<h1>@Model.Class.CourseName</h1>
 </div>
@@ -201,3 +261,5 @@
 		
 	</tbody>
 </table>
+
+<div id="chart_div"></div>

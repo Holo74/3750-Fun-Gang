@@ -6,5 +6,6 @@
 		public Class Class { get; set; }
 		public User User { get; set; }
 		public bool TeachesClass { get; set; }
+		public int[] array = new int[12];
 	}
 }
