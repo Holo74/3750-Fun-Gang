@@ -15,6 +15,82 @@
 	</div>
 }
 
+@{
+	double totalgrade = 0;
+	double totalmaxgrade = 0;
+	double totalpercent = 0;
+}
+@foreach (var item in Model.Assignments)
+{
+	@if (Model.User.UserType == "Student")
+	{
+		@if (item.Submission.Count() == 1)
+		{
+			@if (item.Submission.FirstOrDefault().Points != null){
+				
+				totalgrade = totalgrade+(double)item.Submission.FirstOrDefault().Points;
+				totalmaxgrade = totalmaxgrade + (double)item.Assignment.MaxPoints;
+			}
+		}
+	}
+}
+@{
+	totalpercent = (totalgrade/totalmaxgrade)*100;
+	string lettergrade;
+	@if(totalpercent >= 94)
+	{
+		lettergrade = "A";
+	}else if(totalpercent >= 90)
+	{
+		lettergrade = "A-";
+	}
+	else if (totalpercent >= 87)
+	{
+		lettergrade = "B+";
+	}
+	else if (totalpercent >= 84)
+	{
+		lettergrade = "B";
+	}
+	else if (totalpercent >= 80)
+	{
+		lettergrade = "B-";
+	}
+	else if (totalpercent >= 77)
+	{
+		lettergrade = "C+";
+	}
+	else if (totalpercent >= 74)
+	{
+		lettergrade = "C";
+	}
+	else if (totalpercent >= 70)
+	{
+		lettergrade = "C-";
+	}
+	else if (totalpercent >= 67)
+	{
+		lettergrade = "D+";
+	}
+	else if (totalpercent >= 64)
+	{
+		lettergrade = "D";
+	}
+	else if (totalpercent >= 60)
+	{
+		lettergrade = "D-";
+	}
+	else
+	{
+		lettergrade = "E";
+	}
+
+
+    <h3> 
+        Letter grade: @lettergrade (@Math.Round(@totalpercent, 2)%)
+    </h3>
+}
+
 <table class="table">
 	<thead>
 		<tr>
@@ -122,5 +198,6 @@
 				}*@
 			</tr>
 		}
+		
 	</tbody>
 </table>
