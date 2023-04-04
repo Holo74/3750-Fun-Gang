@@ -87,8 +87,17 @@ namespace Assignment_1.Controllers
             //  CUA.Assignments = _context.ClassAssignments.Where(x => x.ClassId == CUA.Class.ClassId).ToList();
             var t = from u in _context.User select u;
             SALV.User = t.Where(t => t.Id == UserID).FirstOrDefault();
-            SALV.array[0] = 5;
-            SALV.array[4] = 2;
+
+            PiechartInfo dummyData = new PiechartInfo() { Title = "Hello world" };
+            SALV.PiechartData = new List<PieChartNameandAmount>();
+            SALV.PiechartData.Add(new PieChartNameandAmount() { Name = "A", Amount = 3 });
+            SALV.PiechartData.Add(new PieChartNameandAmount() { Name = "A-", Amount = 1 });
+            SALV.PiechartData.Add(new PieChartNameandAmount() { Name = "B+", Amount = 5 });
+            SALV.PiechartData.Add(new PieChartNameandAmount() { Name = "C", Amount = 0 });
+            SALV.PiechartData.Add(new PieChartNameandAmount() { Name = "B", Amount = 0 });
+            SALV.PiechartData.Add(new PieChartNameandAmount() { Name = "D", Amount = 0 });
+            SALV.PiechartData.Add(new PieChartNameandAmount() { Name = "E", Amount = 0 });
+
 
             return View(SALV);
         }
