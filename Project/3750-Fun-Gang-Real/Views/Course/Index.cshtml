@@ -27,10 +27,9 @@
 			data.addColumn('string', 'Names');
 			data.addColumn('number', 'Amount');
 
-
 			// Converts the model list into an array
 			var pieInfo = @Html.Raw(Json.Serialize(Model.PiechartData));
-
+			
 			// Each object in the list is a class.  Meaning you can access the properties by doing .{name of property}
 			for (let i = 0; i < pieInfo.length; i++) {
 				data.addRow([pieInfo[i].name, pieInfo[i].amount])
@@ -40,7 +39,8 @@
 			var options = {
 				
 				'width': 400,
-				'height': 300
+				'height': 300,
+				slices: [{color: 'Green'}, {color: 'LightGreen'}, {color: 'LightBlue'}, {color: 'Blue'}, {color: 'DarkBlue'}, {color: 'GreenYellow'}, {color: 'Yellow'}, {color: 'LightYellow'}, {color: 'Pink'}, {color: 'Red'}, {color: 'DarkRed'}, {color: 'Black'}]
 			};
 
 			// Instantiate and draw our chart, passing in some options.
