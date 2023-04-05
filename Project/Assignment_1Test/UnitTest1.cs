@@ -6,6 +6,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Assignment_1.Controllers;
 using Microsoft.VisualStudio.TestPlatform.Utilities;
 using Stripe;
+using Assignment_1.Controllers;
+using System.Security.Cryptography;
 
 namespace Assignment_1Test
 {
@@ -63,46 +65,110 @@ namespace Assignment_1Test
             _context.Class.Remove(course);
             await _context.SaveChangesAsync();
         }
+		[TestMethod]
+        public async Task TeacherCanCreateAssignment()
+        {
+            var course =  _context.Class.Where(x => x.ClassId ==13).ToList();
+            var numOfAssignmentBefore = _context.ClassAssignments.Where(c => c.ClassId == course[0].ClassId).ToList();
+            int lengthBefore = numOfAssignmentBefore.Count();
 
-        [TestMethod]
-		public async Task StudentCanRegisterForCourse()
-		{
-			//find student id that exists (id = 43 is teststud)
-			//query for how many courses the student is signed up for
+            ClassAssignments assignments = new ClassAssignments();
+            assignments.AssignmentTitle = "TesterTest";
+            assignments.Description = "DescriptionTest";
+            assignments.MaxPoints = 100;
+            assignments.DueDate = DateTime.Now;
+            assignments.DueTime = DateTime.Now;
+            assignments.SubmissionType = "doc";
 
-			var user = _context.User.Where(x => x.Id == 43).ToList();
-			var numOfClassesBefore = _context.Registrations.Where(c => c.UserFK == user[0].Id && c.IsRegistered == 1).ToList();
-			int lengthBefore = numOfClassesBefore.Count();
+            ClassAssignmentsController cac = new ClassAssignmentsController(_context);
+            await cac.CreateMain(course[0].ClassId, assignments);
 
-			//find a class already in the registration table
-			var registrationList = _context.Registrations.Where(d => d.ID == 27).ToList();
+            var numOfAssignmentsAfter = _context.ClassAssignments.Where(c =>c.ClassId == course[0].ClassId).ToList();
+            int lengthAfter = numOfAssignmentsAfter.Count();
 
-            if (registrationList.Count> 0)
+            Assert.AreEqual(lengthAfter, lengthBefore + 1);
+
+            _context.ClassAssignments.Remove(assignments);
+            await _context.SaveChangesAsync();
+
+
+
+        }
+
+
+		[TestMethod]
+        public async Task StudentCanRegisterForCourse()
+        {
+            //find student id that exists (id = 43 is teststud)
+            //query for how many courses the student is signed up for
+
+            var user = _context.User.Where(x => x.Id == 43).ToList();
+            var numOfClassesBefore = _context.Registrations.Where(c => c.UserFK == user[0].Id && c.IsRegistered == 1).ToList();
+            int lengthBefore = numOfClassesBefore.Count();
+
+            //find a class already in the registration table
+            var registrationList = _context.Registrations.Where(d => d.ID == 27).ToList();
+
+            if (registrationList.Count > 0)
             {
                 //var registration = registrationList[0];
                 StudentRegistrationController registrations = new StudentRegistrationController(_context);
                 //27 is a class made for unit testing
                 await registrations.RegisterForClassLogic(43, 16);
-				//registration.IsRegistered = 1; 
-				//make the student register for a course
-				//query for how many courses the student is registered for (should be one more than last time)
-				//await _context.SaveChangesAsync();
+                //registration.IsRegistered = 1; 
+                //make the student register for a course
+                //query for how many courses the student is registered for (should be one more than last time)
+                //await _context.SaveChangesAsync();
 
-				//if thats true, pass. else, fail
+                //if thats true, pass. else, fail
 
-				var numOfClassesAfter = _context.Registrations.Where(c => c.UserFK == user[0].Id && c.IsRegistered == 1).ToList();
-			    int lengthAfter = numOfClassesAfter.Count();
+                var numOfClassesAfter = _context.Registrations.Where(c => c.UserFK == user[0].Id && c.IsRegistered == 1).ToList();
+                int lengthAfter = numOfClassesAfter.Count();
 
-			    Assert.AreEqual(lengthAfter, lengthBefore + 1);
+                Assert.AreEqual(lengthAfter, lengthBefore + 1);
 
                 await registrations.RegisterForClassLogic(43, 16);
                 //_context.Registrations.Remove()
                 await _context.SaveChangesAsync();
             }
+        }
+        [TestMethod]
+        public async Task AssignmentCanBeGraded()
+        {
+            var submissions = (from a in _context.AssignmentSubmissions select a).ToList();
+            int Tries = 3;//maximum submissions to test
 
+            //test first (Tries) submissions retrieved
+            foreach(var submission in submissions )
+            {
+                if(Tries > 0)
+                {
+                    ClassAssignmentsController c = new ClassAssignmentsController(_context);
 
+                    //random point value to assign
+                    int randomPoints = new Random().Next(1, 11);
+					
+                    //call set points function on current submission with teh random value
+					await c.SetPoints(randomPoints, submission.Id);
 
-			
-		}
+                    AssignmentSubmissions a = _context.AssignmentSubmissions.Where(x => x.Id == submission.Id).FirstOrDefault();
+
+                    Assert.IsNotNull(a);
+
+                    if(a != null)
+                    {
+                        Assert.AreEqual(randomPoints, a.Points);
+                    }
+
+                    Tries--;
+                }
+                else
+                {
+                    break;
+                }
+
+            }
+           
+        }
 	}
 }

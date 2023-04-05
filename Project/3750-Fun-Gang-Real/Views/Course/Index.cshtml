@@ -75,13 +75,13 @@
 						@Html.DisplayFor(modelData => item.Assignment.MaxPoints)
 					</td>
 					<td>
-						<button class="btn btn-primary">
-							Edit
-						</button>
+
+						<a asp-action="Edit" asp-route-id="@item.Assignment.Id">Edit</a>
+						
 					</td>
 					<td>
 						<button class="btn btn-primary">
-							Delete
+							<a asp-action="Details" asp-route-id="@item.Assignment.Id">Details</a>
 						</button>
 					</td>
 					<td>

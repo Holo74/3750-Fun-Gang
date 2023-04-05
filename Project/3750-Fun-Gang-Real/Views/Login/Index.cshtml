@@ -6,8 +6,66 @@
 	ViewData["Title"] = "Login";
 }
 
+<style>
+	body{
+		background-image: url('/Photos/Gradient-Background.png');
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+		
+	}
+	.box{
+		border:thin;
+		border-block-color:lightblue;
+		border-radius: 25px;
+		box-shadow: 10px 10px 10px rgba(68, 68, 68, 0.6);
+		width:20%;
+		height:300px;
+		margin: 0 auto;
+		background-color:white;
+		vertical-align: middle;
+		position:absolute;
+		top:25%;
+		left:40%;
+		
+		
+	}
+	.btn-primary{
+		background-color:cornflowerblue;
+		border-color:cornflowerblue;
+		font-family:  'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+		box-shadow: 5px 5px 2px lightblue;
+		
+	}
+	.btn-primary:hover{
+		background-color:lightblue;
+		border-color:lightblue;
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	}
+	.btn-secondary{
+		background-color:mediumpurple;
+		font-family:  'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+		box-shadow: 5px 5px 2px lightblue;
+		
+	}
+	.btn-secondary:hover{
+			background-color: mediumpurple;
+			background-color:mediumpurple;
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	}
+	label{
+		font-family:  'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	}
+	
+	
+</style>
+<body>
+	@*<img src = "~/Photos/Gradient-Background.png" />*@
+	
+<div class="box">
 <div class="text-center d-flex justify-content-center">
-	<div style="width:20vw">
+	<div style="width:20vw; margin:auto; padding:50px;">
 		<form asp-controller="Login" asp-action="Validate">
 			<div class="d-flex justify-content-between">
 				<label asp-for="Email">Email:</label><input asp-for="Email" name="Email" type="text" />
@@ -19,6 +77,11 @@
 			<input value="Log in" type="submit" class="btn btn-primary" />
 		</form>
 		<hr />
-		<a class="btn btn-dark" asp-controller="Users" asp-action="Create">Create a new Account</a>
+		
+		<a class="btn btn-secondary" asp-controller="Users" asp-action="Create">Create a new Account</a>
+		
 	</div>
 </div>
+</div>
+</body>
+

@@ -1,5 +1,4 @@
 ﻿using Assignment_1.Data;
-using Assignment_1.Migrations;
 using Assignment_1.Models;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
@@ -52,7 +51,15 @@ namespace Assignment_1.Controllers
             var AssignmentID = HttpContext.Session.GetInt32("AssignmentID");
             return View();
         }
+       public async Task<int> CreateMain(int id, ClassAssignments ca)
+        {
+            ca.ClassId = id == null ? -1 : id;
+            _context.ClassAssignments.Add(ca);
+            await _context.SaveChangesAsync();
+            return 1;
 
+
+        }
         public IActionResult Assignment(int ID)
         {
             AssignmentSubmissionViewModel ASVM = new AssignmentSubmissionViewModel();            
@@ -65,9 +72,39 @@ namespace Assignment_1.Controllers
             int? UserID = HttpContext.Session.GetInt32("UserID");
             int ClassID = ASVM.Assignment.ClassId;
 
+            //-------------< gets all assignments for the chart >--------------
+            var l = from k in _context.AssignmentSubmissions select k;
+            ASVM.Submission = l.Where(x => x.AssignmentFK == ID).ToList();
+
+            int maxPoints = 100;
+            if (ASVM.Assignment != null)
+            {
+                maxPoints = ASVM.Assignment.MaxPoints.Value;
+            }
+
+            foreach (var item in ASVM.Submission)
+            {
+
+                int t = item.Points == null ? 0 : item.Points.Value;//get point value if it exists
+
+                //get grade fraction, multiply by 10 (90/100 -> 0.9 -> 9.0) and cast to int, use this value as index of asvm grade bin and incriment it
+                t = (int)(10 * ((float)t / (float)maxPoints));
+                if (t <= 10)
+                {
+                    ASVM.GradeBins[t]++;
+                }
+                else
+                {
+                    //if it gets here then the points earned is > 100% of possible points
+                    ASVM.GradeBins[10]++;
+                }
+                
+            }
+            //-----------------------------------------------------------------
             //in case not already set, used in the submit()
             HttpContext.Session.SetInt32("AssignmentID",ID);
             HttpContext.Session.SetInt32("ClassID",ClassID);
+            //ASVM.GradeBins = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6 };
 
             int AssignmentID = ID;
             var submission = from s in _context.AssignmentSubmissions select s;
@@ -77,6 +114,16 @@ namespace Assignment_1.Controllers
                 ASVM.Submission = submission.Where(x => x.UserFK== UserID).Where(y => y.AssignmentFK == AssignmentID).Where(z => z.ClassFK == ClassID);
                 
             }
+
+            ASVM.StudentBin = 0;
+            if(ASVM.Submission != null && ASVM.Submission.Count() > 0) {
+
+                if(ASVM.Submission.First().Points != null)
+                {
+                    ASVM.StudentBin = (int)(10 * ((float)ASVM.Submission.First().Points / (float)maxPoints));
+                }
+            }
+           
             return View(ASVM);
         }
 
@@ -127,6 +174,30 @@ namespace Assignment_1.Controllers
             ASVM.Assignment = assignments.Where(y => y.Id== ID).First();
             var s = from a in _context.AssignmentSubmissions select a;
             ASVM.Submission = s.Where(x => x.AssignmentFK == ID).ToList();
+
+            int maxPoints = 100;
+            if(ASVM.Assignment != null)
+            {
+                maxPoints = ASVM.Assignment.MaxPoints.Value;
+            }
+
+            foreach(var item in ASVM.Submission)
+            {
+                
+                int t = item.Points == null ? 0 : item.Points.Value;//get point value if it exists
+
+				//get grade fraction, multiply by 10 (90/100 -> 0.9 -> 9.0) and cast to int, use this value as index of asvm grade bin and incriment it
+				t = (int)(10 * ((float)t / (float)maxPoints));
+                if (t <= 10)
+                {
+                    ASVM.GradeBins[t]++;
+                }
+                else
+                {
+                    //if it gets here then the points earned is > 100% of possible points
+                    ASVM.GradeBins[10]++;
+                }
+            }
 
             // Added all this list code to get the users because I can't use the entire database (crashes)
             // might still crash unless we fix the problem in the users table
@@ -189,24 +260,77 @@ namespace Assignment_1.Controllers
             await _context.SaveChangesAsync();
 			return RedirectToAction("Submissions", new { ID = t.AssignmentFK });
 		}
-  //      public IActionResult DownloadFile()
-  //      {
-  //          AssignmentSubmissions asub;
-  //          var memory = DownloadSingleFile(asub.Data);
-  //      }
-		//private MemoryStream DownloadSingleFile(string uploadPath)
-  //      {
-  //          var path = Path.Combine(Directory.GetCurrentDirectory(), uploadPath);
-  //          var memory = new MemoryStream();
-  //          if(System.IO.File.Exists(path))
-  //          {
-  //              var net = new System.Net.WebClient();
-  //              var data = net.DownloadData(path);
-  //              var content = new System.IO.MemoryStream(data);
-               
-  //          }
-  //          memory.Position = 0;
-  //          return memory;
-  //      }
-	}
+
+   //     public async Task<IActionResult> Details(int? id)
+   //     {
+   //         if (id == null || _context.ClassAssignments == null)
+   //         {
+   //             return NotFound();
+   //         }
+
+   //         var courseA = await _context.ClassAssignments
+   //             .FirstOrDefaultAsync(m => m.Id == id);
+   //         if (courseA == null)
+   //         {
+   //             return NotFound();
+   //         }
+
+   //         return View(courseA);
+   //     }
+   //     public async Task<IActionResult> Edit(int? id)
+   //     {
+
+
+   //         if (id == null || _context.ClassAssignments == null)
+   //         {
+   //             return NotFound();
+   //         }
+   //         ///ca = ClassAssignments
+			//var ca = await _context.ClassAssignments.FindAsync(id);
+   //         if (ca == null)
+   //         {
+   //             return NotFound();
+   //         }
+
+   //         return View(ca);
+
+   //     }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Edit(int id, [Bind("ID,ClassId,AssignmentTitle,Description,MaxPoints,DueDate,DueTime,SubmissionType")] ClassAssignments ca)
+        //{
+
+
+        //    var Id = HttpContext.Session.GetInt32("ID");
+
+        //    var oldID = _context.ClassAssignments.Where(x => x.Id == id).FirstOrDefault();
+
+
+
+        //    _context.ChangeTracker.Clear();
+        //    _context.Update(ca);
+        //    await _context.SaveChangesAsync();
+
+        //    return Redirect(string.Format("/ClassAssignments/Details/ID={0}", Id));//return to index page after creating page
+        //}
+        ////      public IActionResult DownloadFile()
+        //      {
+        //          AssignmentSubmissions asub;
+        //          var memory = DownloadSingleFile(asub.Data);
+        //      }
+        //private MemoryStream DownloadSingleFile(string uploadPath)
+        //      {
+        //          var path = Path.Combine(Directory.GetCurrentDirectory(), uploadPath);
+        //          var memory = new MemoryStream();
+        //          if(System.IO.File.Exists(path))
+        //          {
+        //              var net = new System.Net.WebClient();
+        //              var data = net.DownloadData(path);
+        //              var content = new System.IO.MemoryStream(data);
+
+        //          }
+        //          memory.Position = 0;
+        //          return memory;
+        //      }
+    }
 }
