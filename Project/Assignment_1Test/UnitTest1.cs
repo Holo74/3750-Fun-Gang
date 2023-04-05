@@ -165,6 +165,8 @@ namespace Assignment_1Test
 
             Assert.AreEqual(count, new UsersController(_context, null, null).GetNotifications(u).Result.Count);
 
+
+
         }
 	}
 }

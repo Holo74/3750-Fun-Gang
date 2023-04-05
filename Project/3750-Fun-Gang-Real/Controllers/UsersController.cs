@@ -455,6 +455,7 @@ namespace Assignment_1.Controllers
 
             User updatingLastLogin = _context.User.First(x => x.Id == viewUser.Id);
 
+            // Note to self. Change the datetime now cause that uses the local systems time not the servers time
             updatingLastLogin.LastedLoggedIn = DateTime.Now;
             _context.User.Update(updatingLastLogin);
             await _context.SaveChangesAsync();
