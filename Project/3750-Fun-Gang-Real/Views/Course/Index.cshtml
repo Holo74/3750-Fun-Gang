@@ -4,6 +4,51 @@
 	ViewData["Title"] = "Course";
 }
 
+
+
+<head>
+
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script type="text/javascript">
+
+		// Load the Visualization API and the corechart package.
+		google.charts.load('current', { 'packages': ['corechart'] });
+
+		// Set a callback to run when the Google Visualization API is loaded.
+		google.charts.setOnLoadCallback(drawChart);
+
+		// Callback that creates and populates a data table,
+		// instantiates the pie chart, passes in the data and
+		// draws it.
+		function drawChart() {
+
+			// Create the data table.
+			var data = new google.visualization.DataTable();
+			data.addColumn('string', 'Names');
+			data.addColumn('number', 'Amount');
+
+			// Converts the model list into an array
+			var pieInfo = @Html.Raw(Json.Serialize(Model.PiechartData));
+			
+			// Each object in the list is a class.  Meaning you can access the properties by doing .{name of property}
+			for (let i = 0; i < pieInfo.length; i++) {
+				data.addRow([pieInfo[i].name, pieInfo[i].amount])
+			}
+
+			// Set chart options
+			var options = {
+				
+				'width': 400,
+				'height': 300,
+				slices: [{color: 'Green'}, {color: 'LightGreen'}, {color: 'LightBlue'}, {color: 'Blue'}, {color: 'DarkBlue'}, {color: 'GreenYellow'}, {color: 'Yellow'}, {color: 'LightYellow'}, {color: 'Pink'}, {color: 'Red'}, {color: 'DarkRed'}, {color: 'Black'}]
+			};
+
+			// Instantiate and draw our chart, passing in some options.
+			var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+			chart.draw(data, options);
+		}
+	</script>
+</head>
 <div class="text-center">
 	<h1>@Model.Class.CourseName</h1>
 </div>
@@ -13,6 +58,87 @@
 		<a asp-action="Create" asp-route-classId="@Model.Class.ClassId">Create New Assignment</a>
 		@*  <a href="@Url.Action("Index", "ClassAssignments",  { classID = item.ClassId })">*@
 	</div>
+}
+
+@{
+	double totalgrade = 0;
+	double totalmaxgrade = 0;
+	double totalpercent = 0;
+}
+@foreach (var item in Model.Assignments)
+{
+	@if (Model.User.UserType == "Student")
+	{
+		@if (item.Submission.Count() == 1)
+		{
+			@if (item.Submission.FirstOrDefault().Points != null)
+			{
+
+				totalgrade = totalgrade + (double)item.Submission.FirstOrDefault().Points;
+				totalmaxgrade = totalmaxgrade + (double)item.Assignment.MaxPoints;
+			}
+		}
+	}
+}
+@{
+	totalpercent = (totalgrade / totalmaxgrade) * 100;
+	string lettergrade;
+	@if (totalpercent >= 94)
+	{
+		lettergrade = "A";
+	}
+	else if (totalpercent >= 90)
+	{
+		lettergrade = "A-";
+	}
+	else if (totalpercent >= 87)
+	{
+		lettergrade = "B+";
+	}
+	else if (totalpercent >= 84)
+	{
+		lettergrade = "B";
+	}
+	else if (totalpercent >= 80)
+	{
+		lettergrade = "B-";
+	}
+	else if (totalpercent >= 77)
+	{
+		lettergrade = "C+";
+	}
+	else if (totalpercent >= 74)
+	{
+		lettergrade = "C";
+	}
+	else if (totalpercent >= 70)
+	{
+		lettergrade = "C-";
+	}
+	else if (totalpercent >= 67)
+	{
+		lettergrade = "D+";
+	}
+	else if (totalpercent >= 64)
+	{
+		lettergrade = "D";
+	}
+	else if (totalpercent >= 60)
+	{
+		lettergrade = "D-";
+	}
+	else
+	{
+		lettergrade = "E";
+	}
+
+	@if (Model.User.UserType == "Student")
+	{
+	<h3>
+		Letter grade: @lettergrade (@Math.Round(@totalpercent, 2)%)
+	</h3>	
+	}
+	
 }
 
 <table class="table">
@@ -59,12 +185,12 @@
 				</td>
 				<td>
 					@Html.DisplayFor(modelData => item.Assignment.DueTime)
-                </td>
+				</td>
 				@if (Model.User.UserType == "Student")
 				{
 					<td>
 						@Html.DisplayFor(modelData => item.Submission.FirstOrDefault().Points) / @Html.DisplayFor(modelData => item.Assignment.MaxPoints)
-                </td>
+					</td>
 				}
 
 
@@ -95,32 +221,40 @@
 					</td>
 				}
 				@*
-				@if (Model.User.UserType != "Student")
-				{
-					<td>
-						<button class="btn btn-primary">
-							Edit
-						</button>
-					</td>
-					<td>
-						<button class="btn btn-primary">
-							Delete
-						</button>
-					</td>
-					<td>
-						<button class="btn btn-primary">
-							Submissions
-						</button>
-					</td>
-				}
-				else
-				{
-					<td>
-						<a class="btn btn-primary" href="ClassAssignments/Assignment/?ID=@item.Id">Submit</a>
-					</td>
+			@if (Model.User.UserType != "Student")
+			{
+			<td>
+			<button class="btn btn-primary">
+			Edit
+			</button>
+			</td>
+			<td>
+			<button class="btn btn-primary">
+			Delete
+			</button>
+			</td>
+			<td>
+			<button class="btn btn-primary">
+			Submissions
+			</button>
+			</td>
+			}
+			else
+			{
+			<td>
+			<a class="btn btn-primary" href="ClassAssignments/Assignment/?ID=@item.Id">Submit</a>
+			</td>
 
-				}*@
+			}*@
 			</tr>
 		}
+
 	</tbody>
 </table>
+@if (Model.User.UserType == "Student")
+{
+<body>
+	<!--Div that will hold the pie chart-->
+	<div id="chart_div"></div>
+</body>
+}
