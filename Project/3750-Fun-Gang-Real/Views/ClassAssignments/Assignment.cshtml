@@ -101,13 +101,18 @@
 @if (Model.Submission != null && Model.Submission.FirstOrDefault() == null)
 {
     <form asp-action="Submit" enctype="multipart/form-data">
-        <div>
-            <label asp-for="Submission.First().Data" class="control-label"></label>
-            <input name="Data" type="file" />
-            <span asp-validation-for="Submission.First().Data" class="text-danger"></span>
-        </div>
-        @*<textarea name="Data"></textarea>
-    <br />*@
+        @if(Model.Assignment.SubmissionType != null && (Model.Assignment.SubmissionType == "text" || Model.Assignment.SubmissionType == "Text"))
+        {
+            <textarea name="Data"></textarea>
+        }
+        else
+        {
+            <div>
+                <label asp-for="Submission.First().Data" class="control-label"></label>
+                <input name="Data" type="file" />
+                <span asp-validation-for="Submission.First().Data" class="text-danger"></span>
+            </div>
+        }
         <input value="Submit" type="submit" class="btn btn-primary" />
     </form>
 }
