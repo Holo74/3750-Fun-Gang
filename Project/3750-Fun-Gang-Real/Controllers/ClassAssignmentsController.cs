@@ -51,7 +51,15 @@ namespace Assignment_1.Controllers
             var AssignmentID = HttpContext.Session.GetInt32("AssignmentID");
             return View();
         }
+       public async Task<int> CreateMain(int id, ClassAssignments ca)
+        {
+            ca.ClassId = id == null ? -1 : id;
+            _context.ClassAssignments.Add(ca);
+            await _context.SaveChangesAsync();
+            return 1;
 
+
+        }
         public IActionResult Assignment(int ID)
         {
             AssignmentSubmissionViewModel ASVM = new AssignmentSubmissionViewModel();            
@@ -252,24 +260,77 @@ namespace Assignment_1.Controllers
             await _context.SaveChangesAsync();
 			return RedirectToAction("Submissions", new { ID = t.AssignmentFK });
 		}
-  //      public IActionResult DownloadFile()
-  //      {
-  //          AssignmentSubmissions asub;
-  //          var memory = DownloadSingleFile(asub.Data);
-  //      }
-		//private MemoryStream DownloadSingleFile(string uploadPath)
-  //      {
-  //          var path = Path.Combine(Directory.GetCurrentDirectory(), uploadPath);
-  //          var memory = new MemoryStream();
-  //          if(System.IO.File.Exists(path))
-  //          {
-  //              var net = new System.Net.WebClient();
-  //              var data = net.DownloadData(path);
-  //              var content = new System.IO.MemoryStream(data);
-               
-  //          }
-  //          memory.Position = 0;
-  //          return memory;
-  //      }
-	}
+
+   //     public async Task<IActionResult> Details(int? id)
+   //     {
+   //         if (id == null || _context.ClassAssignments == null)
+   //         {
+   //             return NotFound();
+   //         }
+
+   //         var courseA = await _context.ClassAssignments
+   //             .FirstOrDefaultAsync(m => m.Id == id);
+   //         if (courseA == null)
+   //         {
+   //             return NotFound();
+   //         }
+
+   //         return View(courseA);
+   //     }
+   //     public async Task<IActionResult> Edit(int? id)
+   //     {
+
+
+   //         if (id == null || _context.ClassAssignments == null)
+   //         {
+   //             return NotFound();
+   //         }
+   //         ///ca = ClassAssignments
+			//var ca = await _context.ClassAssignments.FindAsync(id);
+   //         if (ca == null)
+   //         {
+   //             return NotFound();
+   //         }
+
+   //         return View(ca);
+
+   //     }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Edit(int id, [Bind("ID,ClassId,AssignmentTitle,Description,MaxPoints,DueDate,DueTime,SubmissionType")] ClassAssignments ca)
+        //{
+
+
+        //    var Id = HttpContext.Session.GetInt32("ID");
+
+        //    var oldID = _context.ClassAssignments.Where(x => x.Id == id).FirstOrDefault();
+
+
+
+        //    _context.ChangeTracker.Clear();
+        //    _context.Update(ca);
+        //    await _context.SaveChangesAsync();
+
+        //    return Redirect(string.Format("/ClassAssignments/Details/ID={0}", Id));//return to index page after creating page
+        //}
+        ////      public IActionResult DownloadFile()
+        //      {
+        //          AssignmentSubmissions asub;
+        //          var memory = DownloadSingleFile(asub.Data);
+        //      }
+        //private MemoryStream DownloadSingleFile(string uploadPath)
+        //      {
+        //          var path = Path.Combine(Directory.GetCurrentDirectory(), uploadPath);
+        //          var memory = new MemoryStream();
+        //          if(System.IO.File.Exists(path))
+        //          {
+        //              var net = new System.Net.WebClient();
+        //              var data = net.DownloadData(path);
+        //              var content = new System.IO.MemoryStream(data);
+
+        //          }
+        //          memory.Position = 0;
+        //          return memory;
+        //      }
+    }
 }

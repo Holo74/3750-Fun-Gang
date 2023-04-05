@@ -68,8 +68,38 @@ namespace Assignment_1Test
             _context.Class.Remove(course);
             await _context.SaveChangesAsync();
         }
+		[TestMethod]
+        public async Task TeacherCanCreateAssignment()
+        {
+            var course =  _context.Class.Where(x => x.ClassId ==13).ToList();
+            var numOfAssignmentBefore = _context.ClassAssignments.Where(c => c.ClassId == course[0].ClassId).ToList();
+            int lengthBefore = numOfAssignmentBefore.Count();
 
-        [TestMethod]
+            ClassAssignments assignments = new ClassAssignments();
+            assignments.AssignmentTitle = "TesterTest";
+            assignments.Description = "DescriptionTest";
+            assignments.MaxPoints = 100;
+            assignments.DueDate = DateTime.Now;
+            assignments.DueTime = DateTime.Now;
+            assignments.SubmissionType = "doc";
+
+            ClassAssignmentsController cac = new ClassAssignmentsController(_context);
+            await cac.CreateMain(course[0].ClassId, assignments);
+
+            var numOfAssignmentsAfter = _context.ClassAssignments.Where(c =>c.ClassId == course[0].ClassId).ToList();
+            int lengthAfter = numOfAssignmentsAfter.Count();
+
+            Assert.AreEqual(lengthAfter, lengthBefore + 1);
+
+            _context.ClassAssignments.Remove(assignments);
+            await _context.SaveChangesAsync();
+
+
+
+        }
+
+
+		[TestMethod]
         public async Task StudentCanRegisterForCourse()
         {
             //find student id that exists (id = 43 is teststud)
