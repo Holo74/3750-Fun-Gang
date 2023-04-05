@@ -132,10 +132,13 @@
 		lettergrade = "E";
 	}
 
-
+	@if (Model.User.UserType == "Student")
+	{
 	<h3>
 		Letter grade: @lettergrade (@Math.Round(@totalpercent, 2)%)
-	</h3>
+	</h3>	
+	}
+	
 }
 
 <table class="table">
@@ -248,7 +251,10 @@
 
 	</tbody>
 </table>
+@if (Model.User.UserType == "Student")
+{
 <body>
 	<!--Div that will hold the pie chart-->
 	<div id="chart_div"></div>
 </body>
+}

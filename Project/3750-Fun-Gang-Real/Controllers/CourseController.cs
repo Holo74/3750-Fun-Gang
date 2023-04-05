@@ -89,15 +89,91 @@ namespace Assignment_1.Controllers
             var t = from u in _context.User select u;
             SALV.User = t.Where(t => t.Id == UserID).FirstOrDefault();
 
-            PiechartInfo dummyData = new PiechartInfo() { Title = "Hello world" };
-            SALV.PiechartData = new List<PieChartNameandAmount>();
-            SALV.PiechartData.Add(new PieChartNameandAmount() { Name = "A", Amount = 3 });
-            SALV.PiechartData.Add(new PieChartNameandAmount() { Name = "A-", Amount = 1 });
-            SALV.PiechartData.Add(new PieChartNameandAmount() { Name = "B+", Amount = 5 });
-            SALV.PiechartData.Add(new PieChartNameandAmount() { Name = "C", Amount = 0 });
-            SALV.PiechartData.Add(new PieChartNameandAmount() { Name = "B", Amount = 0 });
-            SALV.PiechartData.Add(new PieChartNameandAmount() { Name = "D", Amount = 0 });
-            SALV.PiechartData.Add(new PieChartNameandAmount() { Name = "E", Amount = 0 });
+            int gradeA = 0;
+			int gradeAm = 0;
+			int gradeBp = 0;
+			int gradeB = 0;
+			int gradeBm = 0;
+			int gradeCp = 0;
+			int gradeC = 0;
+			int gradeCm = 0;
+			int gradeDp = 0;
+			int gradeD = 0;
+			int gradeDm = 0;
+			int gradeE = 0;
+
+            foreach (var grade in submissions)
+            {
+                var isassignment = assignment.Where(f => f.Id == grade.AssignmentFK).First();
+
+                if (grade.Points == null) continue;
+                float currentgrade = ((float)grade.Points.Value/(float)(isassignment?.MaxPoints==null ?1:isassignment.MaxPoints.Value));
+
+                float currentpercent = currentgrade * 100;
+
+                if (currentpercent >= 94)
+                {
+                    gradeA++;
+                }
+                else if (currentpercent >= 90)
+                {
+                    gradeAm++;
+                }
+                else if (currentpercent >= 87)
+                {
+                    gradeBp++;
+                }
+                else if (currentpercent >= 84)
+                {
+                    gradeB++;
+                }
+                else if (currentpercent >= 80)
+                {
+                    gradeBm++;
+                }
+                else if (currentpercent >= 77)
+                {
+                    gradeCp++;
+                }
+                else if (currentpercent >= 74)
+                {
+                    gradeC++;
+                }
+                else if (currentpercent >= 70)
+                {
+                    gradeCm++;
+                }
+                else if (currentpercent >= 67)
+                {
+                    gradeDp++;
+                }
+                else if (currentpercent >= 64)
+                {
+                    gradeD++;
+                }
+                else if (currentpercent >= 60)
+                {
+                    gradeDm++;
+                }
+                else
+                {
+                    gradeE++;
+                }
+            }
+
+			SALV.PiechartData = new List<PieChartNameandAmount>();
+            SALV.PiechartData.Add(new PieChartNameandAmount() { Name = "A", Amount = gradeA });
+            SALV.PiechartData.Add(new PieChartNameandAmount() { Name = "A-", Amount = gradeAm });
+			SALV.PiechartData.Add(new PieChartNameandAmount() { Name = "B+", Amount = gradeBp });
+			SALV.PiechartData.Add(new PieChartNameandAmount() { Name = "B", Amount = gradeB });
+			SALV.PiechartData.Add(new PieChartNameandAmount() { Name = "B-", Amount = gradeBm });
+			SALV.PiechartData.Add(new PieChartNameandAmount() { Name = "C+", Amount = gradeCp });
+			SALV.PiechartData.Add(new PieChartNameandAmount() { Name = "C", Amount = gradeC });
+			SALV.PiechartData.Add(new PieChartNameandAmount() { Name = "C-", Amount = gradeCm });
+			SALV.PiechartData.Add(new PieChartNameandAmount() { Name = "D+", Amount = gradeDp });
+			SALV.PiechartData.Add(new PieChartNameandAmount() { Name = "D", Amount = gradeD });
+			SALV.PiechartData.Add(new PieChartNameandAmount() { Name = "D-", Amount = gradeDm });
+			SALV.PiechartData.Add(new PieChartNameandAmount() { Name = "E", Amount = gradeE });
 
 
             return View(SALV);
