@@ -8,6 +8,9 @@ using Microsoft.VisualStudio.TestPlatform.Utilities;
 using Stripe;
 using Assignment_1.Controllers;
 using System.Security.Cryptography;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
 
 namespace Assignment_1Test
 {
@@ -168,5 +171,32 @@ namespace Assignment_1Test
 
 
         }
-	}
+
+        [TestMethod]
+        public void SeleniumCreateAccount()
+        {
+
+            IWebDriver driver = new FirefoxDriver();
+
+            driver.Navigate().GoToUrl("https://notebook-cs3750.azurewebsites.net/Login/");
+
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
+
+            var textBox = driver.FindElement(By.ClassName("btn-secondary"));
+            textBox.Click();
+
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
+
+            var signupBut = driver.FindElement(By.ClassName("btn-primary"));
+            signupBut.Click();
+
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
+
+            string emailError = driver.FindElement(By.Id("Email-error")).Text;
+
+            Assert.IsTrue(emailError.Length > 0);
+
+            driver.Quit();
+        }
+    }
 }
