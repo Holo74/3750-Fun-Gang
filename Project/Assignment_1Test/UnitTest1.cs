@@ -8,6 +8,7 @@ using Microsoft.VisualStudio.TestPlatform.Utilities;
 using Stripe;
 using Assignment_1.Controllers;
 using System.Security.Cryptography;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace Assignment_1Test
 {
@@ -15,6 +16,7 @@ namespace Assignment_1Test
     public class UnitTest1
     {
         private readonly Assignment_1Context _context;
+        private IMemoryCache _cache;
 
         public UnitTest1()
         {
@@ -52,7 +54,7 @@ namespace Assignment_1Test
             days.Add("W");
             ICollection<string> day = days;
 
-            ClassesController classes = new ClassesController(_context);
+            ClassesController classes = new ClassesController(_context, _cache);
             await classes.CreateMain(user[0].Id, course, days);
 
             //if thats true, pass. else, fail
@@ -112,7 +114,7 @@ namespace Assignment_1Test
             if (registrationList.Count > 0)
             {
                 //var registration = registrationList[0];
-                StudentRegistrationController registrations = new StudentRegistrationController(_context);
+                StudentRegistrationController registrations = new StudentRegistrationController(_context, _cache);
                 //27 is a class made for unit testing
                 await registrations.RegisterForClassLogic(43, 16);
                 //registration.IsRegistered = 1; 
