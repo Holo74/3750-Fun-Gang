@@ -174,9 +174,10 @@ namespace Assignment_1.Controllers
 			SALV.PiechartData.Add(new PieChartNameandAmount() { Name = "D", Amount = gradeD });
 			SALV.PiechartData.Add(new PieChartNameandAmount() { Name = "D-", Amount = gradeDm });
 			SALV.PiechartData.Add(new PieChartNameandAmount() { Name = "E", Amount = gradeE });
+			
 
 
-            return View(SALV);
+			return View(SALV);
         }
         public IActionResult Create(int classId)
         {
