@@ -3,15 +3,74 @@
 @{
     ViewData["Title"] = "Create";
 }
+<style>
+    .box{
+        border:solid;
+        border-color:white;
+		border-radius: 5px;
+		box-shadow: 10px 10px 10px rgba(68, 68, 68, 0.6);
+		width:30%;
+		height:415px;
+		margin: 0 auto;
+		background-color:white;
+		vertical-align: middle;
+		position:absolute;
+		top:25%;
+		left:35%;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
 
-<h1>Create</h1>
+   
+    h1{
+        margin:auto;
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+    body {
+        background-image: url('/Photos/Gradient-Background.png');
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+    .btn-primary{
+		border:thin;
+		border-block-color:lightblue;
+		border-radius: 5px;
+		box-shadow: 10px 10px 10px rgba(68, 68, 68, 0.6);
+		width:100%;
+		background-color:cornflowerblue;
+		margin: 0 auto;
+		position:absolute;
+		top:72%;
+		left:33%;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+		
+	    }   
+    .b1{
+       border:thin;
+		border-block-color:lightblue;
+		border-radius: 5px;
+		box-shadow: 10px 10px 10px rgba(68, 68, 68, 0.6);
+		width:20%;
+		
+		margin: 0 auto;
+		background-color:white;
+		position:absolute;
+		top:72%;
+		left:33%;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+</style>
+<h1>Create An Account</h1>
 
-<h4>User</h4>
-<hr />
+@*<h4>User</h4>*@
+@*<hr />*@
+<body>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class = "box">
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
                 <input asp-for="Email" class="form-control"/>
@@ -48,14 +107,21 @@
                 Teacher
                 @Html.RadioButtonFor(model => model.UserType, "Teacher")
             </div>
-            <div class="form-group">
-                <input type="submit" value="Sign Up" class="btn btn-primary" />
-            </div>
-          
-        </form>
-    </div>
-</div>
+            
+           
 
+           </div>
+               <div class = "b1">
+                <div class="form-group">
+                    <input type="submit" value="Sign Up" class="btn btn-primary" />
+                </div>
+                 </div>
+            
+        </form>
+        </div>
+    </div>
+
+</body>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

@@ -2,6 +2,7 @@
 using Assignment_1.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
 namespace Assignment_1.Controllers
@@ -115,8 +116,69 @@ namespace Assignment_1.Controllers
             return Redirect(string.Format("/Course?classId={0}",ClassId));//return to index page after creating page
         }
 
+        public async Task<IActionResult> Edit(int? id)
+        {
 
-        public class CourseInfo
+
+            if (id == null || _context.ClassAssignments == null)
+            {
+                return NotFound();
+            }
+            ///ca = ClassAssignments
+			var ca = await _context.ClassAssignments.FindAsync(id);
+            if (ca == null)
+            {
+                return NotFound();
+            }
+
+            return View(ca);
+
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ClassId,AssignmentTitle,Description,MaxPoints,DueDate,DueTime,SubmissionType")] ClassAssignments ca)
+        {
+            //var ClassId = _context.ClassAssignments.Where(x => x.Id == id).FirstOrDefault();
+
+
+			//var oldID = _context.ClassAssignments.Where(x => x.Id == id).FirstOrDefault();
+
+
+
+            _context.ChangeTracker.Clear();
+            _context.Update(ca);
+            await _context.SaveChangesAsync();
+
+            return Redirect("/Course?classId="+ ca.ClassId);
+        }
+		public async Task<IActionResult> Details(int? id)
+		{
+			if (id == null || _context.ClassAssignments == null)
+			{
+				return NotFound();
+			}
+
+			var ai = await _context.ClassAssignments
+				.FirstOrDefaultAsync(m => m.Id == id);
+			if (ai == null)
+			{
+				return NotFound();
+			}
+
+			return View(ai);
+		}
+		[HttpPost, ActionName("DeleteC")]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> DeleteConfirmed(int id, ClassAssignments ca)
+		{
+			var a = await _context.ClassAssignments.FindAsync(id);
+			_context.ClassAssignments.Remove(ca);
+			await _context.SaveChangesAsync();
+			return RedirectToAction(nameof(Index));
+
+		
+		}
+		public class CourseInfo
         {
             public string CourseName { get; set; }
             public string Department { get; set; }
