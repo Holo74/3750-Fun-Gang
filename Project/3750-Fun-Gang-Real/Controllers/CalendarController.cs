@@ -583,6 +583,7 @@ namespace Assignment_1.Controllers
                             ev.Title = course.Department.ToString() + course.CourseNumber.ToString() + " " + assign.AssignmentTitle.ToString();
                             ev.Color = "red";
                             ev.TextColor = "red";
+                            ev.Url = "../../ClassAssignments/Submissions/?ID=" + assign.Id;
 
                             myEvents.Add(ev);
                         }

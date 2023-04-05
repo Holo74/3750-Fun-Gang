@@ -44,7 +44,7 @@ namespace Assignment_1.Controllers
             {
                 _cache.TryGetValue(CacheKeys.UserView, out ClassUserViewModel view);
 
-                if (view == null || view.classes.ElementAt(0) == null)
+                if (view == null || view.classes[0] == null)
                 {
                     ClassUserViewModel classUserView = new ClassUserViewModel();
 
