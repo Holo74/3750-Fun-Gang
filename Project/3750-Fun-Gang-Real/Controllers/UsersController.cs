@@ -424,7 +424,7 @@ namespace Assignment_1.Controllers
             return View();
         }
 
-        private async Task<List<string>> GetNotifications(User viewUser)
+        public async Task<List<string>> GetNotifications(User viewUser)
         {
             List<string> notification = new List<string>();
             var joinedAssignmentTables =
