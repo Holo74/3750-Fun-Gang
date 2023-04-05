@@ -92,6 +92,11 @@
         min-width: 200px;
     }
 
+    .card a{
+        color:darkslategray;
+        text-decoration:none;
+    }
+
         /* On mouse-over, add a deeper shadow */
         .card:hover {
             box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
@@ -152,23 +157,6 @@
                     </div>
                 }
             }
-
-            @*@if (ViewData["Student"].ToString() != "Student")
-        {
-        @foreach (var item in ViewData["UserId"])
-        {
-        @if (ViewData["UserId"] == model => model.UserId)
-        {
-        <div class="card">
-        <div class="container">
-        <h6><b>@Html.DisplayFor(modelItem => item.CourseName)/@Html.DisplayNameFor(model => model.CourseNumber)</b></h6>
-        <p>@Html.DisplayFor(modelItem => item.DaysOfWeek) at @Html.DisplayFor(modelItem => item.TimeOfDay)</p>
-        <p>@Html.DisplayFor(modelItem => item.Location)</p>
-        </div>
-        </div>
-        }
-        }
-        }*@
         }
     </div>
 
