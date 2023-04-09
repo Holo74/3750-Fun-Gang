@@ -37,6 +37,9 @@ namespace Assignment_1.Controllers
             if (UserID != null)
             {
                 Course = Course.Where(c => c.UserId == UserID);
+                var users = from u in _context.User select u;
+                var user = users.Where(u => u.Id == UserID).ToList();
+                ViewData["Student"] = user[0].UserType;
                 return View(Course);
             }
             return Redirect("/Login/");//need a different default response
@@ -59,6 +62,10 @@ namespace Assignment_1.Controllers
 
         public IActionResult Create()
         {
+            var UserID = HttpContext.Session.GetInt32("UserID");
+            var users = from u in _context.User select u;
+            var user = users.Where(u => u.Id == UserID).ToList();
+            ViewData["Student"] = user[0].UserType;
             return View(); // just brings the create page up
         }
 
@@ -71,6 +78,11 @@ namespace Assignment_1.Controllers
             int? UserID = HttpContext.Session.GetInt32("UserID");
             await CreateMain(UserID ?? default(int), cl, day);
             _cache.Remove(CacheKeys.UserView);
+
+            var users = from u in _context.User select u;
+            var user = users.Where(u => u.Id == UserID).ToList();
+            ViewData["Student"] = user[0].UserType;
+
             return Redirect("/Classes/");//return to index page after creating page
         }
 
@@ -110,6 +122,11 @@ namespace Assignment_1.Controllers
             {
                 return NotFound();
             }
+
+            int? UserID = HttpContext.Session.GetInt32("UserID");
+            var users = from u in _context.User select u;
+            var user = users.Where(u => u.Id == UserID).ToList();
+            ViewData["Student"] = user[0].UserType;
 
             return View(course);
 
@@ -159,6 +176,11 @@ namespace Assignment_1.Controllers
             {
                 return NotFound();
             }
+
+            int? UserID = HttpContext.Session.GetInt32("UserID");
+            var users = from u in _context.User select u;
+            var user = users.Where(u => u.Id == UserID).ToList();
+            ViewData["Student"] = user[0].UserType;
 
             return View(course);
         }

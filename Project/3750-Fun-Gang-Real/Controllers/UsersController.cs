@@ -259,7 +259,7 @@ namespace Assignment_1.Controllers
                         }
                     }
                 }
-
+                ViewData["Student"] = view.viewUser.UserType;
                 return View(view);
             }
             else if (Id != null)
@@ -434,6 +434,8 @@ namespace Assignment_1.Controllers
             uv.Password = user.Password;
             uv.UserType = user.UserType;
             uv.ShowImage = TransformImagePath(user.Image);
+
+            ViewData["Student"] = user.UserType;
             return View(uv);
         }
 
@@ -519,7 +521,7 @@ namespace Assignment_1.Controllers
             {
                 return NotFound();
             }
-
+            ViewData["Student"] = user.UserType;
             return View(user);
         }
 
@@ -572,6 +574,7 @@ namespace Assignment_1.Controllers
                         throw;
                     }
                 }
+            ViewData["Student"] = user.UserType;
             return Redirect("/Users/Details/" + user.Id);
         }
 
@@ -589,7 +592,6 @@ namespace Assignment_1.Controllers
             {
                 return NotFound();
             }
-
             return View(user);
         }
 

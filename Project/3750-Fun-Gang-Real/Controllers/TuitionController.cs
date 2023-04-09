@@ -73,8 +73,8 @@ namespace Assignment_1.Controllers
                 a.Balance += Convert.ToDecimal(p != null ? p : 0);
                 _context.Update(a);
                 _context.SaveChangesAsync();
+                ViewData["Student"] = a.UserType;
             }
-
             return View();
         }
 
@@ -89,6 +89,7 @@ namespace Assignment_1.Controllers
             if (UserID != null)
             {
                 Assignment_1.Models.User a = user.Where(x => x.Id == UserID).First();
+                ViewData["Student"] = a.UserType;
                 return View(a);
             }
             return Redirect("/Login/");
