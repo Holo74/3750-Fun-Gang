@@ -206,9 +206,9 @@ namespace Assignment_1Test
 		public void StudentCanRegisterForCourseSelenium()
 		{
 
-			IWebDriver driver = new FirefoxDriver();
-		//https://localhost:7099/Login/Index/
-			driver.Navigate().GoToUrl("https://notebook-cs3750.azurewebsites.net/Login/");
+			IWebDriver driver = new ChromeDriver();
+		    //https://localhost:7099/Login/Index/
+			driver.Navigate().GoToUrl("https://localhost:7099/Login/Index/");
 
 			driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
 
@@ -228,29 +228,31 @@ namespace Assignment_1Test
             var regbtn = driver.FindElement(By.LinkText("Registration"));
             regbtn.Click();
 
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(2000);
 
-            var coursebtn = driver.FindElement(By.LinkText("Register"));
+            var coursebtn = driver.FindElement(By.Name("Register"));
             coursebtn.Click();
 
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(2000);
 
             var homebtn = driver.FindElement(By.LinkText("Home"));
             homebtn.Click();
 
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
 
-            string isclassthere = driver.FindElement(By.Id("1")).Text;
+            string isclassthere = driver.FindElement(By.ClassName("card")).Text;
 
             Assert.IsTrue(isclassthere.Length > 0);
 
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
 
-            regbtn.Click();
+			regbtn = driver.FindElement(By.LinkText("Registration"));
+			regbtn.Click();
 
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
 
-            coursebtn.Click();
+            coursebtn = driver.FindElement(By.Name("Register"));
+			coursebtn.Click();
 
             driver.Quit();
 		}

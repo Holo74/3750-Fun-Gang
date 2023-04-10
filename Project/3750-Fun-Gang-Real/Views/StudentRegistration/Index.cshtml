@@ -47,7 +47,7 @@
                 </td>
                 <td>
                     <form asp-action="RegisterForClass" method="post" asp-route-classId="@item.Classes.ClassId">
-                        <button>
+                        <button name="Register">
                             @if (item.Reg != null && item.Reg.IsRegistered == 1)
                             {
                                 <p>Unenroll</p>
