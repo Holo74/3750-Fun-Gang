@@ -460,26 +460,7 @@ namespace Assignment_1.Controllers
             var temp = await users.FirstOrDefaultAsync();
             return View(users);
         }
-        /*
-        //GET Users/Details/X
-		public async Task<IActionResult> Validate(int? id)
-		{
-			if (id == null || _context.User == null)
-			{
-				return NotFound();
-			}
-
-			var user = await _context.User
-				.FirstOrDefaultAsync(m => m.Id == id);
-			if (user == null)
-			{
-				return NotFound();
-			}
-
-			return Redirect("/Users/Details/" + id);
-		}
-        */
-		// GET: Users/Create
+        
 		public IActionResult Create()
         {
             return View();
@@ -500,8 +481,7 @@ namespace Assignment_1.Controllers
                 user.Password = Hasher.HashPassword(new Models.User(), user.Password);//hash before sending to database
                 _context.Add(user);
                 await _context.SaveChangesAsync();
-             //   return RedirectToAction(nameof(Index));
-            //}
+            
             return Redirect("/Login/");
         }
 
@@ -533,29 +513,41 @@ namespace Assignment_1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Email,FirstName,LastName,BirthDate,UserType,Address,City,State,ZipCode,PhoneNumber,ReferenceOne,ReferenceTwo,ReferenceThree,Image")]User user)
         {
+
+            int i;
             var UserID = HttpContext.Session.GetInt32("UserID");
             string directory = "wwwroot/Images";
             Directory.CreateDirectory(directory);
-
-            IFormFile z = Request.Form.Files[0];
-            string fileExtension = z.FileName.Substring(z.FileName.LastIndexOf('.'));
-            string path = directory + "/" + UserID + fileExtension;
-            using (Stream filestream = new FileStream(directory + "/" + UserID + fileExtension, FileMode.Create, FileAccess.Write))
-            {
-                // Saves the file to where ever the filestream was pointed to.
-                z.CopyTo(filestream);
-                // Won't save properly without this
-                filestream.Close();
-            }
+            
+            
           
             Console.WriteLine(ModelState.IsValid);
             Console.WriteLine("Model State is valid?");
             Console.WriteLine(ModelState.ErrorCount);
             var olduser = _context.User.Where(x => x.Id == id).FirstOrDefault();
+            if (Request.Form.Files.Count > 0)
+            {
+                
+                IFormFile z = Request.Form.Files[0];
+                string fileExtension = z.FileName.Substring(z.FileName.LastIndexOf('.'));
+                string path = directory + "/" + z.FileName;
+                using (Stream filestream = new FileStream(directory + "/" + z.FileName, FileMode.Create, FileAccess.Write))
+                {
+                    // Saves the file to where ever the filestream was pointed to.
+                    z.CopyTo(filestream);
+                    // Won't save properly without this
+                    filestream.Close();
+                    user.Image = path;
+                }
+            }
+            else
+            {
+                user.Image = olduser.Image;
+            }
 
             try
-                {
-                user.Image = path;
+            {
+                
                 user.Password = olduser.Password;
                 user.UserType = olduser.UserType;        
                 user.ConfirmPassword = olduser.Password;

@@ -9,12 +9,17 @@
 <h4>User</h4>
 <hr />
 <div class="row">
+    <label>Hello World</label>
+    <label>@Model.Image</label>
+    <img src="@Model.Image" />
+    
     <div class="col-md-4">
         <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="None" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
 
-           <div>
+           <div class="form-group">
+              
                 <label asp-for="Image" class="control-label"></label>
                 <input name="image" type="file" />
                 <span asp-validation-for="Image" class="text-danger"></span>
