@@ -256,5 +256,19 @@ namespace Assignment_1Test
 
             driver.Quit();
 		}
-	}
+        [TestMethod]
+        public void CanInstructorCreateClassTestSelenium()
+        {
+            IWebDriver driver = new ChromeDriver();
+            //https://localhost:7099/Login/Index/
+            driver.Navigate().GoToUrl("https://localhost:7099/Login/Index/");
+
+
+
+
+
+
+            driver.Quit();
+        }
+    }
 }
