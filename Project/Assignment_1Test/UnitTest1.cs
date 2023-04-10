@@ -9,6 +9,10 @@ using Stripe;
 using Assignment_1.Controllers;
 using System.Security.Cryptography;
 using Microsoft.Extensions.Caching.Memory;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.IE;
 
 namespace Assignment_1Test
 {
@@ -172,5 +176,85 @@ namespace Assignment_1Test
             }
            
         }
+		[TestMethod]
+		public void SeleniumCreateAccount()
+		{
+
+			IWebDriver driver = new FirefoxDriver();
+
+			driver.Navigate().GoToUrl("https://notebook-cs3750.azurewebsites.net/Login/");
+
+			driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
+
+			var textBox = driver.FindElement(By.ClassName("btn-secondary"));
+			textBox.Click();
+
+			driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
+
+			var signupBut = driver.FindElement(By.ClassName("btn-primary"));
+			signupBut.Click();
+
+			driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
+
+			string emailError = driver.FindElement(By.Id("Email-error")).Text;
+
+			Assert.IsTrue(emailError.Length > 0);
+
+			driver.Quit();
+		}
+		[TestMethod]
+		public void StudentCanRegisterForCourseSelenium()
+		{
+
+			IWebDriver driver = new ChromeDriver();
+		    //https://localhost:7099/Login/Index/
+			driver.Navigate().GoToUrl("https://localhost:7099/Login/Index/");
+
+			driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
+
+			var textBox = driver.FindElement(By.Name("Email"));
+			textBox.Click();
+            textBox.SendKeys("teststud");
+
+			var passBox = driver.FindElement(By.Name("Password"));
+			passBox.Click();
+            passBox.SendKeys("Waffle1#");
+
+            var loginbtn = driver.FindElement(By.ClassName("btn-primary"));
+            loginbtn.Click();
+
+			driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
+
+            var regbtn = driver.FindElement(By.LinkText("Registration"));
+            regbtn.Click();
+
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(2000);
+
+            var coursebtn = driver.FindElement(By.Name("Register"));
+            coursebtn.Click();
+
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(2000);
+
+            var homebtn = driver.FindElement(By.LinkText("Home"));
+            homebtn.Click();
+
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
+
+            string isclassthere = driver.FindElement(By.ClassName("card")).Text;
+
+            Assert.IsTrue(isclassthere.Length > 0);
+
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
+
+			regbtn = driver.FindElement(By.LinkText("Registration"));
+			regbtn.Click();
+
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
+
+            coursebtn = driver.FindElement(By.Name("Register"));
+			coursebtn.Click();
+
+            driver.Quit();
+		}
 	}
 }
