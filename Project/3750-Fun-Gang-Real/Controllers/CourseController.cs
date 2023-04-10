@@ -105,8 +105,8 @@ namespace Assignment_1.Controllers
 			int gradeDm = 0;
 			int gradeE = 0;
             
-            if (SALV.User.UserType != "Student")
-            {
+            //if (SALV.User.UserType != "Student")
+            //{
                 foreach(var studentuser in studentlist2.Where(x => x.IsRegistered == 1).ToList())
                 {
 
@@ -195,69 +195,69 @@ namespace Assignment_1.Controllers
 
 				}
 				
-			}
+			//}
 
-            if(SALV.User.UserType == "Student")
-            {
-                foreach (var grade in submissions)
-                {
-                    var isassignment = assignment.Where(f => f.Id == grade.AssignmentFK).First();
+   //         if(SALV.User.UserType == "Student")
+   //         {
+   //             foreach (var grade in submissions)
+   //             {
+   //                 var isassignment = assignment.Where(f => f.Id == grade.AssignmentFK).First();
 
-                    if (grade.Points == null) continue;
-                    float currentgrade = ((float)grade.Points.Value/(float)(isassignment?.MaxPoints==null ?1:isassignment.MaxPoints.Value));
+   //                 if (grade.Points == null) continue;
+   //                 float currentgrade = ((float)grade.Points.Value/(float)(isassignment?.MaxPoints==null ?1:isassignment.MaxPoints.Value));
 
-                    float currentpercent = currentgrade * 100;
+   //                 float currentpercent = currentgrade * 100;
 
-                    if (currentpercent >= 94)
-                    {
-                        gradeA++;
-                    }
-                    else if (currentpercent >= 90)
-                    {
-                        gradeAm++;
-                    }
-                    else if (currentpercent >= 87)
-                    {
-                        gradeBp++;
-                    }
-                    else if (currentpercent >= 84)
-                    {
-                        gradeB++;
-                    }
-                    else if (currentpercent >= 80)
-                    {
-                        gradeBm++;
-                    }
-                    else if (currentpercent >= 77)
-                    {
-                        gradeCp++;
-                    }
-                    else if (currentpercent >= 74)
-                    {
-                        gradeC++;
-                    }
-                    else if (currentpercent >= 70)
-                    {
-                        gradeCm++;
-                    }
-                    else if (currentpercent >= 67)
-                    {
-                        gradeDp++;
-                    }
-                    else if (currentpercent >= 64)
-                    {
-                        gradeD++;
-                    }
-                    else if (currentpercent >= 60)
-                    {
-                        gradeDm++;
-                    }
-                    else
-                    {
-                        gradeE++;
-                    }
-                }
-            }
+   //                 if (currentpercent >= 94)
+   //                 {
+   //                     gradeA++;
+   //                 }
+   //                 else if (currentpercent >= 90)
+   //                 {
+   //                     gradeAm++;
+   //                 }
+   //                 else if (currentpercent >= 87)
+   //                 {
+   //                     gradeBp++;
+   //                 }
+   //                 else if (currentpercent >= 84)
+   //                 {
+   //                     gradeB++;
+   //                 }
+   //                 else if (currentpercent >= 80)
+   //                 {
+   //                     gradeBm++;
+   //                 }
+   //                 else if (currentpercent >= 77)
+   //                 {
+   //                     gradeCp++;
+   //                 }
+   //                 else if (currentpercent >= 74)
+   //                 {
+   //                     gradeC++;
+   //                 }
+   //                 else if (currentpercent >= 70)
+   //                 {
+   //                     gradeCm++;
+   //                 }
+   //                 else if (currentpercent >= 67)
+   //                 {
+   //                     gradeDp++;
+   //                 }
+   //                 else if (currentpercent >= 64)
+   //                 {
+   //                     gradeD++;
+   //                 }
+   //                 else if (currentpercent >= 60)
+   //                 {
+   //                     gradeDm++;
+   //                 }
+   //                 else
+   //                 {
+   //                     gradeE++;
+   //                 }
+   //             }
+   //         }
 			
 
 			SALV.PiechartData = new List<PieChartNameandAmount>();
