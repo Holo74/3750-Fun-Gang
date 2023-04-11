@@ -101,6 +101,14 @@ namespace Assignment_1.Controllers
             var Registered = from r in _context.Registrations select r;
             Registered = Registered.Where(reg => reg.UserFK == UserID && reg.ClassFK == classId);
 
+            var user = from u in _context.User select u;
+            var person = user.Where(x => x.Id == UserID).FirstOrDefault();
+
+            var course = from c in _context.Class select c;
+            var t = course.Where(y => y.ClassId== classId).FirstOrDefault();
+
+            int CreditHourCost = 100;
+
             var listing = Registered.ToList();
             Models.Registrations reg = new Models.Registrations()
             {
@@ -112,6 +120,8 @@ namespace Assignment_1.Controllers
             if (listing.Count == 0)
             {
                 _context.Registrations.Add(reg);
+                //subtract from students balance | no refunds?
+                person.Balance -= (t.NumOfCredits * CreditHourCost);
             }
             else
             {
