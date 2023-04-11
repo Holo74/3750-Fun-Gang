@@ -257,17 +257,85 @@ namespace Assignment_1Test
             driver.Quit();
 		}
         [TestMethod]
-        public void CanInstructorCreateClassTestSelenium()
+        public async void CanInstructorCreateClassTestSelenium()
         {
+            // Go to Website
             IWebDriver driver = new ChromeDriver();
-            //https://localhost:7099/Login/Index/
-            driver.Navigate().GoToUrl("https://localhost:7099/Login/Index/");
+            driver.Navigate().GoToUrl("https://notebook-cs3750.azurewebsites.net/Login/");
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
 
+            // Login
+            var textBox = driver.FindElement(By.Name("Email"));
+            textBox.Click();
+            textBox.SendKeys("testteacher");
 
+            var passBox = driver.FindElement(By.Name("Password"));
+            passBox.Click();
+            passBox.SendKeys("thepassword");
 
+            var loginbtn = driver.FindElement(By.ClassName("btn-primary"));
+            loginbtn.Click();
 
+            // Go To Classes and Create Page
+            var classes = driver.FindElement(By.Name("classes"));
+            classes.Click();
 
+            var createClass = driver.FindElement(By.Name("create"));
+            createClass.Click();
 
+            // Fill out Create Form
+            var dept = driver.FindElement(By.Name("Department"));
+            dept.Click();
+
+            var math = driver.FindElement(By.Name("math"));
+            math.Click();
+
+            var number = driver.FindElement(By.Name("courseNumber"));
+            number.Click();
+            number.SendKeys("1010");
+
+            var name = driver.FindElement(By.Name("cName"));
+            name.Click();
+            name.SendKeys("Intro to Math");
+
+            var credits = driver.FindElement(By.Name("credits"));
+            credits.Click();
+            credits.SendKeys(Keys.ArrowRight);
+
+            var location = driver.FindElement(By.Name("location"));
+            location.Click();
+            location.SendKeys("Tracy Hall");
+
+            var day = driver.FindElements(By.Name("day"));
+            day[0].Click();
+            day[2].Click();
+            day[4].Click();
+
+            var sTime = driver.FindElement(By.Name("start"));
+            sTime.Click();
+            sTime.SendKeys("1130AM");
+
+            var eTime = driver.FindElement(By.Name("end"));
+            eTime.Click();
+            eTime.SendKeys("0120PM");
+
+            var reg = driver.FindElement(By.Name("register"));
+            reg.Click();
+
+            // Check if Class was created
+            var home = driver.FindElement(By.Name("home"));
+            home.Click();
+
+            int numCourses = driver.FindElements(By.ClassName("container")).Count;
+            Assert.IsTrue(numCourses == 1);
+
+            // Remove Class from database
+            int id = _context.Class.Last().ClassId;
+            Class? test = await _context.Class.FindAsync(id);
+            _context.Class.Remove(test);
+            await _context.SaveChangesAsync();
+
+            // End Test
             driver.Quit();
         }
     }

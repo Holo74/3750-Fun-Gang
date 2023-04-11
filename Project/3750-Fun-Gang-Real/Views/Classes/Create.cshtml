@@ -16,7 +16,7 @@
                 <label asp-for="Department" class="control-label"></label>
                 <select asp-for="Department" name="Department" class="form-control"> @*This is a dropbox in HTML*@
                     <option value="CS">CS</option>
-                    <option value="MATH">MATH</option>
+                    <option name="math" value="MATH">MATH</option>
                     <option value="ENGL">ENGL</option>
                     <option value="HIST">HIST</option>
                     <option value="CHEM">CHEM</option>
@@ -25,12 +25,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="CourseNumber" class="control-label"></label>
-                <input asp-for="CourseNumber" class="form-control" />
+                <input asp-for="CourseNumber" name="courseNumber" class="form-control" />
                 <span asp-validation-for="CourseNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CourseName" class="control-label"></label>
-                <input asp-for="CourseName" class="form-control" />
+                <input asp-for="CourseName" name="cName" class="form-control" />
                 <span asp-validation-for="CourseName" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -39,13 +39,13 @@
                     Makes a slider for credits below, I swear I can remember the professor saying
                     we should do this as a slider but I can't remember for sure. Figured I'd do it just in case.
                 *@
-                <input asp-for="NumOfCredits" class="form-control" type="range" min="0" max="10" value="3" 
+                <input asp-for="NumOfCredits" name="credits" class="form-control" type="range" min="0" max="10" value="3" 
                 oninput="document.getElementById('credits').innerHTML = 'Number of Credits: ' + this.value;" id="credits"/> 
                 <span asp-validation-for="NumOfCredits" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Location" class="control-label"></label>
-                <input asp-for="Location" class="form-control" />
+                <input asp-for="Location" name="location" class="form-control" />
                 <span asp-validation-for="Location" class="text-danger"></span>
             </div>@*
             <div class="form-group"> @* Still need to make it so it's 7 buttons/check boxes for each day of the week
@@ -67,16 +67,16 @@
             </div>
             <div class="form-group">
                 <label asp-for="StartTime" class="control-label"></label>
-                <input asp-for="StartTime" class="form-control" />
+                <input asp-for="StartTime" name="start" class="form-control" />
                 <span asp-validation-for="StartTime" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="EndTime" class="control-label"></label>
-                <input asp-for="EndTime" class="form-control" />
+                <input asp-for="EndTime" name="end" class="form-control" />
                 <span asp-validation-for="EndTime" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Register Class" class="btn btn-primary" />
+                <input type="submit" value="Register Class" name="register" class="btn btn-primary" />
             </div>
 
         </form>
