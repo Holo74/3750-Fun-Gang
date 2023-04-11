@@ -13,6 +13,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
+using Stripe.BillingPortal;
 
 namespace Assignment_1Test
 {
@@ -27,7 +28,7 @@ namespace Assignment_1Test
 
             DbContextOptions<Assignment_1Context> options = new DbContextOptions<Assignment_1Context>();
             DbContextOptionsBuilder builder = new DbContextOptionsBuilder(options);
-            SqlServerDbContextOptionsExtensions.UseSqlServer(builder, "Server=titan.cs.weber.edu,10433;Database=LMS_FunGang;User Id=LMS_FunGang;Password=FunGang!5;", null);
+            SqlServerDbContextOptionsExtensions.UseSqlServer(builder, "Data Source=tcp:fun-gang.database.windows.net,1433;Initial Catalog=db;Persist Security Info=False;User ID=databaseAdmin;Password=DoNotForgetTh1s!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;", null);
             _context = new Assignment_1Context((DbContextOptions<Assignment_1Context>)builder.Options);
         }
 
@@ -257,7 +258,7 @@ namespace Assignment_1Test
             driver.Quit();
 		}
         [TestMethod]
-        public async void CanInstructorCreateClassTestSelenium()
+        public void CanInstructorCreateClassTestSelenium()
         {
             // Go to Website
             IWebDriver driver = new ChromeDriver();
@@ -276,12 +277,18 @@ namespace Assignment_1Test
             var loginbtn = driver.FindElement(By.ClassName("btn-primary"));
             loginbtn.Click();
 
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(1000);
+
             // Go To Classes and Create Page
             var classes = driver.FindElement(By.Name("classes"));
             classes.Click();
 
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
+
             var createClass = driver.FindElement(By.Name("create"));
             createClass.Click();
+
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
 
             // Fill out Create Form
             var dept = driver.FindElement(By.Name("Department"));
@@ -294,7 +301,7 @@ namespace Assignment_1Test
             number.Click();
             number.SendKeys("1010");
 
-            var name = driver.FindElement(By.Name("cName"));
+            var name = driver.FindElement(By.Name("courseName"));
             name.Click();
             name.SendKeys("Intro to Math");
 
@@ -322,21 +329,29 @@ namespace Assignment_1Test
             var reg = driver.FindElement(By.Name("register"));
             reg.Click();
 
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
+
             // Check if Class was created
             var home = driver.FindElement(By.Name("home"));
             home.Click();
 
-            int numCourses = driver.FindElements(By.ClassName("container")).Count;
-            Assert.IsTrue(numCourses == 1);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
+
+            int numCourses = driver.FindElements(By.ClassName("card")).Count;
+            Assert.IsTrue(numCourses == 2);
 
             // Remove Class from database
-            int id = _context.Class.Last().ClassId;
-            Class? test = await _context.Class.FindAsync(id);
-            _context.Class.Remove(test);
-            await _context.SaveChangesAsync();
+            int id = _context.Class.OrderBy(c => c.ClassId).Last().ClassId;
+            removeClass(id);
 
             // End Test
             driver.Quit();
+        }
+        public async void removeClass(int id)
+        {
+            Class? test = await _context.Class.FindAsync(id);
+            _context.Class.Remove(test);
+            await _context.SaveChangesAsync();
         }
     }
 }
