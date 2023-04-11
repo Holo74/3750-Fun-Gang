@@ -5,6 +5,7 @@ using Stripe;
 using Stripe.Checkout;
 using Microsoft.EntityFrameworkCore;
 using Assignment_1.Data;
+using Assignment_1.Models;
 
 namespace Assignment_1.Controllers
 {
@@ -72,6 +73,15 @@ namespace Assignment_1.Controllers
                 //update user balance in database
                 a.Balance += Convert.ToDecimal(p != null ? p : 0);
                 _context.Update(a);
+
+                //add new payment to the database
+                Payment payment = new Payment();
+                payment.Date = DateTime.Now;
+                payment.UserFK = a.Id;
+                payment.Amount = Convert.ToDecimal(p != null ? p : 0);
+
+                //update database
+                _context.Payment.Add(payment);
                 _context.SaveChangesAsync();
                 ViewData["Student"] = a.UserType;
             }
@@ -88,9 +98,16 @@ namespace Assignment_1.Controllers
             var user = from u in _context.User select u;
             if (UserID != null)
             {
-                Assignment_1.Models.User a = user.Where(x => x.Id == UserID).First();
-                ViewData["Student"] = a.UserType;
-                return View(a);
+                UserPaymentsViewModel UPVM = new UserPaymentsViewModel();
+                UPVM.user = user.Where(x => x.Id == UserID).First();
+
+                var parments = from payment in _context.Payment select payment;
+                parments = parments.Where(x => x.UserFK == UPVM.user.Id);
+
+                UPVM.payments = parments.ToList();
+
+                ViewData["Student"] = UPVM.user.UserType;
+                return View(UPVM);
             }
             return Redirect("/Login/");
         }
