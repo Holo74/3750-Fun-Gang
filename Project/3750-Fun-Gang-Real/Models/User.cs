@@ -46,7 +46,7 @@ namespace Assignment_1.Models
         public string? ReferenceTwo { get; set; }
         public string? ReferenceThree { get; set; }
         //[DataType(DataType.Currency)]
-        public decimal? Balance { get; set; }
+        public decimal Balance { get; set; }
         public string? Image { get; set; }
         public DateTime? LastedLoggedIn { get; set; }
 

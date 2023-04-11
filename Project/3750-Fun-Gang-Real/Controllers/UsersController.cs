@@ -498,6 +498,7 @@ namespace Assignment_1.Controllers
             //
                 PasswordHasher<User> Hasher = new PasswordHasher<User>();
                 user.Password = Hasher.HashPassword(new Models.User(), user.Password);//hash before sending to database
+                user.Balance= 0;
                 _context.Add(user);
                 await _context.SaveChangesAsync();
              //   return RedirectToAction(nameof(Index));
