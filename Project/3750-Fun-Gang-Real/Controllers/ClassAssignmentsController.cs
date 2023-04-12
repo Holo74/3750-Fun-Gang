@@ -12,15 +12,18 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using System.IO;
 using System.Drawing;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace Assignment_1.Controllers
 {
     public class ClassAssignmentsController : Controller
     {
         private readonly Assignment_1Context _context;
-        public ClassAssignmentsController(Assignment_1Context context)
+        private IMemoryCache _cache;
+        public ClassAssignmentsController(Assignment_1Context context, IMemoryCache cache)
         {
             _context = context;
+            _cache = cache;
         }
         [HttpGet]
         public IActionResult Index(int id)
@@ -59,6 +62,7 @@ namespace Assignment_1.Controllers
         {
             ca.ClassId = id == null ? -1 : id;
             _context.ClassAssignments.Add(ca);
+            _cache.Remove(CacheKeys.UserView);
             await _context.SaveChangesAsync();
             return 1;
 

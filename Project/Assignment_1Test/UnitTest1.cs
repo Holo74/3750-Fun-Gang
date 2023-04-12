@@ -87,7 +87,7 @@ namespace Assignment_1Test
             assignments.DueTime = DateTime.Now;
             assignments.SubmissionType = "doc";
 
-            ClassAssignmentsController cac = new ClassAssignmentsController(_context);
+            ClassAssignmentsController cac = new ClassAssignmentsController(_context, _cache);
             await cac.CreateMain(course[0].ClassId, assignments);
 
             var numOfAssignmentsAfter = _context.ClassAssignments.Where(c =>c.ClassId == course[0].ClassId).ToList();
@@ -150,7 +150,7 @@ namespace Assignment_1Test
             {
                 if(Tries > 0)
                 {
-                    ClassAssignmentsController c = new ClassAssignmentsController(_context);
+                    ClassAssignmentsController c = new ClassAssignmentsController(_context, _cache);
 
                     //random point value to assign
                     int randomPoints = new Random().Next(1, 11);
