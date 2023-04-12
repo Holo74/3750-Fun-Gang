@@ -75,10 +75,10 @@ namespace Assignment_1Test
             _context.Class.Remove(course);
             await _context.SaveChangesAsync();
         }
-		[TestMethod]
+        [TestMethod]
         public async Task TeacherCanCreateAssignment()
         {
-            var course =  _context.Class.Where(x => x.ClassId ==13).ToList();
+            var course = _context.Class.Where(x => x.ClassId == 13).ToList();
             var numOfAssignmentBefore = _context.ClassAssignments.Where(c => c.ClassId == course[0].ClassId).ToList();
             int lengthBefore = numOfAssignmentBefore.Count();
 
@@ -93,7 +93,7 @@ namespace Assignment_1Test
             ClassAssignmentsController cac = new ClassAssignmentsController(_context, _cache);
             await cac.CreateMain(course[0].ClassId, assignments);
 
-            var numOfAssignmentsAfter = _context.ClassAssignments.Where(c =>c.ClassId == course[0].ClassId).ToList();
+            var numOfAssignmentsAfter = _context.ClassAssignments.Where(c => c.ClassId == course[0].ClassId).ToList();
             int lengthAfter = numOfAssignmentsAfter.Count();
 
             Assert.AreEqual(lengthAfter, lengthBefore + 1);
@@ -106,7 +106,7 @@ namespace Assignment_1Test
         }
 
 
-		[TestMethod]
+        [TestMethod]
         public async Task StudentCanRegisterForCourse()
         {
             //find student id that exists (id = 43 is teststud)
@@ -149,23 +149,23 @@ namespace Assignment_1Test
             int Tries = 3;//maximum submissions to test
 
             //test first (Tries) submissions retrieved
-            foreach(var submission in submissions )
+            foreach (var submission in submissions)
             {
-                if(Tries > 0)
+                if (Tries > 0)
                 {
                     ClassAssignmentsController c = new ClassAssignmentsController(_context, _cache);
 
                     //random point value to assign
                     int randomPoints = new Random().Next(1, 11);
-					
+
                     //call set points function on current submission with teh random value
-					await c.SetPoints(randomPoints, submission.Id);
+                    await c.SetPoints(randomPoints, submission.Id);
 
                     AssignmentSubmissions a = _context.AssignmentSubmissions.Where(x => x.Id == submission.Id).FirstOrDefault();
 
                     Assert.IsNotNull(a);
 
-                    if(a != null)
+                    if (a != null)
                     {
                         Assert.AreEqual(randomPoints, a.Points);
                     }
@@ -178,56 +178,56 @@ namespace Assignment_1Test
                 }
 
             }
-           
+
         }
-		[TestMethod]
-		public void SeleniumCreateAccount()
-		{
+        [TestMethod]
+        public void SeleniumCreateAccount()
+        {
 
-			IWebDriver driver = new FirefoxDriver();
+            IWebDriver driver = new FirefoxDriver();
 
-			driver.Navigate().GoToUrl("https://notebook-cs3750.azurewebsites.net/Login/");
+            driver.Navigate().GoToUrl("https://notebook-cs3750.azurewebsites.net/Login/");
 
-			driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
 
-			var textBox = driver.FindElement(By.ClassName("btn-secondary"));
-			textBox.Click();
+            var textBox = driver.FindElement(By.ClassName("btn-secondary"));
+            textBox.Click();
 
-			driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
 
-			var signupBut = driver.FindElement(By.ClassName("btn-primary"));
-			signupBut.Click();
+            var signupBut = driver.FindElement(By.ClassName("btn-primary"));
+            signupBut.Click();
 
-			driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
 
-			string emailError = driver.FindElement(By.Id("Email-error")).Text;
+            string emailError = driver.FindElement(By.Id("Email-error")).Text;
 
-			Assert.IsTrue(emailError.Length > 0);
+            Assert.IsTrue(emailError.Length > 0);
 
-			driver.Quit();
-		}
-		[TestMethod]
-		public void StudentCanRegisterForCourseSelenium()
-		{
+            driver.Quit();
+        }
+        [TestMethod]
+        public void StudentCanRegisterForCourseSelenium()
+        {
 
-			IWebDriver driver = new ChromeDriver();
-		    //https://localhost:7099/Login/Index/
-			driver.Navigate().GoToUrl("https://localhost:7099/Login/Index/");
+            IWebDriver driver = new ChromeDriver();
+            //https://localhost:7099/Login/Index/
+            driver.Navigate().GoToUrl("https://localhost:7099/Login/Index/");
 
-			driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
 
-			var textBox = driver.FindElement(By.Name("Email"));
-			textBox.Click();
+            var textBox = driver.FindElement(By.Name("Email"));
+            textBox.Click();
             textBox.SendKeys("teststud");
 
-			var passBox = driver.FindElement(By.Name("Password"));
-			passBox.Click();
+            var passBox = driver.FindElement(By.Name("Password"));
+            passBox.Click();
             passBox.SendKeys("Waffle1#");
 
             var loginbtn = driver.FindElement(By.ClassName("btn-primary"));
             loginbtn.Click();
 
-			driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
 
             var regbtn = driver.FindElement(By.LinkText("Registration"));
             regbtn.Click();
@@ -250,16 +250,16 @@ namespace Assignment_1Test
 
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
 
-			regbtn = driver.FindElement(By.LinkText("Registration"));
-			regbtn.Click();
+            regbtn = driver.FindElement(By.LinkText("Registration"));
+            regbtn.Click();
 
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
 
             coursebtn = driver.FindElement(By.Name("Register"));
-			coursebtn.Click();
+            coursebtn.Click();
 
             driver.Quit();
-		}
+        }
         [TestMethod]
         public void CanInstructorCreateClassTestSelenium()
         {
@@ -355,8 +355,6 @@ namespace Assignment_1Test
             Class? test = await _context.Class.FindAsync(id);
             _context.Class.Remove(test);
             await _context.SaveChangesAsync();
-            }
-           
         }
 
 
@@ -387,31 +385,5 @@ namespace Assignment_1Test
 
         }
 
-        [TestMethod]
-        public void SeleniumCreateAccount()
-        {
-
-            IWebDriver driver = new FirefoxDriver();
-
-            driver.Navigate().GoToUrl("https://notebook-cs3750.azurewebsites.net/Login/");
-
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
-
-            var textBox = driver.FindElement(By.ClassName("btn-secondary"));
-            textBox.Click();
-
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
-
-            var signupBut = driver.FindElement(By.ClassName("btn-primary"));
-            signupBut.Click();
-
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
-
-            string emailError = driver.FindElement(By.Id("Email-error")).Text;
-
-            Assert.IsTrue(emailError.Length > 0);
-
-            driver.Quit();
-        }
     }
 }
