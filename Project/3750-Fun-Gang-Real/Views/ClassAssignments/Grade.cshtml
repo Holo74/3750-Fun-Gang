@@ -25,9 +25,16 @@
 	
 </div>
 <br />
-<div>
- <a href ="@Model.Submission.First().Data"download="filename">Download</a>
-</div>
+@if (Model.Submission.FirstOrDefault().SubmissonType == "Text" || Model.Submission.FirstOrDefault().SubmissonType == "text")
+{
+	<p>@Html.DisplayFor(model => model.Submission.FirstOrDefault().Data)</p>
+}
+else
+{
+	<div>
+			<a href="@Model.Submission.First().Data" download="filename">Download</a>
+		</div>
+}
 <hr />
 <form asp-action="SetPoints">
 	<input name="points" type="number" min="0" max="@Model.Assignment.MaxPoints" />

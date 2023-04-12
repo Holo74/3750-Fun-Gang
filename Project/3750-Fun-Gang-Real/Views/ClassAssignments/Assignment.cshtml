@@ -114,7 +114,7 @@
                 <span asp-validation-for="Submission.First().Data" class="text-danger"></span>
             </div>
         }
-        <input name = "SubmissonType" type ="hidden" value="@Html.Display(Model.Assignment.SubmissionType)"/>
+        <input name="SubmissonType" type="hidden" value="@Html.DisplayFor(model => model.Assignment.SubmissionType)"/>
         <input value="Submit" type="submit" class="btn btn-primary" />
     </form>
 }
