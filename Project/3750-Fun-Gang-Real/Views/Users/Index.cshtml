@@ -191,15 +191,6 @@
         }
     </ul>
 </div>
-
-<div class="vertical-menu">
-    <a href="#" class="active">ToDo's</a>
-    @foreach (var item in Model.todoitems )
-    {
-        <a href="@Url.Action("Assignment", "ClassAssignments", new { ID = item.ID })">@Html.DisplayFor(modelData => item.AssignmentTitle)<br>class: @Html.DisplayFor(modelData => item.CourseNumber)</a>
-    }
-</div>
-</div>
 @*@Url.Action("Index", "Assignment", new { assignmentID = item.ID })*@
 
 <div class="links">
