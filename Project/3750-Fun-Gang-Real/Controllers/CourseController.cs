@@ -116,6 +116,7 @@ namespace Assignment_1.Controllers
                 {
 
 					var submissionsPerStudent = _context.AssignmentSubmissions.Where(e => e.UserFK == studentuser.UserFK);
+                submissionsPerStudent = submissionsPerStudent.Where(x => x.ClassFK == classId);
 					var submissionsPerClass = _context.AssignmentSubmissions.Where(f => f.ClassFK == classId).ToList();
 					double totalgrade = 0;
 					double totalmaxgrade = 0;

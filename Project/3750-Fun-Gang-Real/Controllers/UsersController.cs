@@ -163,8 +163,6 @@ namespace Assignment_1.Controllers
                             }
                             classUserView.classes = Course.ToList();
 
-                            Course = from c in _context.Class select c;
-
                             List<ClassAssignments> myassignments = new List<ClassAssignments>();
                             foreach (var mycourse in Course.ToList())
                             {
@@ -252,10 +250,6 @@ namespace Assignment_1.Controllers
                     }
                     classUserView.classes = Course.ToList();
 
-
-
-
-                    Course = from c in _context.Class select c;
 
                     //step 1: Find out all classes for this student, student id.
 
