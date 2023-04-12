@@ -268,7 +268,7 @@ namespace Assignment_1Test
             // Login
             var textBox = driver.FindElement(By.Name("Email"));
             textBox.Click();
-            textBox.SendKeys("testteacher");
+            textBox.SendKeys("testtest");
 
             var passBox = driver.FindElement(By.Name("Password"));
             passBox.Click();
