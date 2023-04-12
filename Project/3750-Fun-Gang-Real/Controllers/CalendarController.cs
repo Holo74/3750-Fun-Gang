@@ -73,6 +73,7 @@ namespace Assignment_1.Controllers
                             ev.Title = course.CourseName;
                             ev.Color = "blue";
                             ev.TextColor = "blue";
+                            ev.Url = "CalendarPage";
 
                             myEvents.Add(ev);
                         }
@@ -105,6 +106,7 @@ namespace Assignment_1.Controllers
                             ev.Title = course.CourseName;
                             ev.Color = "blue";
                             ev.TextColor = "blue";
+                            ev.Url = "CalendarPage";
 
                             myEvents.Add(ev);
                         }
@@ -136,6 +138,7 @@ namespace Assignment_1.Controllers
                             ev.Title = course.CourseName;
                             ev.Color = "blue";
                             ev.TextColor = "blue";
+                            ev.Url = "CalendarPage";
 
                             myEvents.Add(ev);
                         }
@@ -167,6 +170,7 @@ namespace Assignment_1.Controllers
                             ev.Title = course.CourseName;
                             ev.Color = "blue";
                             ev.TextColor = "blue";
+                            ev.Url = "CalendarPage";
 
                             myEvents.Add(ev);
                         }
@@ -202,6 +206,7 @@ namespace Assignment_1.Controllers
                             ev.Title = course.CourseName;
                             ev.Color = "blue";
                             ev.TextColor = "blue";
+                            ev.Url = "CalendarPage";
 
                             myEvents.Add(ev);
                         }
@@ -237,6 +242,7 @@ namespace Assignment_1.Controllers
                             ev.Title = course.CourseName;
                             ev.Color = "blue";
                             ev.TextColor = "blue";
+                            ev.Url = "CalendarPage";
 
                             myEvents.Add(ev);
                         }
@@ -272,6 +278,7 @@ namespace Assignment_1.Controllers
                             ev.Title = course.CourseName;
                             ev.Color = "blue";
                             ev.TextColor = "blue";
+                            ev.Url = "CalendarPage";
 
                             myEvents.Add(ev);
                         }
@@ -351,6 +358,7 @@ namespace Assignment_1.Controllers
                             ev.Title = course.CourseName;
                             ev.Color = "blue";
                             ev.TextColor = "blue";
+                            ev.Url = "CalendarPage";
 
                             myEvents.Add(ev);
                         }
@@ -383,6 +391,7 @@ namespace Assignment_1.Controllers
                             ev.Title = course.CourseName;
                             ev.Color = "blue";
                             ev.TextColor = "blue";
+                            ev.Url = "CalendarPage";
 
                             myEvents.Add(ev);
                         }
@@ -414,6 +423,7 @@ namespace Assignment_1.Controllers
                             ev.Title = course.CourseName;
                             ev.Color = "blue";
                             ev.TextColor = "blue";
+                            ev.Url = "CalendarPage";
 
                             myEvents.Add(ev);
                         }
@@ -445,6 +455,7 @@ namespace Assignment_1.Controllers
                             ev.Title = course.CourseName;
                             ev.Color = "blue";
                             ev.TextColor = "blue";
+                            ev.Url = "CalendarPage";
 
                             myEvents.Add(ev);
                         }
@@ -480,6 +491,7 @@ namespace Assignment_1.Controllers
                             ev.Title = course.CourseName;
                             ev.Color = "blue";
                             ev.TextColor = "blue";
+                            ev.Url = "CalendarPage";
 
                             myEvents.Add(ev);
                         }
@@ -515,6 +527,7 @@ namespace Assignment_1.Controllers
                             ev.Title = course.CourseName;
                             ev.Color = "blue";
                             ev.TextColor = "blue";
+                            ev.Url = "CalendarPage";
 
                             myEvents.Add(ev);
                         }
@@ -550,6 +563,7 @@ namespace Assignment_1.Controllers
                             ev.Title = course.CourseName;
                             ev.Color = "blue";
                             ev.TextColor = "blue";
+                            ev.Url = "CalendarPage";
 
                             myEvents.Add(ev);
                         }

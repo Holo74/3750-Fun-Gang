@@ -13,13 +13,7 @@
         console.log(data);
         var objs = [];
         for (var i = 0; i < data.length; i++) {
-            if (String(data[i].url) != null){
-                
-                objs.push({ start: String(data[i].startTime), end: String(data[i].endTime), title: String(data[i].title), color: String(data[i].color), url: String(data[i].url) });
-            }
-            else{
-                objs.push({ start: String(data[i].startTime), end: String(data[i].endTime), title: String(data[i].title), color: String(data[i].color) });
-            }
+            objs.push({ start: String(data[i].startTime), end: String(data[i].endTime), title: String(data[i].title), color: String(data[i].color), url: String(data[i].url) });
         }
 
         document.addEventListener('DOMContentLoaded', function () {
