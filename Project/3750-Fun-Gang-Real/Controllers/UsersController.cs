@@ -134,7 +134,7 @@ namespace Assignment_1.Controllers
                     if (date < DateTime.Now)
                     {
                         ClassUserViewModel classUserView = new ClassUserViewModel();
-
+                        
                         classUserView.todoitems = new List<TODOitem>();
                         var user = _context.User.Where(x => x.Id == Id).First();
                         classUserView.viewUser = user;
@@ -179,7 +179,7 @@ namespace Assignment_1.Controllers
 
                             }
                             futureAssignmentList = futureAssignmentList.OrderBy(y => y.DueDate.Value.DayOfYear).OrderBy(z => z.DueTime.Value.Date.TimeOfDay.Hours).ToList();
-
+                            
                             var Assignments = _context.ClassAssignments;
 
                             int breakint = 0;
@@ -406,6 +406,8 @@ namespace Assignment_1.Controllers
             uv.Password = user.Password;
             uv.UserType = user.UserType;
             uv.ShowImage = TransformImagePath(user.Image);
+
+            ViewData["Student"] = user.UserType;
             return View(uv);
         }
 
@@ -491,7 +493,7 @@ namespace Assignment_1.Controllers
             {
                 return NotFound();
             }
-
+            ViewData["Student"] = user.UserType;
             return View(user);
         }
 
@@ -544,6 +546,7 @@ namespace Assignment_1.Controllers
                         throw;
                     }
                 }
+            ViewData["Student"] = user.UserType;
             return Redirect("/Users/Details/" + user.Id);
         }
 
@@ -561,7 +564,6 @@ namespace Assignment_1.Controllers
             {
                 return NotFound();
             }
-
             return View(user);
         }
 

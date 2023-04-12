@@ -39,11 +39,11 @@
         bottom: 100px;
     }
 
-    .notification{
-        width:10px;
-        position:fixed;
-        right:313px;
-        top:65px;
+    .notification {
+        width: 10px;
+        position: fixed;
+        right: 313px;
+        top: 65px;
     }
 
 	.notification-menu {
@@ -114,9 +114,9 @@
 </style>
 <div class="d-flex flex-md-row justify-content-between">
     <div class="text-center d-flex justify-content-around flex-wrap">
-        @if (ViewData["Student"] != null)
+        @if (Model.viewUser.UserType != null)
         {
-            @if (ViewData["Student"].ToString() == "Student")
+            @if (Model.viewUser.UserType == "Student")
             {
                 foreach (var item in Model.classes)
                 {
@@ -139,7 +139,7 @@
                     </div>
                 }
             }
-            @if (ViewData["Student"].ToString() != "Student")
+            @if (Model.viewUser.UserType != "Student")
             {
                 foreach (var item in Model.classes)
                 {

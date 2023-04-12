@@ -21,7 +21,9 @@ namespace Assignment_1.Controllers
         {
             //  classId = HttpContext.Session.GetInt32("ClassId");
             var UserID = HttpContext.Session.GetInt32("UserID");
-             
+
+            var users = from u in _context.User select u;
+            var user = users.Where(u => u.Id == UserID).ToList();
             var courses = from c in _context.Class select c;
             var course = courses.Where(c => c.ClassId == classId).ToList();
             var assignments = from d in _context.ClassAssignments select d;
@@ -174,10 +176,10 @@ namespace Assignment_1.Controllers
 			SALV.PiechartData.Add(new PieChartNameandAmount() { Name = "D", Amount = gradeD });
 			SALV.PiechartData.Add(new PieChartNameandAmount() { Name = "D-", Amount = gradeDm });
 			SALV.PiechartData.Add(new PieChartNameandAmount() { Name = "E", Amount = gradeE });
-			
 
 
-			return View(SALV);
+            ViewData["Student"] = user[0].UserType;
+            return View(SALV);
         }
         public IActionResult Create(int classId)
         {
@@ -186,6 +188,12 @@ namespace Assignment_1.Controllers
 
             var courses = from c in _context.Class select c;
             var course = courses.Where(c => c.ClassId == classId).ToList();
+
+            var UserID = HttpContext.Session.GetInt32("UserID");
+            var users = from u in _context.User select u;
+            var user = users.Where(u => u.Id == UserID).ToList();
+            ViewData["Student"] = user[0].UserType;
+
             return View(); // just brings the create page up
 
         }
@@ -218,7 +226,10 @@ namespace Assignment_1.Controllers
             {
                 return NotFound();
             }
-
+            var UserID = HttpContext.Session.GetInt32("UserID");
+            var users = from u in _context.User select u;
+            var user = users.Where(u => u.Id == UserID).ToList();
+            ViewData["Student"] = user[0].UserType;
             return View(ca);
 
         }
@@ -229,9 +240,12 @@ namespace Assignment_1.Controllers
             //var ClassId = _context.ClassAssignments.Where(x => x.Id == id).FirstOrDefault();
 
 
-			//var oldID = _context.ClassAssignments.Where(x => x.Id == id).FirstOrDefault();
+            //var oldID = _context.ClassAssignments.Where(x => x.Id == id).FirstOrDefault();
 
-
+            var UserID = HttpContext.Session.GetInt32("UserID");
+            var users = from u in _context.User select u;
+            var user = users.Where(u => u.Id == UserID).ToList();
+            ViewData["Student"] = user[0].UserType;
 
             _context.ChangeTracker.Clear();
             _context.Update(ca);
@@ -253,7 +267,12 @@ namespace Assignment_1.Controllers
 				return NotFound();
 			}
 
-			return View(ai);
+            var UserID = HttpContext.Session.GetInt32("UserID");
+            var users = from u in _context.User select u;
+            var user = users.Where(u => u.Id == UserID).ToList();
+            ViewData["Student"] = user[0].UserType;
+
+            return View(ai);
 		}
 		[HttpPost, ActionName("DeleteC")]
 		[ValidateAntiForgeryToken]

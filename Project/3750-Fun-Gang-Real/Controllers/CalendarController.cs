@@ -23,6 +23,7 @@ namespace Assignment_1.Controllers
             var UserID = HttpContext.Session.GetInt32("UserID");
             var users = from u in _context.User select u;
             var user = users.Where(u => u.Id == UserID).ToList();
+            ViewData["Student"] = user[0].UserType;
 
             List<EventCS3750> myEvents = new List<EventCS3750>();
 

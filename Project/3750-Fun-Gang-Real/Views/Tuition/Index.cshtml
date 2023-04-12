@@ -1,16 +1,31 @@
-﻿@model Assignment_1.Models.User
+﻿@model UserPaymentsViewModel
 <html>
 <head>
     <title>Tuition Balance</title>
 </head>
 <body>
     <h1>User Balance: </h1>
-    $@Html.DisplayFor(model => model.Balance)
+    $@Html.DisplayFor(model => model.user.Balance)
     <hr />
     <form action="/create-checkout-session" method="POST">
         <input type="number" name="amount" />
         <button type="submit" class="btn-primary">Pay Amount</button>
     </form>
+
+    @if(Model.payments.Count() < 1)
+    {
+        <h2>No Past Payments Found</h2>
+    }
+    else
+    {
+        @foreach(var item in Model.payments)
+        {
+            <div>
+                <h4>@Html.DisplayFor(model => item.Date)</h4>
+                <p>@Html.DisplayFor(model => item.Amount)</p>
+            </div>
+        }
+    }
 </body>
 </html>
 

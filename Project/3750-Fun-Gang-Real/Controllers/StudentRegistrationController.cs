@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Assignment_1.Data;
 using System.Linq;
 using Microsoft.Extensions.Caching.Memory;
+using Assignment_1.Models;
 
 namespace Assignment_1.Controllers
 {
@@ -25,6 +26,7 @@ namespace Assignment_1.Controllers
                 Models.FilteredRegistrationAndClass FRC = new Models.FilteredRegistrationAndClass();
                 FRC.VRC = CourseList()?.ToList();
                 FRC.ClassDepartments = (from c in _context.Class select c.Department).Distinct().ToList();
+                ViewData["Student"] = "Student";
                 return View(FRC);
             }
             return NotFound();
@@ -40,6 +42,7 @@ namespace Assignment_1.Controllers
                 Models.FilteredRegistrationAndClass FRC = new Models.FilteredRegistrationAndClass();
                 FRC.VRC = CourseList(Request.Form["department"], Request.Form["keyword"])?.ToList();
                 FRC.ClassDepartments = (from c in _context.Class select c.Department).Distinct().ToList();
+                ViewData["Student"] = "Student";
                 return View("Index", FRC);
             }
             return NotFound();
@@ -90,6 +93,7 @@ namespace Assignment_1.Controllers
             var UserID = HttpContext.Session.GetInt32("UserID");
             await RegisterForClassLogic(UserID.Value, classId);
             _cache.Remove(CacheKeys.UserView);
+            ViewData["Student"] = "Student";
             return Redirect("Index");
         }
         public async Task RegisterForClassLogic(int UserID, int classId)

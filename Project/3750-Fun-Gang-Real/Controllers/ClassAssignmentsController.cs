@@ -49,6 +49,10 @@ namespace Assignment_1.Controllers
         public IActionResult Create() 
         {
             var AssignmentID = HttpContext.Session.GetInt32("AssignmentID");
+            int? UserID = HttpContext.Session.GetInt32("UserID");
+            var users = from u in _context.User select u;
+            var user = users.Where(u => u.Id == UserID).ToList();
+            ViewData["Student"] = user[0].UserType;
             return View();
         }
        public async Task<int> CreateMain(int id, ClassAssignments ca)
@@ -123,7 +127,11 @@ namespace Assignment_1.Controllers
                     ASVM.StudentBin = (int)(10 * ((float)ASVM.Submission.First().Points / (float)maxPoints));
                 }
             }
-           
+
+            var users = from u in _context.User select u;
+            var user = users.Where(u => u.Id == UserID).ToList();
+            ViewData["Student"] = user[0].UserType;
+
             return View(ASVM);
         }
 
@@ -219,6 +227,11 @@ namespace Assignment_1.Controllers
 
             ASVM.User = Users;
 
+            int? UserID = HttpContext.Session.GetInt32("UserID");
+            var users = from u in _context.User select u;
+            var user = users.Where(u => u.Id == UserID).ToList();
+            ViewData["Student"] = user[0].UserType;
+
             return View(ASVM);
         }
         private string TransformSubPath(string? subPath)
@@ -240,7 +253,12 @@ namespace Assignment_1.Controllers
             ASVM.Submission = sub.Where(x => x.Id == ID);
             var asn = from a in _context.ClassAssignments select a;
             ASVM.Assignment = asn.Where(y => y.Id == ASVM.Submission.First().AssignmentFK).First();
-            
+
+            int? UserID = HttpContext.Session.GetInt32("UserID");
+            var users = from u in _context.User select u;
+            var user = users.Where(u => u.Id == UserID).ToList();
+            ViewData["Student"] = user[0].UserType;
+
             return View(ASVM);
         }
 
