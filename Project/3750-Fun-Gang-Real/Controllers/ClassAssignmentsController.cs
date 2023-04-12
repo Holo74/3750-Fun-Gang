@@ -62,7 +62,7 @@ namespace Assignment_1.Controllers
         {
             ca.ClassId = id == null ? -1 : id;
             _context.ClassAssignments.Add(ca);
-            _cache.Remove(CacheKeys.UserView);
+            
             await _context.SaveChangesAsync();
             return 1;
 

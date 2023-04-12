@@ -3,6 +3,7 @@ using Assignment_1.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using System.ComponentModel.DataAnnotations;
 
 namespace Assignment_1.Controllers
@@ -11,10 +12,12 @@ namespace Assignment_1.Controllers
     {
         
         private readonly Assignment_1Context _context; // declaration for the context object
+        private IMemoryCache _cache;
 
-        public CourseController(Assignment_1Context context)
+        public CourseController(Assignment_1Context context, IMemoryCache cache)
         {
             _context = context; // makes it so we can get the database at any time
+            _cache = cache;
         }
 
         public IActionResult Index(int? classId)
@@ -293,6 +296,7 @@ namespace Assignment_1.Controllers
             var users = from u in _context.User select u;
             var user = users.Where(u => u.Id == UserID).ToList();
             ViewData["Student"] = user[0].UserType;
+            _cache.Remove(CacheKeys.UserView);
 
             return View(); // just brings the create page up
 
