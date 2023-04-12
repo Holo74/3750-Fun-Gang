@@ -118,7 +118,7 @@ namespace Assignment_1.Controllers
 					double totalmaxgrade = 0;
 					foreach (var item in submissionsPerStudent)
 					{
-						var assignmentCurrent = assignment.Where(f => f.Id == item.AssignmentFK).First();
+						var assignmentCurrent = assignment.Where(f => f.Id == item.AssignmentFK).FirstOrDefault();
 
 						if (item.Points == null) continue;
 						float currentgrade = ((float)item.Points.Value / (float)(assignmentCurrent?.MaxPoints == null ? 1 : assignmentCurrent.MaxPoints.Value));

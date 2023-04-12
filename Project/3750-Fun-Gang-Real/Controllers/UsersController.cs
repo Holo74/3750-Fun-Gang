@@ -551,6 +551,7 @@ namespace Assignment_1.Controllers
                 user.Password = olduser.Password;
                 user.UserType = olduser.UserType;        
                 user.ConfirmPassword = olduser.Password;
+                user.Balance = olduser.Balance;
                 _context.ChangeTracker.Clear();
                 _context.Update(user);
                     await _context.SaveChangesAsync();

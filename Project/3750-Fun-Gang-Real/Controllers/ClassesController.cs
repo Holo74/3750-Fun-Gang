@@ -189,6 +189,14 @@ namespace Assignment_1.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id,Class c)
         {
             var course = await _context.Class.FindAsync(id);
+            var reg = from u in _context.Registrations select u;
+
+             reg = reg.Where(u => u.ClassFK == c.ClassId);
+             foreach(var item in reg)
+            {
+                _context.Registrations.Remove(item);
+            }
+            await _context.SaveChangesAsync();
             _context.Class.Remove(c);
             await _context.SaveChangesAsync();
             _cache.Remove(CacheKeys.UserView);
