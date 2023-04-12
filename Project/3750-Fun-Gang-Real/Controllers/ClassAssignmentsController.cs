@@ -140,7 +140,7 @@ namespace Assignment_1.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Submit([Bind("Id,Data")] AssignmentSubmissions s)
+        public async Task<IActionResult> Submit([Bind("Id,Data,SubmissonType")] AssignmentSubmissions s)
         {
             //AssignmentSubmissions s = new AssignmentSubmissions();
             int? UserID = HttpContext.Session.GetInt32("UserID");
@@ -153,29 +153,36 @@ namespace Assignment_1.Controllers
             s.SubmitDate= DateTime.Now;
             //s.SubmitTime= default(DateTime).Add(DateTime.Now.TimeOfDay);
 
-
-            string directory = "wwwroot/Submissions";
-            Directory.CreateDirectory(directory);
-            IFormFile z = Request.Form.Files[0];
-            string fileExtension = z.FileName.Substring(z.FileName.LastIndexOf('.'));
-            string path = directory + "/" + UserID +"."+AssignmentID + fileExtension;
-            using (Stream filestream = new FileStream(directory + "/" + UserID +"."+ AssignmentID + fileExtension, FileMode.Create, FileAccess.Write))
+            if (s.SubmissonType == "Text" || s.SubmissonType == "text")
             {
-                // Saves the file to where ever the filestream was pointed to.
-                z.CopyTo(filestream);
-                // Won't save properly without this
-                filestream.Close();
+                _context.AssignmentSubmissions.Add(s);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                string directory = "wwwroot/Submissions";
+                Directory.CreateDirectory(directory);
+                IFormFile z = Request.Form.Files[0];
+                string fileExtension = z.FileName.Substring(z.FileName.LastIndexOf('.'));
+                string path = directory + "/" + UserID + "." + AssignmentID + fileExtension;
+                using (Stream filestream = new FileStream(directory + "/" + UserID + "." + AssignmentID + fileExtension, FileMode.Create, FileAccess.Write))
+                {
+                    // Saves the file to where ever the filestream was pointed to.
+                    z.CopyTo(filestream);
+                    // Won't save properly without this
+                    filestream.Close();
+                }
+
+                s.Data = TransformSubPath(path);
+
+                _context.AssignmentSubmissions.Add(s);
+                await _context.SaveChangesAsync();
+            }
+                return RedirectToAction("Assignment", new { ID = AssignmentID });//hardcode for testing
+            
             }
 
-            s.Data = TransformSubPath(path);
-        
-            _context.AssignmentSubmissions.Add(s);
-			await _context.SaveChangesAsync();
-
-			return RedirectToAction("Assignment", new {ID = AssignmentID});//hardcode for testing
-        }
-
-        public IActionResult Submissions(int ID)//ID is the id of an assignment
+            public IActionResult Submissions(int ID)//ID is the id of an assignment
         {
 			AssignmentSubmissionViewModel ASVM = new AssignmentSubmissionViewModel();
             var assignments = from b in _context.ClassAssignments select b;

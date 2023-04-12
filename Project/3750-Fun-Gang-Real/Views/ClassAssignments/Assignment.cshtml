@@ -105,6 +105,7 @@
         {
             <textarea name="Data"></textarea>
         }
+
         else
         {
             <div>
@@ -113,6 +114,7 @@
                 <span asp-validation-for="Submission.First().Data" class="text-danger"></span>
             </div>
         }
+        <input name = "SubmissonType" type ="hidden" value="@Html.Display(Model.Assignment.SubmissionType)"/>
         <input value="Submit" type="submit" class="btn btn-primary" />
     </form>
 }

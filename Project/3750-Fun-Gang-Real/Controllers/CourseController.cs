@@ -124,10 +124,11 @@ namespace Assignment_1.Controllers
 						float currentgrade = ((float)item.Points.Value / (float)(assignmentCurrent?.MaxPoints == null ? 1 : assignmentCurrent.MaxPoints.Value));
 
 						float currentpercent = currentgrade * 100;
-                        
-				        
-                        totalgrade = totalgrade + (double)item.Points;
-					    totalmaxgrade = totalmaxgrade + (double)assignmentCurrent.MaxPoints;
+
+                    //if (item.Points == null) continue;
+                    totalgrade = totalgrade + (double)item.Points;
+                  //  if (assignmentCurrent.MaxPoints == null) continue;
+                    totalmaxgrade = totalmaxgrade + (double)assignmentCurrent.MaxPoints;
 						
 
 					}

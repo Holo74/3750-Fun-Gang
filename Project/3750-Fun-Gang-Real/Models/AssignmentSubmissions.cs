@@ -20,6 +20,7 @@ namespace Assignment_1.Models
         [DataType(DataType.Time)]
         public DateTime? SubmitTime { get; set; }
         public DateTime? Modified { get; set; }
+        public string? SubmissonType { get; set; }
 
 	}
 }
