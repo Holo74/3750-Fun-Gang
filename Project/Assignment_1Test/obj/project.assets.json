@@ -2283,6 +2283,21 @@
           }
         }
       },
+      "Selenium.WebDriver/4.8.2": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.1"
+        },
+        "compile": {
+          "lib/net6.0/WebDriver.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/WebDriver.dll": {}
+        },
+        "build": {
+          "buildTransitive/Selenium.WebDriver.targets": {}
+        }
+      },
       "Stripe.net/41.7.0": {
         "type": "package",
         "dependencies": {
@@ -3890,6 +3905,7 @@
         "dependencies": {
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.14",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.12",
+          "Selenium.WebDriver": "4.8.2",
           "Stripe.net": "41.7.0"
         },
         "compile": {
@@ -7436,6 +7452,31 @@
         "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
         "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.nuspec",
         "runtimes/ubuntu.16.10-x64/native/System.Security.Cryptography.Native.OpenSsl.so"
+      ]
+    },
+    "Selenium.WebDriver/4.8.2": {
+      "sha512": "gNCaZrR32U2e9pyS+HXSqNHdcrIbqulOkcmycFoDL/tM5la4tELaZ3FpPRbq7tjJK3cKs5lLqVVFM9PfY1WW5g==",
+      "type": "package",
+      "path": "selenium.webdriver/4.8.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/Selenium.WebDriver.targets",
+        "buildTransitive/Selenium.WebDriver.targets",
+        "images/icon.png",
+        "lib/net45/WebDriver.dll",
+        "lib/net46/WebDriver.dll",
+        "lib/net47/WebDriver.dll",
+        "lib/net48/WebDriver.dll",
+        "lib/net5.0/WebDriver.dll",
+        "lib/net6.0/WebDriver.dll",
+        "lib/netstandard2.0/WebDriver.dll",
+        "lib/netstandard2.1/WebDriver.dll",
+        "manager/linux/selenium-manager",
+        "manager/macos/selenium-manager",
+        "manager/windows/selenium-manager.exe",
+        "selenium.webdriver.4.8.2.nupkg.sha512",
+        "selenium.webdriver.nuspec"
       ]
     },
     "Stripe.net/41.7.0": {
@@ -11368,6 +11409,7 @@
       "MSTest.TestFramework >= 2.2.8",
       "Microsoft.EntityFrameworkCore >= 6.0.14",
       "Microsoft.NET.Test.Sdk >= 17.1.0",
+      "Selenium.WebDriver >= 4.8.2",
       "coverlet.collector >= 3.1.2"
     ]
   },
@@ -11434,6 +11476,10 @@
           "Microsoft.NET.Test.Sdk": {
             "target": "Package",
             "version": "[17.1.0, )"
+          },
+          "Selenium.WebDriver": {
+            "target": "Package",
+            "version": "[4.8.2, )"
           },
           "coverlet.collector": {
             "target": "Package",

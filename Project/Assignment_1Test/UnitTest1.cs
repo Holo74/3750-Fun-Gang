@@ -8,6 +8,9 @@ using Microsoft.VisualStudio.TestPlatform.Utilities;
 using Stripe;
 using Assignment_1.Controllers;
 using System.Security.Cryptography;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
 using Microsoft.Extensions.Caching.Memory;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -352,6 +355,63 @@ namespace Assignment_1Test
             Class? test = await _context.Class.FindAsync(id);
             _context.Class.Remove(test);
             await _context.SaveChangesAsync();
+            }
+           
+        }
+
+
+        [TestMethod]
+        public async Task NotificationsWork()
+        {
+            int id = 14;
+            User u = _context.User.Where(x => x.Id == id).FirstOrDefault();
+
+            u.LastedLoggedIn = new DateTime(2022, 1, 1);
+
+            _context.User.Update(u);
+            await _context.SaveChangesAsync();
+
+            int count = _context.AssignmentSubmissions.Where(x => x.UserFK == id).Count();
+
+            count +=
+                (from reg in _context.Registrations
+                 join newAssignments in _context.ClassAssignments
+                 on reg.ClassFK equals newAssignments.ClassId
+                 where reg.UserFK == id
+                 where newAssignments.CreatedDate > u.LastedLoggedIn
+                 select newAssignments.ClassId).Count();
+
+            Assert.AreEqual(count, new UsersController(_context, null, null).GetNotifications(u).Result.Count);
+
+
+
+        }
+
+        [TestMethod]
+        public void SeleniumCreateAccount()
+        {
+
+            IWebDriver driver = new FirefoxDriver();
+
+            driver.Navigate().GoToUrl("https://notebook-cs3750.azurewebsites.net/Login/");
+
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
+
+            var textBox = driver.FindElement(By.ClassName("btn-secondary"));
+            textBox.Click();
+
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
+
+            var signupBut = driver.FindElement(By.ClassName("btn-primary"));
+            signupBut.Click();
+
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(500);
+
+            string emailError = driver.FindElement(By.Id("Email-error")).Text;
+
+            Assert.IsTrue(emailError.Length > 0);
+
+            driver.Quit();
         }
     }
 }

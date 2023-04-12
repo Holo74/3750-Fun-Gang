@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
+using Assignment_1.Migrations;
 using System.IO.Pipes;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
@@ -122,30 +123,7 @@ namespace Assignment_1.Controllers
                             }
                         }
 
-                        List<string> notification = new List<string>();
-                        var joinedAssignmentTables =
-                        from submitted in _context.AssignmentSubmissions
-                        join assignment in _context.ClassAssignments on
-                        submitted.AssignmentFK equals assignment.Id
-                        join assignClass in _context.Class on
-                        submitted.ClassFK equals assignClass.ClassId
-                        where
-                        submitted.Modified > classUserView.viewUser.LastedLoggedIn
-                        where
-                        submitted.UserFK == classUserView.viewUser.Id
-                        select assignment.AssignmentTitle + " in class " + assignClass.CourseNumber + " was graded";
-
-                        notification.Concat(joinedAssignmentTables);
-
-                        var joinedClassCreatedAssignment =
-                            from assignments in _context.ClassAssignments
-                            join assignClass in _context.Class on
-                            assignments.ClassId equals assignClass.ClassId
-                            select assignClass.CourseName + " Has created a new assignment named " + assignments.AssignmentTitle;
-
-                        notification.Concat(joinedClassCreatedAssignment);
-
-                        classUserView.notifications = notification;
+                        classUserView.notifications = GetNotifications(classUserView.viewUser).Result;
 
                         CacheKeys.UserView = classUserView;
                         _cache.Set(CacheKeys.UserView, classUserView);
@@ -157,7 +135,7 @@ namespace Assignment_1.Controllers
                     DateTime date = new DateTime(view.todoitems[0].dueDate.Value.Year, view.todoitems[0].dueDate.Value.Month, view.todoitems[0].dueDate.Value.Day,
                     view.todoitems[0].dueTime.Value.Hour, view.todoitems[0].dueTime.Value.Minute, view.todoitems[0].dueTime.Value.Second);
 
-                    if ( date < DateTime.Now)
+                    if (date < DateTime.Now)
                     {
                         ClassUserViewModel classUserView = new ClassUserViewModel();
                         
@@ -232,30 +210,7 @@ namespace Assignment_1.Controllers
                                 }
                             }
 
-                            List<string> notification = new List<string>();
-                            var joinedAssignmentTables =
-                            from submitted in _context.AssignmentSubmissions
-                            join assignment in _context.ClassAssignments on
-                            submitted.AssignmentFK equals assignment.Id
-                            join assignClass in _context.Class on
-                            submitted.ClassFK equals assignClass.ClassId
-                            where
-                            submitted.Modified > classUserView.viewUser.LastedLoggedIn
-                            where
-                            submitted.UserFK == classUserView.viewUser.Id
-                            select assignment.AssignmentTitle + " in class " + assignClass.CourseNumber + " was graded";
-
-                            notification.Concat(joinedAssignmentTables);
-
-                            var joinedClassCreatedAssignment =
-                                from assignments in _context.ClassAssignments
-                                join assignClass in _context.Class on
-                                assignments.ClassId equals assignClass.ClassId
-                                select assignClass.CourseName + " Has created a new assignment named " + assignments.AssignmentTitle;
-
-                            notification.Concat(joinedClassCreatedAssignment);
-
-                            classUserView.notifications = notification;
+                            classUserView.notifications = GetNotifications(classUserView.viewUser).Result;
 
                             CacheKeys.UserView = classUserView;
                             _cache.Set(CacheKeys.UserView, classUserView);
@@ -268,11 +223,11 @@ namespace Assignment_1.Controllers
             }
             else if (Id != null)
             {
-                ClassUserViewModel classUserView= new ClassUserViewModel();
+                ClassUserViewModel classUserView = new ClassUserViewModel();
                 // list constructor default sucks, has to use this
                 classUserView.todoitems = new List<TODOitem>();
                 var user = _context.User.Where(x => x.Id == Id).First();
-                classUserView.viewUser= user;
+                classUserView.viewUser = user;
                 var UserID = HttpContext.Session.GetInt32("UserID");
                 ViewData["Student"] = user.UserType;
                 var Course = from c in _context.Class select c;
@@ -280,7 +235,7 @@ namespace Assignment_1.Controllers
                 if (UserID != null)
                 {
                     if (user.UserType == "Student")
-                    {                        
+                    {
                         Registration = Registration.Where(r => r.UserFK == UserID);
                         Registration = Registration.Where(r => r.IsRegistered == 1);
                         Course = from Class in Course
@@ -292,7 +247,7 @@ namespace Assignment_1.Controllers
                     }
                     else
                     {
-                    Course = Course.Where(c => c.UserId == UserID);
+                        Course = Course.Where(c => c.UserId == UserID);
 
                     }
                     classUserView.classes = Course.ToList();
@@ -320,30 +275,30 @@ namespace Assignment_1.Controllers
                     }
 
                     List<ClassAssignments> futureAssignmentList = new List<ClassAssignments>();
-                    foreach(var x in myassignments)
+                    foreach (var x in myassignments)
                     {
                         DateTime dt = new DateTime(x.DueDate.Value.Year, x.DueDate.Value.Month, x.DueDate.Value.Day, x.DueTime.Value.Hour, x.DueTime.Value.Minute, x.DueTime.Value.Second);
-                        if(dt > DateTime.Now)
+                        if (dt > DateTime.Now)
                         {
                             futureAssignmentList.Add(x);
                         }
 
                     }
-					futureAssignmentList = futureAssignmentList.OrderBy(y => y.DueDate.Value.DayOfYear).OrderBy(z => z.DueTime.Value.Date.TimeOfDay.Hours).ToList();
-					//futureAssignmentList = futureAssignmentList.OrderBy(y => y.DueTime.Value.Hour).ToList();
-					//futureAssignmentList = futureAssignmentList.OrderBy(y => y.DueTime.Value.Minute).ToList();
-					//futureAssignmentList = futureAssignmentList.OrderBy(y => y.DueTime.Value.Second).ToList();
-					// step 3: sort them by due date and pick the top 5. 
+                    futureAssignmentList = futureAssignmentList.OrderBy(y => y.DueDate.Value.DayOfYear).OrderBy(z => z.DueTime.Value.Date.TimeOfDay.Hours).ToList();
+                    //futureAssignmentList = futureAssignmentList.OrderBy(y => y.DueTime.Value.Hour).ToList();
+                    //futureAssignmentList = futureAssignmentList.OrderBy(y => y.DueTime.Value.Minute).ToList();
+                    //futureAssignmentList = futureAssignmentList.OrderBy(y => y.DueTime.Value.Second).ToList();
+                    // step 3: sort them by due date and pick the top 5. 
 
-					var Assignments = _context.ClassAssignments;
+                    var Assignments = _context.ClassAssignments;
 
-     //               myassignments = myassignments.Where(a => a.DueDate >= DateTime.Today).ToList();
-					//myassignments = myassignments.Where(a => a.DueTime.Value.Hour >= DateTime.Today.Hour).ToList();
-					//myassignments = myassignments.Where(a => a.DueTime.Value.Minute >= DateTime.Today.Minute).ToList();
-					//myassignments = myassignments.Where(a => a.DueTime.Value.Second >= DateTime.Today.Second).ToList();
+                    //               myassignments = myassignments.Where(a => a.DueDate >= DateTime.Today).ToList();
+                    //myassignments = myassignments.Where(a => a.DueTime.Value.Hour >= DateTime.Today.Hour).ToList();
+                    //myassignments = myassignments.Where(a => a.DueTime.Value.Minute >= DateTime.Today.Minute).ToList();
+                    //myassignments = myassignments.Where(a => a.DueTime.Value.Second >= DateTime.Today.Second).ToList();
 
-					//var AssignmentList = Assignments.ToList();
-					int breakint = 0;
+                    //var AssignmentList = Assignments.ToList();
+                    int breakint = 0;
                     foreach (var assignment in futureAssignmentList)
                     {
 
@@ -361,46 +316,63 @@ namespace Assignment_1.Controllers
 
                         classUserView.todoitems.Add(todo);
                         breakint++;
-                        if(breakint == 5)
+                        if (breakint == 5)
                         {
                             break;
                         }
                     }
 
                     //classUserView.assignments = AssignmentsTODO.ToList();
-                    List<string> notification = new List<string>();
-                    var joinedAssignmentTables =
-                    from submitted in _context.AssignmentSubmissions
-                    join assignment in _context.ClassAssignments on 
-                    submitted.AssignmentFK equals assignment.Id
-                    join assignClass in _context.Class on 
-                    submitted.ClassFK equals assignClass.ClassId
-                    where
-                    submitted.Modified > classUserView.viewUser.LastedLoggedIn
-                    where
-                    submitted.UserFK == classUserView.viewUser.Id
-                    select assignment.AssignmentTitle + " in class " + assignClass.CourseNumber + " was graded";
 
-                    notification.Concat(joinedAssignmentTables);
-
-                    var joinedClassCreatedAssignment =
-                        from assignments in _context.ClassAssignments
-                        join assignClass in _context.Class on
-                        assignments.ClassId equals assignClass.ClassId
-                        select assignClass.CourseName + " Has created a new assignment named " + assignments.AssignmentTitle;
-
-                    notification.Concat(joinedClassCreatedAssignment);
-
-                    classUserView.notifications = notification;
+                    classUserView.notifications = GetNotifications(classUserView.viewUser).Result;
 
                     //Registration = Registration.Where(r => r.UserFK == UserID);
                     //classUserView.registrations = Registration.ToList();
                     CacheKeys.UserView = classUserView;
-                    _cache.Set(CacheKeys.UserView, classUserView); 
+                    _cache.Set(CacheKeys.UserView, classUserView);
                     return View(classUserView);
                 }
             }
             return View();
+        }
+
+        public async Task<List<string>> GetNotifications(User viewUser)
+        {
+            List<string> notification = new List<string>();
+            var joinedAssignmentTables =
+            from submitted in _context.AssignmentSubmissions
+            join assignment in _context.ClassAssignments on
+            submitted.AssignmentFK equals assignment.Id
+            join assignClass in _context.Class on
+            submitted.ClassFK equals assignClass.ClassId
+            where
+            submitted.Modified > viewUser.LastedLoggedIn
+            where
+            submitted.UserFK == viewUser.Id
+            select assignment.AssignmentTitle + " in class " + assignClass.CourseName + " was graded";
+
+            notification = notification.Concat(joinedAssignmentTables).ToList();
+
+            var joinedClassCreatedAssignment =
+                from assignments in _context.ClassAssignments
+                join assignClass in _context.Class on
+                assignments.ClassId equals assignClass.ClassId
+                join registClass in _context.Registrations on
+                assignClass.ClassId equals registClass.ClassFK
+                where registClass.UserFK == viewUser.Id
+                where assignments.CreatedDate > viewUser.LastedLoggedIn
+                select assignClass.CourseName + " Has created a new assignment named " + assignments.AssignmentTitle;
+
+            notification = notification.Concat(joinedClassCreatedAssignment).ToList();
+
+            User updatingLastLogin = _context.User.First(x => x.Id == viewUser.Id);
+
+            // Note to self. Change the datetime now cause that uses the local systems time not the servers time
+            updatingLastLogin.LastedLoggedIn = DateTime.Now;
+            _context.User.Update(updatingLastLogin);
+            await _context.SaveChangesAsync();
+
+            return notification;
         }
 
         // GET: Users/Details/5
