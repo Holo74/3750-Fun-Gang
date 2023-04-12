@@ -38,9 +38,11 @@ namespace Assignment_1.Models
         public string Location { get; set; }
         [Required]
         public string DaysOfWeek { get; set; }//MO:TU:WE:TH:FR
+
         [Required]
         [DataType(DataType.Time)]
         public DateTime StartTime { get; set; }
+
         [Required]
         [DataType(DataType.Time)]
         public DateTime EndTime { get; set; }
