@@ -19,5 +19,6 @@ namespace Assignment_1.Data
         public DbSet<Assignment_1.Models.Registrations> Registrations { get; set; } = default!;
         public DbSet<Assignment_1.Models.ClassAssignments> ClassAssignments { get; set; } = default!;
         public DbSet<Assignment_1.Models.AssignmentSubmissions> AssignmentSubmissions { get; set; } = default!;
+        public DbSet<Assignment_1.Models.Payment> Payment { get; set; } = default!;
     }
 }

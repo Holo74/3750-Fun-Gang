@@ -74,11 +74,15 @@ namespace Assignment_1.Controllers
                         Course = from c in _context.Class select c;
 
                         List<ClassAssignments> myassignments = new List<ClassAssignments>();
-                        foreach (var mycourse in Course.ToList())
+                        if (Course != null)
                         {
-                            var z = _context.ClassAssignments.Where(y => y.ClassId == mycourse.ClassId).ToList();
-                            myassignments.AddRange(z.ToList());
+                            foreach (var mycourse in Course.ToList())
+                            {
+                                var z = _context.ClassAssignments.Where(y => y.ClassId == mycourse.ClassId).ToList();
+                                myassignments.AddRange(z.ToList());
+                            }
                         }
+                        
 
                         List<ClassAssignments> futureAssignmentList = new List<ClassAssignments>();
                         foreach (var x in myassignments)
@@ -479,6 +483,7 @@ namespace Assignment_1.Controllers
             //
                 PasswordHasher<User> Hasher = new PasswordHasher<User>();
                 user.Password = Hasher.HashPassword(new Models.User(), user.Password);//hash before sending to database
+                user.Balance = 0;
                 _context.Add(user);
                 await _context.SaveChangesAsync();
             
