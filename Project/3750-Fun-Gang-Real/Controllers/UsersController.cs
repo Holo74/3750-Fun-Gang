@@ -70,7 +70,6 @@ namespace Assignment_1.Controllers
                             Course = Course.Where(c => c.UserId == UserID);
 
                         }
-                        classUserView.classes = Course.ToList();
 
                         Course = from c in _context.Class select c;
 
@@ -161,7 +160,6 @@ namespace Assignment_1.Controllers
                                 Course = Course.Where(c => c.UserId == UserID);
 
                             }
-                            classUserView.classes = Course.ToList();
 
                             List<ClassAssignments> myassignments = new List<ClassAssignments>();
                             foreach (var mycourse in Course.ToList())
