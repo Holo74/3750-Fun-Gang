@@ -40,8 +40,8 @@ namespace Assignment_1.Controllers
                   },
                 },
                 Mode = "payment",
-                SuccessUrl = "https://localhost:7099/Tuition/Success?session_id={CHECKOUT_SESSION_ID}",
-                CancelUrl = "https://localhost:7099/Tuition/Cancel",
+                SuccessUrl = "https:/notebook-cs3750.azurewebsites.net/Tuition/Success?session_id={CHECKOUT_SESSION_ID}",
+                CancelUrl = "https:/notebook-cs3750.azurewebsites.net/Tuition/Cancel",
             };
 
             var service = new SessionService();
