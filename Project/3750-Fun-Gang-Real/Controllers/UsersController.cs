@@ -122,7 +122,7 @@ namespace Assignment_1.Controllers
                                 break;
                             }
                         }
-
+                        classUserView.todoitems.OrderBy(x => x.dueDate);
                         classUserView.notifications = GetNotifications(classUserView.viewUser).Result;
 
                         CacheKeys.UserView = classUserView;
@@ -207,7 +207,7 @@ namespace Assignment_1.Controllers
                                     break;
                                 }
                             }
-
+                            classUserView.todoitems.OrderBy(x => x.dueDate);
                             classUserView.notifications = GetNotifications(classUserView.viewUser).Result;
 
                             CacheKeys.UserView = classUserView;
@@ -317,7 +317,7 @@ namespace Assignment_1.Controllers
                     }
 
                     //classUserView.assignments = AssignmentsTODO.ToList();
-
+                    classUserView.todoitems.OrderBy(x => x.dueDate);
                     classUserView.notifications = GetNotifications(classUserView.viewUser).Result;
 
                     //Registration = Registration.Where(r => r.UserFK == UserID);

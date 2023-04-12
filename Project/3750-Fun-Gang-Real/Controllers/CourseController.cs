@@ -30,7 +30,7 @@ namespace Assignment_1.Controllers
             var courses = from c in _context.Class select c;
             var course = courses.Where(c => c.ClassId == classId).ToList();
             var assignments = from d in _context.ClassAssignments select d;
-            var assignment = assignments.Where(d => d.ClassId == classId).ToList();
+            var assignment = assignments.Where(d => d.ClassId == classId).OrderBy(x => x.DueDate).ToList();
             var submissions = from e in _context.AssignmentSubmissions select e;
             submissions = submissions.Where(e => e.UserFK == UserID);
             var submissionList = submissions.Where(f => f.ClassFK== classId).ToList();
