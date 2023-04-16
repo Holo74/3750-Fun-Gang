@@ -3,8 +3,52 @@
 @{
     ViewData["Title"] = "Edit";
 }
+<style>
+    body {
+        background-image: url('/Photos/AssignmentPagesBG.jpg');
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
 
-<h1>Edit Class</h1>
+    .box {
+        border: solid;
+        border-color: white;
+        border-radius: 5px;
+        box-shadow: 10px 10px 10px rgba(68, 68, 68, 0.6);
+        width: 30%;
+        height: 420px;
+        margin: 0 auto;
+        background-color: white;
+        vertical-align: middle;
+        position: absolute;
+        top: 15%;
+        left: 35%;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+     .btn-primary {
+        width: 5%;
+        border: solid;
+        border-color:White;
+       
+        margin: 0 auto;
+        position: absolute;
+        width: 25%;
+        top: 60%;
+        left: 38%;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        text-decoration: none;
+        color:white;
+    }
+     h1{
+         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+         font-size:35px;
+        color: #DEB887;
+    }
+</style>
+<body>
+    <h1> Editing @Html.DisplayFor(model => model.AssignmentTitle)</h1>
 
 
 <hr />
@@ -15,7 +59,7 @@
             <input type="hidden" asp-for="Id" />
             <input type="hidden" asp-for="ClassId" />
 
-
+            <div class="box">
             <div class="form-group">
                 <label asp-for="AssignmentTitle" class="control-label"></label>
                 <input asp-for="AssignmentTitle" class="form-control" />
@@ -48,6 +92,7 @@
                 <input asp-for="SubmissionType" class="form-control" />
                 <span asp-validation-for="SubmissionType" class="text-danger"></span>
             </div>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
@@ -55,7 +100,7 @@
     </div>
 </div>
 
-
+</body>
 @*@section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

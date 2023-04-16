@@ -3,10 +3,54 @@
 @{
     ViewData["Title"] = "Details";
 }
+<style>
+    body {
+        background-image: url('/Photos/AssignmentPagesBG.jpg');
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+    .box {
+        border: solid;
+        border-color: white;
+        border-radius: 15px;
+        box-shadow: 20px 20px 20px rgba(68, 68, 68, 0.6);
+        width: 20%;
+        height: 400px;
+        margin: 0 auto;
+        background-color: white;
+        vertical-align: middle;
+        position: absolute;
+        top: 20%;
+        left: 40%;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+     .btn-danger {
+        width: 5%;
+        border: solid;
+        border-color:grey;
+        	box-shadow: 10px 10px 10px rgba(68, 68, 68, 0.6);
+        background-color:darkred;
+        margin: 0 auto;
+        position: absolute;
+        width: 25%;
+        top: 65%;
+        left: 38%;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        text-decoration: none;
+    }
+     h1{
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size:35px;
+        color: #DEB887;
+    }
 
+</style>
+<body>
 <h1>
-    Details for
-    @Html.DisplayFor(model => model.AssignmentTitle)
+    Assignment Details
+   
 
 </h1>
 
@@ -14,6 +58,7 @@
 
     <hr />
     <dl class="row">
+            <div class="box">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.AssignmentTitle)
         </dt>
@@ -50,7 +95,7 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.SubmissionType)
         </dd>
-
+        </div>
         <form asp-action="DeleteC">
             <input type="hidden" asp-for="Id" />
             <input type="submit" value="Delete" class="btn btn-danger" /> |
@@ -58,7 +103,8 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Go Back</a>
+ @*   <a asp-action="Edit" asp-route-id="@Model?.Id">Go Back</a>*@
 
 
 </div>
+</body>

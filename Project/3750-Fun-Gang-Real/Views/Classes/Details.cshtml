@@ -3,7 +3,51 @@
 @{
     ViewData["Title"] = "Details";
 }
+<style>
+    body {
+        background-image: url('/Photos/editClass.jpg');
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+     .box{
+        border:solid;
+        border-color:white;
+		border-radius: 15px;
+		box-shadow: 20px 20px 20px rgba(68, 68, 68, 0.6);
+		width:20%;
+		height:500px;
+		margin: 0 auto;
+		background-color:white;
+		vertical-align: middle;
+		position:absolute;
+		top:20%;
+		left:40%;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+     .btn-danger {
+        width: 5%;
+        border: solid;
+        border-color:grey;
+        	box-shadow: 10px 10px 10px rgba(68, 68, 68, 0.6);
+        background-color:darkred;
+        margin: 0 auto;
+        position: absolute;
+        width: 25%;
+        top: 75%;
+        left: 38%;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        text-decoration: none;
+    }
+    h1{
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size:30px;
+        color:white;
 
+    }
+</style>
+<body>
 <h1>
     Details for
     @Html.DisplayFor(model => model.CourseName)
@@ -14,6 +58,7 @@
 
     <hr />
     <dl class="row">
+        <div class="box">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Department)
         </dt>
@@ -62,14 +107,16 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.EndTime)
         </dd>
+        </div>
         <form asp-action="Delete">
             <input type="hidden" asp-for="ClassId" />
-            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            <input type="submit" value="Delete" class="btn btn-danger" /> 
         </form>
     </dl>
 </div>
 <div>
-    <a asp-action="Index" asp-route-id="@Model?.ClassId">Go Back</a>
-   
+@* <a asp-action="Index" asp-route-id="@Model?.ClassId">Go Back</a>*@
+  
 
 </div>
+</body>

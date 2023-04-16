@@ -3,15 +3,60 @@
 @{
     ViewData["Title"] = "Create";
 }
+<style>
+    body {
+        background-image: url('/Photos/editClass.jpg');
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
 
-<h1>Create</h1>
+    .box {
+        border: solid;
+        border-color: white;
+        border-radius: 5px;
+        box-shadow: 10px 10px 10px rgba(68, 68, 68, 0.6);
+        width: 30%;
+        height: 500px;
+        margin: 0 auto;
+        background-color: white;
+        vertical-align: middle;
+        position: absolute;
+        top: 15%;
+        left: 35%;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
 
-<h4>Class</h4>
+    .btn-primary {
+        width: 5%;
+        border: solid;
+        border-color: White;
+        margin: 0 auto;
+        position: absolute;
+        width: 25%;
+        top: 70%;
+        left: 38%;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        text-decoration: none;
+        color: white;
+    }
+
+    h1 {
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size: 30px;
+        color: white;
+    }
+</style>
+<body>
+<h1>Create A New Class</h1>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-controller="Classes" asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="box">
             <div class="form-group">
                 <label asp-for="Department" class="control-label"></label>
                 <select asp-for="Department" name="Department" class="form-control"> @*This is a dropbox in HTML*@
@@ -75,6 +120,7 @@
                 <input asp-for="EndTime" name="EndTime" class="form-control" />
                 <span asp-validation-for="EndTime" class="text-danger"></span>
             </div>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Register Class" name="register" class="btn btn-primary" />
             </div>
@@ -82,6 +128,7 @@
         </form>
     </div>
 </div>
+</body>
 
 @section Scripts {
     @{
