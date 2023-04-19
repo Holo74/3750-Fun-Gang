@@ -61,6 +61,7 @@ namespace Assignment_1.Controllers
        public async Task<int> CreateMain(int id, ClassAssignments ca)
         {
             ca.ClassId = id == null ? -1 : id;
+            ca.CreatedDate = DateTime.Now;
             _context.ClassAssignments.Add(ca);
             
             await _context.SaveChangesAsync();
