@@ -384,12 +384,12 @@ namespace Assignment_1.Controllers
 		public async Task<IActionResult> DeleteConfirmed(int id, ClassAssignments ca)
 		{
 			var a = await _context.ClassAssignments.FindAsync(id);
-			_context.ClassAssignments.Remove(ca);
+			_context.ClassAssignments.Remove(a);
 			await _context.SaveChangesAsync();
-			return RedirectToAction(nameof(Index));
+            //return RedirectToAction(nameof(Index));
+            return Redirect("/Course?classId=" + a.ClassId);
 
-		
-		}
+        }
 		public class CourseInfo
         {
             public string CourseName { get; set; }

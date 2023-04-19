@@ -3,24 +3,69 @@
 @{
     ViewData["Title"] = "Edit";
 }
+<style>
+    body {
+        background-image: url('/Photos/editProfileBG.jpg');
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+    h1{
+      
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size:30px;
+    }
+     .box{
+        border:solid;
+        border-color:white;
+		border-radius: 5px;
+		box-shadow: 10px 10px 10px rgba(68, 68, 68, 0.6);
+		width:30%;
+		height:775px;
+		margin: 0 auto;
+		background-color:white;
+		vertical-align: middle;
+		position:absolute;
+		top:15%;
+		left:35%;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+    .btn-primary{
+        width: 5%;
+        border: solid;
+        border-color: #7393B3;
+        background-color: #7393B3;
+        margin: 0 auto;
+        position: absolute;
+        width: 25%;
+        top: 95%;
+        left: 38%;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        text-decoration: none;
+    }
 
-<h1>Edit</h1>
+</style>
+<body>
 
-<h4>User</h4>
+<h1>Edit Profile</h1>
+
+
 <hr />
+
 <div class="row">
-    <label>Hello World</label>
-    <label>@Model.Image</label>
-    <img src="@Model.Image" />
+  
+   
     
     <div class="col-md-4">
         <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="None" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
-
+            <div class="box">
            <div class="form-group">
               
-                <label asp-for="Image" class="control-label"></label>
+                @*<label asp-for="Image" class="control-label"></label>*@
+                <label>Profile Picture</label>
                 <input name="image" type="file" />
                 <span asp-validation-for="Image" class="text-danger"></span>
            </div>
@@ -87,18 +132,18 @@
                 <input asp-for="ReferenceThree" class="form-control" type = "url" />
                 <span asp-validation-for="ReferenceThree" class="text-danger"></span>
             </div>
-
+                </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save Changes" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Details" asp-route-id="@Model?.Id">Details</a> |
-</div>
-
+@*<div>
+    <a asp-action="Details" asp-route-id="@Model?.Id">Details</a> 
+</div>*@
+</body>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

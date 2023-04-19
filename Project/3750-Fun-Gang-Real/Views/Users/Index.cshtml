@@ -43,14 +43,15 @@
     .notification {
         width: 10px;
         position: fixed;
-        right: 313px;
+        left: 20px;
         top: 65px;
     }
 
 	.notification-menu {
-        width: 550px;
+        width: 200px;
+        height:150px;
 		position: fixed;
-        right: 77px;
+        left: 30px;
         top: 106px;
         z-index: 4;
         background-color: #f5bb00;
@@ -196,5 +197,5 @@
 
 <div class="links">
 
-    <a asp-action="Details" asp-route-id="model.Id">Account Settings</a>
+  @*  <a asp-action="Details" asp-route-id="model.Id">Account Settings</a>*@
 </div>

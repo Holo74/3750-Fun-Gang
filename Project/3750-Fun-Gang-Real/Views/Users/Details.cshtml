@@ -5,46 +5,113 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>
-    Details for
-    @Html.DisplayFor(model => model.FirstName)
-    @Html.DisplayFor(model => model.LastName)
-</h1>
+<style>
+    body {
+        background-image: url('/Photos/editProfileBG.jpg');
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+    h1{
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size:20px;
+    }
+    .btn-primary{
+      
+	
+		width:5%;
+        border:solid;
+        border-color: #7393B3;
+        background-color:#7393B3;
+		margin: 0 auto;
+		position:absolute;
+        width: 25%;
+		top:80%;
+		left:38%;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        text-decoration:none;
+    }
+   
+   
+    .box{
+        border: solid;
+        border-color: white;
+        border-radius: 5px;
+        box-shadow: 10px 10px 10px rgba(68, 68, 68, 0.6);
+        width: 30%;
+        height: 500px;
+        margin: 0 auto;
+        background-color: white;
+        vertical-align: middle;
+        position: absolute;
+        top: 25%;
+        left: 35%;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+   .pic{
+        /*vertical-align: middle;
+        position: absolute;*/
+        top: 15%;
+        left: 40%;
+       /* border: solid;*/
+        /*border-color:green;
+        border-radius: 5px;*/
+    }
+    img{
+        vertical-align: middle;
+            position: absolute;
+        left: 20%;
+        border: 5px solid #7393B3;
+        border-radius: 15px;
+        box-shadow: 10px 10px 10px rgba(68, 68, 68, 0.6);
+    }
 
+</style>
+<h1>
+    Profile Settings
+    @*@Html.DisplayFor(model => model.FirstName)
+    @Html.DisplayFor(model => model.LastName)*@
+</h1>
+<body>
 <div>
   
     <hr />
     <dl class="row">
-        <dt class="col-sm-2">
+        <div class = "pic">
+        @*<dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Image)
-        </dt>
+        </dt>*@
         <dd class="col-sm-10">
             <img src="@Model.ShowImage"/>
         </dd>
-        <dt class = "col-sm-2">
+    </div>
+        <div class = "box">
+
+       @* <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Email)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class = "col-sm-2">
+        </dd>*@
+       @* <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Password)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Password)
-        </dd>
+        </dd>*@
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FirstName)
+           Name @*@Html.DisplayNameFor(model => model.FirstName)*@
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FirstName)
+          @Html.DisplayFor(model => model.FirstName)  @Html.DisplayFor(model => model.LastName)
         </dd>
-        <dt class = "col-sm-2">
+        @*<dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.LastName)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.LastName)
-        </dd>
+        </dd>*@
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.BirthDate)
         </dt>
@@ -61,25 +128,7 @@
             @Html.DisplayNameFor(model => model.Address)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.City)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.City)
-        </dd>
-         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.State)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.State)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ZipCode)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ZipCode)
+        @Html.DisplayFor(model => model.Address), @Html.DisplayFor(model => model.City) @Html.DisplayFor(model => model.State), @Html.DisplayFor(model => model.ZipCode)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.PhoneNumber)
@@ -87,6 +136,12 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.PhoneNumber)
         </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ReferenceOne)
         </dt>
@@ -105,10 +160,20 @@
         <dd class="col-sm-10">
             <a href = "@Html.DisplayFor(model => model.ReferenceThree)">Reference</a>
         </dd>
+     </div>
     </dl>
+        
 </div>
-<div>
-    <a asp-action="Index" asp-route-id="@Model?.Id">Go Back</a>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a>
+
+
+<div class = "bts">
+    
+  @*  <a asp-action="Index" asp-route-id="@Model?.Id">Go Back</a>*@
+       @* <button asp-action="Edit" asp-route-id="@Model?.Id">Edit Profile</button>*@
+   
+            <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model?.Id">Edit Profile</a>
+    
+      
     
 </div>
+</body>

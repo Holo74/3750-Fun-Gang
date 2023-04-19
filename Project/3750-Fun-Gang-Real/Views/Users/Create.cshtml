@@ -4,27 +4,28 @@
     ViewData["Title"] = "Create";
 }
 <style>
-    .box{
-        border:solid;
-        border-color:white;
-		border-radius: 5px;
-		box-shadow: 10px 10px 10px rgba(68, 68, 68, 0.6);
-		width:30%;
-		height:415px;
-		margin: 0 auto;
-		background-color:white;
-		vertical-align: middle;
-		position:absolute;
-		top:25%;
-		left:35%;
+    .box {
+        border: solid;
+        border-color: white;
+        border-radius: 5px;
+        box-shadow: 10px 10px 10px rgba(68, 68, 68, 0.6);
+        background-color: white;
+        vertical-align: middle;
+        padding: 2% 4%;
         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     }
 
-   
-    h1{
-        margin:auto;
-        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    .middle {
+        width: 30vw;
+        flex-direction: column;
+        justify-content: space-between;
     }
+
+    h1 {
+        margin: auto;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
     body {
         background-image: url('/Photos/Gradient-Background.png');
         -webkit-background-size: cover;
@@ -32,32 +33,29 @@
         -o-background-size: cover;
         background-size: cover;
     }
-    .btn-primary{
-		border:thin;
-		border-block-color:lightblue;
-		border-radius: 5px;
-		box-shadow: 10px 10px 10px rgba(68, 68, 68, 0.6);
-		width:100%;
-		background-color:cornflowerblue;
-		margin: 0 auto;
-		position:absolute;
-		top:72%;
-		left:33%;
+
+    .btn-primary {
+        border: thin;
+        border-block-color: lightblue;
+        border-radius: 5px;
+        box-shadow: 10px 10px 10px rgba(68, 68, 68, 0.6);
+        width: 100%;
+        background-color: cornflowerblue;
+        margin: 0 auto;
         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-		
-	    }   
-    .b1{
-       border:thin;
-		border-block-color:lightblue;
-		border-radius: 5px;
-		box-shadow: 10px 10px 10px rgba(68, 68, 68, 0.6);
-		width:20%;
-		
-		margin: 0 auto;
-		background-color:white;
-		position:absolute;
-		top:72%;
-		left:33%;
+    }
+
+    .b1 {
+        border: thin;
+        border-block-color: lightblue;
+        border-radius: 5px;
+        box-shadow: 10px 10px 10px rgba(68, 68, 68, 0.6);
+        width: 50%;
+        margin-top: 5vh;
+        margin-left:auto;
+        margin-right:auto;
+        min-width: 100px;
+        background-color: white;
         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     }
 </style>
@@ -66,62 +64,62 @@
 @*<h4>User</h4>*@
 @*<hr />*@
 <body>
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class = "box">
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control"/>
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control"/>
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ConfirmPassword" class="control-label"></label>
-                <input asp-for="ConfirmPassword" class="form-control" />
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control"/>
-                <span asp-validation-for="FirstName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control"/>
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BirthDate" class="control-label"></label>
-                <input asp-for="BirthDate" class="form-control"/>
-                <span asp-validation-for="BirthDate" class="text-danger"></span>
-            </div>
-              <div>
-                Student
-                @Html.RadioButtonFor(model => model.UserType, "Student")
-                Teacher
-                @Html.RadioButtonFor(model => model.UserType, "Teacher")
-            </div>
-            
-           
+    <div class=" d-flex justify-content-center">
+        <div class="middle">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="box">
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password" class="control-label"></label>
+                        <input asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ConfirmPassword" class="control-label"></label>
+                        <input asp-for="ConfirmPassword" class="form-control" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FirstName" class="control-label"></label>
+                        <input asp-for="FirstName" class="form-control" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LastName" class="control-label"></label>
+                        <input asp-for="LastName" class="form-control" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="BirthDate" class="control-label"></label>
+                        <input asp-for="BirthDate" class="form-control" />
+                        <span asp-validation-for="BirthDate" class="text-danger"></span>
+                    </div>
+                    <div>
+                        Student
+                        @Html.RadioButtonFor(model => model.UserType, "Student")
+                        Teacher
+                        @Html.RadioButtonFor(model => model.UserType, "Teacher")
+                    </div>
 
-           </div>
-               <div class = "b1">
-                <div class="form-group">
+
+
+                </div>
+                <div class="form-group b1">
                     <input type="submit" value="Sign Up" class="btn btn-primary" />
                 </div>
-                 </div>
-            
-        </form>
+
+            </form>
         </div>
     </div>
 
 </body>
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
