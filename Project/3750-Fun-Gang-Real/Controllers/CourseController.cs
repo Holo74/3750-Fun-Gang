@@ -311,6 +311,7 @@ namespace Assignment_1.Controllers
             if (ClassId != null)
             {
                 ca.ClassId = ClassId.Value;
+                ca.CreatedDate = DateTime.Now;
                 _context.ClassAssignments.Add(ca); 
                 await _context.SaveChangesAsync();
             }
